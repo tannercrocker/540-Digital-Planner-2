@@ -1,0 +1,123 @@
+﻿@model ICollection<Digital_Planner.Models.Event>
+@{
+    var month_events = Model.
+        Where(e =>
+            (e.OccursAt.Month.Equals(DateTime.Today.Month) && e.OccursAt.Year.Equals(DateTime.Today.Year)) ||
+            (e.CompleteBy.Month.Equals(DateTime.Today.Month) && e.CompleteBy.Year.Equals(DateTime.Today.Year))
+        );
+    var day_number = 1;
+    var days_in_month = DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month);
+}
+
+<div id="days_of_week" class="text-center">
+    <div class="month_day_header"><h4>Sunday</h4></div>
+    <div class="month_day_header"><h4>Monday</h4></div>
+    <div class="month_day_header"><h4>Tuesday</h4></div>
+    <div class="month_day_header"><h4>Wednesday</h4></div>
+    <div class="month_day_header"><h4>Thursday</h4></div>
+    <div class="month_day_header"><h4>Friday</h4></div>
+    <div class="month_day_header"><h4>Saturday</h4></div>
+</div>
+
+<div id="calendar">
+    @while (day_number <= days_in_month)
+    {
+        <div class="text-center"><!-- style="width:95%;"> -->
+            @{
+                var week_index = 0;
+                var day_of_month = new DateTime(DateTime.Today.Year, DateTime.Today.Month, day_number);
+
+
+                if (day_number == 1)
+                {
+                    /* Prevent off-centering of trailing days in the last week. */
+                    for (int lol = 1; lol < day_of_month.DayOfYear % 7; lol++)
+                    {
+                        <div col="null" class="calendar-item" style="">
+                            <!-- #ddd is used by Bootstrap -->
+                            <table class="table" style="border:1px #ddd solid;"></table>
+                        </div>
+                        week_index++;
+                    }
+                }
+            }
+
+            @* For each week of the month, go through the days of the week *@
+            @while (week_index < 7 && day_number <= days_in_month)
+            {
+                day_of_month = new DateTime(DateTime.Today.Year, DateTime.Today.Month, day_number);
+
+                <div col="@day_number" class="top calendar-item" style="">
+                    <!-- #ddd is used by Bootstrap -->
+                    <table class="table table-hover" style="border:1px #ddd solid;">
+                        <tr>
+                            <th class="day_number">@day_number</th>
+                            <th class="day_availability">
+                                @{
+                                    Digital_Planner.Models.Day first_availability = new Digital_Planner.Models.Day();
+                                    //find the day/availability corresponding....
+                                    //This doesn't always link to the correct availability. User might have multiple availability sessions in a day.
+                                    if (month_events.Count() > 0)
+                                    {
+                                        if (month_events.First().User.Days.Where(d => d.Date.Date.Equals(day_of_month)).Count() > 0)
+                                        {
+                                            first_availability = month_events.First().User.Days.Where(d => d.Date.Date.Equals(day_of_month)).First();
+
+                                            <a class="black-link" title="Edit availability" href=@Url.Action("Edit", "Days", new { id = first_availability.ID })>
+                                                <span class="glyphicon glyphicon-time black-link" />
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="black-link text-right" title="Add availability" href=@Url.Action("Create", "Days", new { date = day_of_month.ToShortDateString() })>
+                                                <span class="glyphicon glyphicon-time black-link text-right" />
+                                            </a>
+                                        }
+                                    }
+                                }
+                            </th>
+                        </tr>
+                        @{
+                            var events_for_day = month_events
+                                .Where(e => e.OccursAt.Day == day_number)// || e.CompleteBy.Day == day_number))
+                                ;
+
+                            if (events_for_day.Count() == 0)
+                            {
+                                <tr class="text-muted">
+                                    <td colspan="2">No Events</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (var day_evt in events_for_day
+                                        .OrderBy(e => e.OccursAt)
+                                        .ThenBy(e => e.CompleteBy)
+                                        )
+                                {
+                                    @Html.Partial("_ShortEvent", day_evt)
+                                }
+                            }
+                        }
+
+                    </table>
+                </div>
+                day_number++;
+                week_index++;
+
+                @* Prevent off-centering of trailing days in the last week. *@
+                if (day_number > DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month))
+                {
+                    while (week_index < 7)
+                    {
+                        <div col="null" class="calendar-item" style="">
+                            <!-- #ddd is used by Bootstrap -->
+                            <table class="table" style="border:1px #ddd solid;"></table>
+                        </div>
+                            week_index++;
+                    }
+                }
+             }
+        </div>
+    }
+</div>

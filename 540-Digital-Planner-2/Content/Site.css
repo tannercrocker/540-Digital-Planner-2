@@ -22,3 +22,115 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+/* Override Bootstrap coloring of <a> */
+.black-link {
+    color: #333 !important;
+}
+
+
+/* Bootstrap styles table headers with text-left, this corrects that */
+th {
+    text-align:center !important;
+}
+
+/* Bootstrap doesn't automatically vert-align table data */
+/* Bootstrap doesn't automatically center-text table data */
+td {
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+
+a.btn:hover {
+    text-decoration-line: none !important;
+    vertical-align: middle !important;
+    text-align:right !important;
+}
+
+#schedule {
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+#day, #week, #month {
+    width: 95%;
+    margin-left: 1%;
+    margin-right: 1%;
+    padding: 1%;
+    border: #333 solid 1px;
+}
+
+/* vvv Styling for Month view vvv */
+#month #days_of_week {
+    border-bottom: #333 solid 1px;
+}
+
+#month .month_day_header {
+    display: inline-block;
+    width: 12.5% !important;
+    margin: 2px;
+    /* margin-left: 1.75em;
+    margin-right: 1.75em; */
+}
+
+#calendar {
+    margin-top: 2%;
+}
+
+#calendar .calendar-item {
+    width: 12.5% !important;
+    display: inline-block !important;
+    top: 0 !important;
+    vertical-align: top !important;
+    margin: 2px;
+}
+
+.calendar-item * {
+    width: 100% !important;
+}
+
+.calendar-item .day_number {
+    text-align: left !important;
+    padding-left: 1.25em !important;
+}
+
+.calendar-item .day_availability {
+    text-align: right !important;
+    padding-right: 1.25em !important;
+}
+/* ^^^ Styling for Month view ^^^ */
+
+/* Remove negative margin from rows */
+.DateSelector .row,
+.TimeSelector .row,
+.DateTimeSelector .row{
+    margin: 0 !important;
+}
+
+/* 
+    The arrows are links in the timepicker;
+        This conflicts with the <a> rules above
+    Color comes from the orignal hover state
+*/
+.bootstrap-datetimepicker-widget a:hover {
+    /*  vertical-align: middle !important;  */
+    text-align: center !important;
+    color: #333 !important;
+}
+
+/*
+.bootstrap-datetimepicker-widget > .row {
+    margin: 0 !important;
+}*/
+
+.timepicker-picker table,
+.timepicker-picker table td a span,
+.timepicker-picker table td,
+.timepicker-picker table td span {
+    height: 30px !important;
+    line-height: 2em !important;
+    width: 2em !important;
+    line-height: 2em !important;
+    padding: 0 !important;
+}

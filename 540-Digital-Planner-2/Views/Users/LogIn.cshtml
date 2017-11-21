@@ -1,0 +1,23 @@
+﻿@model Digital_Planner.Models.User 
+@{
+    ViewBag.Title = "LogIn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>LogIn</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "Login Failed, check details");
+    <div>
+        <fieldset>
+            <legend>Login Form</legend>
+            <div class="editor-label">@Html.LabelFor(u=> u.Email)</div>
+            <div class="editor-field">@Html.TextBoxFor(u=> u.Email)
+                @Html.ValidationMessageFor(u=> u.Email)
+            </div>
+            <input type="submit" value="Log In" />
+        </fieldset>
+    </div>
+}
+

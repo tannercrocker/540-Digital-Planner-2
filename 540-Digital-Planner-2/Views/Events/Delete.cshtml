@@ -1,0 +1,105 @@
+﻿@model Digital_Planner.Models.Event
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Event</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OccursAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OccursAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BufferTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BufferTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Priority)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Priority)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompleteBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompleteBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsComplete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsComplete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.FirstName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.Partial("_PreviousPageHyperlink")
+            @* @Html.ActionLink("Back to List", "Index") *@
+        </div>
+    }
+</div>

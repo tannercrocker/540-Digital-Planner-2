@@ -1,0 +1,79 @@
+﻿@model Digital_Planner.Models.User
+
+@{
+    ViewBag.Title = "Schedule";
+    var model_events = Model.Events;
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#day_button').click(function () {
+            $(this).addClass('btn-primary');
+            $('#week_button').removeClass('btn-primary');
+            $('#month_button').removeClass('btn-primary');
+            $('#day').css('display', 'block');
+            $('#week').css('display', 'none');
+            $('#month').css('display', 'none');
+            $('schedule_text').innerHTML = 'Events for today';
+
+        });
+
+
+        $('#week_button').click(function () {
+                $(this).addClass('btn-primary');
+                $('#day_button').removeClass('btn-primary');
+                $('#month_button').removeClass('btn-primary');
+                $('#week').css({ display: 'block' });
+                $('#day').css({ display: 'none' });
+                $('#month').css({ display: 'none' });
+                $('schedule_text').innerHTML = 'Events for the next week';
+
+            });
+
+
+        $('#month_button').click(function () {
+            $(this).addClass('btn-primary');
+            $('#day_button').removeClass('btn-primary');
+            $('#week_button').removeClass('btn-primary');
+            $('#month').css("display", "block");
+            $('#day').css("display", "none");
+            $('#week').css("display", "none");
+            $('schedule_text').innerHTML = 'Events for @DateTime.Today.ToString("MMMM") @DateTime.Today.Year';
+        });
+    });
+</script>
+
+<h2 id="schedule_text">Events for today</h2>
+<h5>@Html.ActionLink("Add Event","Create", "Events", new { }, new { })</h5>
+
+<div class="row">
+    <center>
+        <button id="day_button" class="btn btn-primary" style="margin-right: 1%;">Today</button>
+        <button id="week_button" class="btn" style="margin-right: 1%;">Week</button>
+        <button id="month_button" class="btn" style="margin-right: 1%;">Month</button>
+    </center>
+</div>
+
+<div id="schedule" class="row" style="margin-top:1%">
+    
+    @{
+        var evts = model_events
+            .Where(e => e.OccursAt.DayOfYear.Equals(DateTime.Today.DayOfYear) && e.OccursAt.Year.Equals(DateTime.Today.Year))
+            .GroupBy(e => e.CategoryID);
+    }
+    <div id="day" class="table">
+        @Html.Partial("_Day", new Tuple<DateTime, ICollection<Digital_Planner.Models.Event>>(DateTime.Today, model_events))
+    </div>
+
+
+    <div id="week" class="table" style="display:none;">
+        @Html.Partial("_Week", model_events)
+   </div>
+   
+    <div id="month" class="container" style="display:none;">
+        @Html.Partial("_Month", model_events)
+    </div>
+</div>
+
+<div>
+    @Html.Partial("_PreviousPageHyperlink")
+</div>

@@ -1,0 +1,62 @@
+﻿@model IGrouping<int, Digital_Planner.Models.Event>
+
+<tr>
+    @{ 
+        var cat_rowspan = Model.Count() + 1;
+        <td rowspan="@cat_rowspan" class="text-center">
+            @Html.ActionLink(@Model.First().Category.Description, "Details", "Categories", new { id=Model.First().ID }, new { title="Category details"})
+        </td>
+        foreach (var evt in Model.OrderBy(e => e.OccursAt))
+        {
+            var row_class = "";
+            var priority = evt.Priority;
+            if (0 > priority)
+            {
+                priority = priority * -1;
+            }
+            switch (priority)
+            {
+                case 1:
+                    row_class = "dismissable";
+                    break;
+                case 2:
+                    row_class = "info";
+                    break;
+                case 3:
+                    row_class = "warning";
+                    break;
+                case 4:
+                    row_class = "danger";
+                    break;
+                default:
+                    break;
+            }
+
+            var tile_class = "";
+            var tile_title = "";
+            //Incomplete & DateTime has passed
+            if (!evt.IsComplete && evt.CompleteBy.CompareTo(DateTime.Now) < 0)
+            {
+                tile_class = "danger";
+                tile_title = "This event is past due";
+            }
+            //Incomplete & DateTime is today
+            else if (!evt.IsComplete && evt.CompleteBy.Date.CompareTo(DateTime.Now.Date) == 0)
+            {
+                tile_class = "warning";
+                tile_title = "This event is set to be completed today";
+            }
+            else if (evt.IsComplete)
+            {
+                tile_class = "success";
+                tile_title = "This event is complete";
+            }
+            <tr class="@row_class @tile_class" title="@tile_title" priority="@priority">
+                @Html.Partial("_Event", evt)
+            </tr>
+        }
+    }
+@*
+ * For whatever reason, this isn't needed here?  
+</tr>
+*@

@@ -15,16 +15,12 @@ namespace Digital_Planner.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Digital Planner is a software for planning your events. You will be able to log in or register" +
+                " and create events and categories for your planner. With each created event, you will be able to see the events" +
+                " through the My Schedule tab in a daily, weekly, or monthly view.";
 
             return View();
         }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        
     }
 }

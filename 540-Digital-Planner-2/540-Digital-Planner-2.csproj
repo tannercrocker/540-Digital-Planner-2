@@ -195,9 +195,17 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AutoSort\Planner.cs" />
+    <Compile Include="AutoSort\PlannerDay.cs" />
+    <Compile Include="AutoSort\PlannerEvent.cs" />
+    <Compile Include="AutoSort\PlannerSettings.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\AvailabilitiesController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\DPUsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -207,6 +215,10 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Availability.cs" />
+    <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\DPUser.cs" />
     <Compile Include="Models\DigitalPlannerModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -214,6 +226,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -235,6 +249,8 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="ConnectionStrings.config" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
@@ -247,6 +263,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
@@ -285,9 +305,49 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Days\Create.cshtml" />
+    <Content Include="Views\Days\Delete.cshtml" />
+    <Content Include="Views\Days\Details.cshtml" />
+    <Content Include="Views\Days\Edit.cshtml" />
+    <Content Include="Views\Days\Index.cshtml" />
+    <Content Include="Views\Events\Create.cshtml" />
+    <Content Include="Views\Events\Delete.cshtml" />
+    <Content Include="Views\Events\Details.cshtml" />
+    <Content Include="Views\Events\Edit.cshtml" />
+    <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AutomaticAssign.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CompletionCheck.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateSelector.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTimeSelector.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\PriorityButtons.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TimeSelector.cshtml" />
+    <Content Include="Views\Shared\_CompletionCheckAsForm.cshtml" />
+    <Content Include="Views\Shared\_Edit-Detail-Delete_Buttons.cshtml" />
+    <Content Include="Views\Shared\_PreviousPageHyperlink.cshtml" />
+    <Content Include="Views\Shared\_Priority.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\LogIn.cshtml" />
+    <Content Include="Views\Users\LogOut.cshtml" />
+    <Content Include="Views\Users\Register.cshtml" />
+    <Content Include="Views\Users\Schedule.cshtml" />
+    <Content Include="Views\Users\_Category.cshtml" />
+    <Content Include="Views\Users\_Day.cshtml" />
+    <Content Include="Views\Users\_Event.cshtml" />
+    <Content Include="Views\Users\_Month.cshtml" />
+    <Content Include="Views\Users\_ShortEvent.cshtml" />
+    <Content Include="Views\Users\_Week.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

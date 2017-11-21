@@ -1,0 +1,26 @@
+﻿@model Tuple<System.Web.Mvc.ControllerBase, int>
+@{ 
+    var controller = Model.Item1;
+    var model_id = Model.Item2;
+
+    var cnt_str = controller.ToString().Split('.')[2];
+    cnt_str = cnt_str.Substring(0, cnt_str.IndexOf("Controller"));
+
+    //Schedule gets handled differently, because it is under the User Controller,
+    //  but needs links to Events Controller
+    if (ViewBag.Title.Equals("Schedule"))
+    {
+        cnt_str = "Events";
+    }
+}
+<span class="btn-group btn-group-sm">
+    <a class="btn btn-primary" title="View details" href=@Url.Action("Details", cnt_str, new { id = model_id})>
+        <span class="glyphicon glyphicon-info-sign"></span>
+    </a>
+    <a class="btn btn-success" title="Edit event" href=@Url.Action("Edit", cnt_str, new { id = model_id })>
+        <span class="glyphicon glyphicon-edit"></span>
+    </a>
+    <a class="btn btn-danger" title="Delete event" href=@Url.Action("Delete", cnt_str, new { id = model_id })>
+        <span class="glyphicon glyphicon-remove"></span>
+    </a>
+</span>
