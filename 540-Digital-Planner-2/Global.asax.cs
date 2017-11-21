@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace _540_Digital_Planner_2
+namespace Digital_Planner
 {
     public class MvcApplication : System.Web.HttpApplication
     {
