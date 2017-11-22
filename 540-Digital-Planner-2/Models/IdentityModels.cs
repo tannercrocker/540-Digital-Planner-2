@@ -21,7 +21,7 @@ namespace Digital_Planner.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
     {
         public ApplicationDbContext()
-            : base("DigitalPlannerDbContext")
+            : base("DigitalPlannerModels")
         {
         }
 
