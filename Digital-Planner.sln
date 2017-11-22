@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "540-Digital-Planner-2", "540-Digital-Planner-2\540-Digital-Planner-2.csproj", "{CCE8DF16-81FA-4626-BF50-2FE5493905C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital-Planner", "540-Digital-Planner-2\Digital-Planner.csproj", "{CCE8DF16-81FA-4626-BF50-2FE5493905C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
