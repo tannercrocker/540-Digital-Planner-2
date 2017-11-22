@@ -5,7 +5,7 @@
 *   Description:    Contains the global settings for the application.
 */
 
-namespace Digital_Planner
+namespace Digital_Planner.Sorting
 {
     class PlannerSettings
     {

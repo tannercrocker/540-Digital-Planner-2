@@ -10,23 +10,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Digital_Planner.Models;
 
-namespace Digital_Planner
+namespace Digital_Planner.Sorting
 {
     class PlannerDay
     {
-        Models.Day day;
-        private System.TimeSpan totalTimeAvailable;
+        Availability day;
+        private TimeSpan totalTimeAvailable;
         private float remainingWorkMinutes;
 
-        public PlannerDay(Models.Day day)
+        public PlannerDay(Availability day)
         {
             this.day = day;
-            totalTimeAvailable = day.HoursAvailable;
-            remainingWorkMinutes = day.HoursAvailable.Minutes;
+            totalTimeAvailable = day.Duration;
+            remainingWorkMinutes = day.OccursAt.Minute + day.OccursAt.Hour / 60;
         }
 
-        public System.DateTime Date {
+        public DateTime Date {
             get {
                 return Date;
             }

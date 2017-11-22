@@ -7,18 +7,19 @@
 
 
 using System;
+using Digital_Planner.Models;
 
-namespace Digital_Planner
+namespace Digital_Planner.Sorting
 {
     class PlannerEvent
     {
-        private static Digital_Planner.Models.calendarEntities db = new Digital_Planner.Models.calendarEntities();
+        private static DigitalPlannerDbContext db = new DigitalPlannerDbContext();
 
-        Models.Event dbEvent;
+        Event dbEvent;
         private float score;
 
 
-        public PlannerEvent(Models.Event dbEvent)
+        public PlannerEvent(Event dbEvent)
         {
             //  Constructor
 

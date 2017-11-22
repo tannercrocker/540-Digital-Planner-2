@@ -11,12 +11,13 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using Digital_Planner.Models;
 
-namespace Digital_Planner
+namespace Digital_Planner.Sorting
 {
     static class Planner
     {
-        private static Digital_Planner.Models.calendarEntities db = new Digital_Planner.Models.calendarEntities();
+        private static DigitalPlannerDbContext db = new DigitalPlannerDbContext();
 
         //TODO:  Pass in user id
         public static void GenerateSchedule()
@@ -53,8 +54,8 @@ namespace Digital_Planner
             System.Diagnostics.Debug.Print("Get Data From Database");
 
             //Get database records
-            List<Models.Event> plannerEvents = db.Events.ToList();
-            List<Models.Day> plannerDays = db.Days.ToList();
+            List<Event> plannerEvents = db.Events.ToList();
+            List<Availability> plannerDays = db.Availabilities.ToList();
 
             //sort events by auto/manual assign
             for (int i = 0; i < plannerEvents.Count; i++)
