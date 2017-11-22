@@ -21,11 +21,9 @@ namespace Digital_Planner.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
 
+            //TC - This isn't working. I don't know why.
+            /*
             int index;
-            List<DPUser> user_entities = new List<DPUser>();
-            List<Availability> avail_entities = new List<Availability>();
-            List<Category> category_entities = new List<Category>();
-            List<Event> event_entities = new List<Event>();
 
             List<ApplicationUser> test_users = new ApplicationDbContext().Users.Where(u => u.UserName.Contains("@thatsthepassword.com")).ToList();
 
@@ -35,72 +33,85 @@ namespace Digital_Planner.Migrations
                 test_users.RemoveAt(test_users.Count());
             }
 
-            //Generate 5 DPUsers
-            for (index = 1; index <= 5; index ++)
+            if (test_users.Count() > 0)
             {
-                if (test_users.Count() > index)
+                //Generate 5 DPUsers
+                index = 0;
+                foreach (var tester in test_users)
                 {
-                    var u = test_users.ElementAt(index-1);
-                    user_entities.Add(new DPUser(index, "first-" + u.Email.Split('@')[0], "last-" + u.Email.Split('@')[1], u.Id));
+                    index++;
+                    var dp = new DPUser() { DPUserID = index, FirstName = tester.Email.Split('@')[0], LastName = tester.Email.Split('@')[1], User = tester, UserID = tester.Id };
+                    //context.DPUsers.Add(dp);
+                    context.DPUsers.AddOrUpdate(dp);
                 }
-            }
-            context.DPUsers.AddOrUpdate(user_entities.ToArray());
-            context.SaveChanges();
+                index = 0;
+                context.SaveChanges();
 
 
-            //Generate 5 Availabilities for each DPUser
-            foreach (DPUser u in context.DPUsers.Where(u => u.DPUserID <= 5))
-            {
-                DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 0);
-                for (index = 1; index <= 15; index++)
+                //Generate 5 Availabilities for each DPUser
+                foreach (DPUser u in context.DPUsers.Where(u => u.DPUserID <= 5))
                 {
-                    avail_entities.Add(new Availability(avail_entities.Count, date, 3, u.DPUserID));
-                    date = date.AddDays(1.4);
+                    List<Availability> avails = new List<Availability>();
+                    DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 0);
+                    for (index = 1; index <= 15; index++)
+                    {
+                        var a = new Availability() { AvailabilityID = avails.Count(), DPUser = u, OccursAt = date, Duration = new TimeSpan(3, 0, 0) };
+                        avails.Add(a);
+                        date = date.AddDays(1.4);
+                    }
+                    u.Availabilities = avails;
                 }
-            }
-            context.Availabilities.AddOrUpdate(avail_entities.ToArray());
-            context.SaveChanges();
+                index = 0;
+                context.SaveChanges();
 
 
-            //Generate 5 Categories for each DPUser
-            foreach (DPUser u in context.DPUsers.Where(u => u.DPUserID <= 5))
-            {
-                DateTime month_day = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-                for (index = 1; index <= 5; index ++)
+                //Generate 5 Categories for each DPUser
+                foreach (DPUser u in context.DPUsers.Where(u => u.DPUserID <= 5))
                 {
-                    //DPusers may have overlapping names, but we're just gonna separate them
-                    category_entities.Add(new Category(category_entities.Count, "Category-" + (index * u.DPUserID), u.DPUserID));
+                    List<Category> cats = new List<Category>();
+                    DateTime month_day = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                    for (index = 1; index <= 5; index++)
+                    {
+                        var c = new Category() { CategoryID = cats.Count(), Description = "Category-" + (index * u.DPUserID), DPUser = u, DPUserID = u.DPUserID };
+                        cats.Add(c);
+                    }
+                    u.Categories = cats;
                 }
-            }
-            context.Categories.AddOrUpdate(category_entities.ToArray());
-            context.SaveChanges();
+                index = 0;
+                context.SaveChanges();
 
 
-            //Generate 15 events for each DPUser
-            foreach (DPUser u in context.DPUsers.Where(u => u.DPUserID <= 5))
-            {
-                DateTime day = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 0);
-                for (index = 1; index <= 15; index++)
+                //Generate 15 events for each DPUser
+                foreach (DPUser u in context.DPUsers.Where(u => u.DPUserID <= 5))
                 {
-                    //Add more events than there is time for in a day (as we set above)
-                    event_entities.Add(
-                        new Event(
-                            event_entities.Count,
-                            "Event-" + (index * u.DPUserID),
-                            day,
-                            day.AddDays(1),
-                            new TimeSpan(1, 0, 0),
-                            index % 4,
-                            Convert.ToBoolean(index % 2),
-                            Convert.ToBoolean(index % 2),
-                            "Eternal Plains of Suffering",
-                            u.DPUserID));
-                    day = day.AddDays(1.4);
+                    List<Event> evts = new List<Event>();
+                    DateTime day = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 0);
+                    for (index = 1; index <= 15; index++)
+                    {
+                        //Add more events than there is time for in a day (as we set above)
+                        var e =
+                            new Event()
+                            {
+                                EventID = evts.Count(),
+                                Title = "Event-" + (index * u.DPUserID),
+                                OccursAt = day,
+                                CompleteBy = day.AddDays(1),
+                                Duration = new TimeSpan(1, 0, 0),
+                                Priority = index % 4,
+                                AutoAssign = Convert.ToBoolean(index % 2),
+                                IsComplete = Convert.ToBoolean(index % 2),
+                                Location = "Eternal Plains of Suffering",
+                                DPUser = u,
+                                DPUserID = u.DPUserID
+                            };
+                        evts.Add(e);
+                        day = day.AddDays(1.4);
+                    }
+                    u.Events = evts;
                 }
+                context.SaveChanges();
             }
-            context.Events.AddOrUpdate(event_entities.ToArray());
-            context.SaveChanges();
-
+           */
         }
     }
 }
