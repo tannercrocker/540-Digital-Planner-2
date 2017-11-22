@@ -209,21 +209,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711211907195_Init.cs" />
-    <Compile Include="Migrations\201711211907195_Init.Designer.cs">
-      <DependentUpon>201711211907195_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711220107499_Add-Priority-To-Event.cs" />
-    <Compile Include="Migrations\201711220107499_Add-Priority-To-Event.Designer.cs">
-      <DependentUpon>201711220107499_Add-Priority-To-Event.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711220110514_Add-Required-To-Priority.cs" />
-    <Compile Include="Migrations\201711220110514_Add-Required-To-Priority.Designer.cs">
-      <DependentUpon>201711220110514_Add-Required-To-Priority.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711220143294_UserDays-to-UserAvailabilities.cs" />
-    <Compile Include="Migrations\201711220143294_UserDays-to-UserAvailabilities.Designer.cs">
-      <DependentUpon>201711220143294_UserDays-to-UserAvailabilities.cs</DependentUpon>
+    <Compile Include="Migrations\201711220511577_Init.cs" />
+    <Compile Include="Migrations\201711220511577_Init.Designer.cs">
+      <DependentUpon>201711220511577_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -362,17 +350,8 @@
     <Content Include="Scripts\jquery-3.2.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711211907195_Init.resx">
-      <DependentUpon>201711211907195_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711220107499_Add-Priority-To-Event.resx">
-      <DependentUpon>201711220107499_Add-Priority-To-Event.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711220110514_Add-Required-To-Priority.resx">
-      <DependentUpon>201711220110514_Add-Required-To-Priority.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711220143294_UserDays-to-UserAvailabilities.resx">
-      <DependentUpon>201711220143294_UserDays-to-UserAvailabilities.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711220511577_Init.resx">
+      <DependentUpon>201711220511577_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

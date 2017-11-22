@@ -7,13 +7,13 @@ namespace Digital_Planner.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddPriorityToEvent : IMigrationMetadata
+    public sealed partial class Init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddPriorityToEvent));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711220107499_Add-Priority-To-Event"; }
+            get { return "201711220511577_Init"; }
         }
         
         string IMigrationMetadata.Source
