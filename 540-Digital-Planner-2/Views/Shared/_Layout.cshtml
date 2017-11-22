@@ -14,22 +14,14 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-fixed-top" style="border-bottom:1px #b81e0d solid;">
+    <div class="navbar navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 @Html.ActionLink("Digital Planner", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("User", "Index", "DPUsers")</li>
-                    <li>@Html.ActionLink("Event", "Index", "Events")</li>
-                    <li>@Html.ActionLink("Category", "Index", "Categories")</li>
+                    @Html.Partial("_HeaderList")
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

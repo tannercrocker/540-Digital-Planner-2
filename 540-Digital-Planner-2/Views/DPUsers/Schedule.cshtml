@@ -43,36 +43,43 @@
 </script>
 
 <h2 id="schedule_text">Events for today</h2>
-<h5>@Html.ActionLink("Add Event","Create", "Events", new { }, new { })</h5>
+<h5>@Html.ActionLink("Add Event", "Create", "Events", new { }, new { })</h5>
 
-<div class="row">
-    <center>
-        <button id="day_button" class="btn btn-primary" style="margin-right: 1%;">Today</button>
-        <button id="week_button" class="btn" style="margin-right: 1%;">Week</button>
-        <button id="month_button" class="btn" style="margin-right: 1%;">Month</button>
-    </center>
-</div>
+@{
+    if (model_events != null)
+    {
+        <div class="row">
+            <center>
+                <button id="day_button" class="btn btn-primary" style="margin-right: 1%;">Today</button>
+                <button id="week_button" class="btn" style="margin-right: 1%;">Week</button>
+                <button id="month_button" class="btn" style="margin-right: 1%;">Month</button>
+            </center>
+        </div>
 
-<div id="schedule" class="row" style="margin-top:1%">
+        <div id="schedule" class="row" style="margin-top:1%">
     
-    @{
-        var evts = model_events
-            .Where(e => e.OccursAt.DayOfYear.Equals(DateTime.Today.DayOfYear) && e.OccursAt.Year.Equals(DateTime.Today.Year))
-            .GroupBy(e => e.CategoryID);
+            var evts = model_events.Where(e => e.OccursAt.DayOfYear.Equals(DateTime.Today.DayOfYear) && e.OccursAt.Year.Equals(DateTime.Today.Year))
+                .GroupBy(e => e.CategoryID);
+
+            <div id="day" class="table">
+                @Html.Partial("_Day", new Tuple<DateTime, ICollection<Digital_Planner.Models.Event>>(DateTime.Today, model_events))
+            </div>
+
+
+            <div id="week" class="table" style="display:none;">
+                @Html.Partial("_Week", model_events)
+           </div>
+
+            <div id="month" class="container" style="display:none;">
+                @Html.Partial("_Month", model_events)
+            </div>
+        </div>
     }
-    <div id="day" class="table">
-        @Html.Partial("_Day", new Tuple<DateTime, ICollection<Digital_Planner.Models.Event>>(DateTime.Today, model_events))
-    </div>
-
-
-    <div id="week" class="table" style="display:none;">
-        @Html.Partial("_Week", model_events)
-   </div>
-   
-    <div id="month" class="container" style="display:none;">
-        @Html.Partial("_Month", model_events)
-    </div>
-</div>
+    else
+    {
+        <p class="text-center">You have no upcoming events, why not @Html.ActionLink("make one", "Create", "Events")?</p>
+    }
+}
 
 <div>
     @Html.Partial("_PreviousPageHyperlink")

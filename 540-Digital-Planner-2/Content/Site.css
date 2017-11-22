@@ -23,6 +23,16 @@ textarea {
     max-width: 280px;
 }
 
+/* ----  Below are things we added  ---- */
+.navbar {
+    border-bottom: 1px #158cba solid;
+}
+
+.navbar .navbar-header :hover,
+.navbar ul li :hover{
+    background-color: #e6e6e6;
+    color: #1080a0;
+}
 
 /* Override Bootstrap coloring of <a> */
 .black-link {

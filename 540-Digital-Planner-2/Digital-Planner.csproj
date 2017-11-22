@@ -209,13 +209,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711220520390_Init.cs" />
-    <Compile Include="Migrations\201711220520390_Init.Designer.cs">
-      <DependentUpon>201711220520390_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201711220723083_Init.cs" />
+    <Compile Include="Migrations\201711220723083_Init.Designer.cs">
+      <DependentUpon>201711220723083_Init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711220521308_SeedOnly.cs" />
-    <Compile Include="Migrations\201711220521308_SeedOnly.Designer.cs">
-      <DependentUpon>201711220521308_SeedOnly.cs</DependentUpon>
+    <Compile Include="Migrations\201711220913155_No-More-Changes-Pls.cs" />
+    <Compile Include="Migrations\201711220913155_No-More-Changes-Pls.Designer.cs">
+      <DependentUpon>201711220913155_No-More-Changes-Pls.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -343,6 +343,7 @@
     <Content Include="Views\DPUsers\_Month.cshtml" />
     <Content Include="Views\DPUsers\_ShortEvent.cshtml" />
     <Content Include="Views\DPUsers\_Week.cshtml" />
+    <Content Include="Views\Shared\_HeaderList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -354,11 +355,11 @@
     <Content Include="Scripts\jquery-3.2.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711220520390_Init.resx">
-      <DependentUpon>201711220520390_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711220723083_Init.resx">
+      <DependentUpon>201711220723083_Init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711220521308_SeedOnly.resx">
-      <DependentUpon>201711220521308_SeedOnly.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711220913155_No-More-Changes-Pls.resx">
+      <DependentUpon>201711220913155_No-More-Changes-Pls.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

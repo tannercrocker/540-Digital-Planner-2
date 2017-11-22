@@ -1,0 +1,8 @@
+﻿@{
+    <li>@Html.ActionLink("Events", "Index", "Events")</li>
+    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+
+    if (Request.IsAuthenticated)
+    {
+        <li>@Html.ActionLink("Schedule", "Schedule", "DPUser", new { id = new Digital_Planner.Models.DigitalPlannerDbContext().DPUsers.First() })</li>
+    }
