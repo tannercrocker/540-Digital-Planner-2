@@ -10,22 +10,6 @@ namespace Digital_Planner.Models
 {
     public class Event
     {
-        public Event() { }
-        public Event(int id, string t, DateTime o, DateTime c, TimeSpan d, int p, bool aa, bool ic, string loc, int u_id)
-        {
-            this.EventID = id;
-            this.Title = t;
-            this.OccursAt = o;
-            this.CompleteBy = c;
-            this.Duration = d;
-            this.Priority = p;
-            this.AutoAssign = aa;
-            this.IsComplete = ic;
-            this.Location = loc;
-            this.DPUserID = u_id;
-            this.DPUser = new DigitalPlannerDbContext().DPUsers.FirstOrDefault(u => u.DPUserID == u_id);
-        }
-
         //PK
         [Key]
         public int EventID { get; set; }

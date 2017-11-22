@@ -3,7 +3,7 @@ namespace Digital_Planner.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class SeedOnly : DbMigration
+    public partial class NoMoreChangesPls : DbMigration
     {
         public override void Up()
         {

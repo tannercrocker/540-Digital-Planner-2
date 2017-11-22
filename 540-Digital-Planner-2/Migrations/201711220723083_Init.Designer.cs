@@ -7,13 +7,13 @@ namespace Digital_Planner.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class SeedOnly : IMigrationMetadata
+    public sealed partial class Init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedOnly));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711220521308_SeedOnly"; }
+            get { return "201711220723083_Init"; }
         }
         
         string IMigrationMetadata.Source

@@ -10,15 +10,6 @@ namespace Digital_Planner.Models
 {
     public class Category
     {
-        public Category() { }
-        public Category(int c_id, string desc, int u_id)
-        {
-            this.CategoryID = c_id;
-            this.Description = desc;
-            this.DPUserID = u_id;
-            this.DPUser = new DigitalPlannerDbContext().DPUsers.FirstOrDefault(u => u.DPUserID == u_id);
-        }
-
         //PK
         [Key]
         public int CategoryID { get; set; }

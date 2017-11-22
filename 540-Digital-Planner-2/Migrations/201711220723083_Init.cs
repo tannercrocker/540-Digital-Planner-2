@@ -25,7 +25,7 @@ namespace Digital_Planner.Migrations
                 c => new
                     {
                         DPUserID = c.Int(nullable: false, identity: true),
-                        FirstName = c.String(nullable: false),
+                        FirstName = c.String(),
                         LastName = c.String(),
                         UserID = c.String(maxLength: 128),
                     })
