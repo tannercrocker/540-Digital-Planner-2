@@ -48,6 +48,7 @@ namespace Digital_Planner.Models
         [Required]
         [Display(Name = "AutomaticAssignment")]
         public bool AutoAssign { get; set; } = false;
+        [Required]
         public int Priority { get; set; } = 1;
         public String Location { get; set; } = "";
 
