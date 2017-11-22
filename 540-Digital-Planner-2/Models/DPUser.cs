@@ -16,8 +16,8 @@ namespace Digital_Planner.Models
             this.DPUserID = id;
             this.FirstName = f;
             this.LastName = l;
-            this.ApplicationUserID = auth;
-            this.ApplicationUser = new ApplicationDbContext().Users.FirstOrDefault(u => auth.Equals(u.Id));
+            this.UserID = auth;
+            this.User = new ApplicationDbContext().Users.FirstOrDefault(u => auth.Equals(u.Id));
         }
 
         //PK
@@ -33,11 +33,11 @@ namespace Digital_Planner.Models
         //Email & Password is in the ApplicationUser
 
         //FK
-        [ForeignKey("ApplicationUser")]
-        public String ApplicationUserID { get; set; }
+        [ForeignKey("User")]
+        public String UserID { get; set; }
 
         //Navigation Properties
-        public ApplicationUser ApplicationUser { get; set; }
+        public ApplicationUser User { get; set; }
 
         public virtual ICollection<Event> Events { get; set; }
         public virtual ICollection<Category> Categories { get; set; }

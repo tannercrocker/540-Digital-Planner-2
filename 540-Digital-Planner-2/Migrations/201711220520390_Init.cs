@@ -8,6 +8,32 @@ namespace Digital_Planner.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Availability",
+                c => new
+                    {
+                        AvailabilityID = c.Int(nullable: false, identity: true),
+                        OccursAt = c.DateTime(nullable: false),
+                        Duration = c.Time(nullable: false, precision: 7),
+                        DPUserID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.AvailabilityID)
+                .ForeignKey("dbo.DPUser", t => t.DPUserID)
+                .Index(t => t.DPUserID);
+            
+            CreateTable(
+                "dbo.DPUser",
+                c => new
+                    {
+                        DPUserID = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(nullable: false),
+                        LastName = c.String(),
+                        UserID = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.DPUserID)
+                .ForeignKey("dbo.User", t => t.UserID)
+                .Index(t => t.UserID);
+            
+            CreateTable(
                 "dbo.Category",
                 c => new
                     {
@@ -20,17 +46,26 @@ namespace Digital_Planner.Migrations
                 .Index(t => t.DPUserID);
             
             CreateTable(
-                "dbo.DPUser",
+                "dbo.Event",
                 c => new
                     {
-                        DPUserID = c.Int(nullable: false, identity: true),
-                        FirstName = c.String(nullable: false),
-                        LastName = c.String(),
-                        ApplicationUserID = c.String(maxLength: 128),
+                        EventID = c.Int(nullable: false, identity: true),
+                        Title = c.String(nullable: false),
+                        OccursAt = c.DateTime(nullable: false),
+                        CompleteBy = c.DateTime(nullable: false),
+                        Duration = c.Time(nullable: false, precision: 7),
+                        IsComplete = c.Boolean(nullable: false),
+                        AutoAssign = c.Boolean(nullable: false),
+                        Priority = c.Int(nullable: false),
+                        Location = c.String(),
+                        DPUserID = c.Int(nullable: false),
+                        CategoryID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.DPUserID)
-                .ForeignKey("dbo.User", t => t.ApplicationUserID)
-                .Index(t => t.ApplicationUserID);
+                .PrimaryKey(t => t.EventID)
+                .ForeignKey("dbo.Category", t => t.CategoryID)
+                .ForeignKey("dbo.DPUser", t => t.DPUserID)
+                .Index(t => t.DPUserID)
+                .Index(t => t.CategoryID);
             
             CreateTable(
                 "dbo.User",
@@ -91,40 +126,6 @@ namespace Digital_Planner.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.Availability",
-                c => new
-                    {
-                        AvailabilityID = c.Int(nullable: false, identity: true),
-                        OccursAt = c.DateTime(nullable: false),
-                        Duration = c.Time(nullable: false, precision: 7),
-                        DPUserID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.AvailabilityID)
-                .ForeignKey("dbo.DPUser", t => t.DPUserID)
-                .Index(t => t.DPUserID);
-            
-            CreateTable(
-                "dbo.Event",
-                c => new
-                    {
-                        EventID = c.Int(nullable: false, identity: true),
-                        Title = c.String(nullable: false),
-                        OccursAt = c.DateTime(nullable: false),
-                        CompleteBy = c.DateTime(nullable: false),
-                        Duration = c.Time(nullable: false, precision: 7),
-                        IsComplete = c.Boolean(nullable: false),
-                        AutoAssign = c.Boolean(nullable: false),
-                        Location = c.String(),
-                        DPUserID = c.Int(nullable: false),
-                        CategoryID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.EventID)
-                .ForeignKey("dbo.Category", t => t.CategoryID)
-                .ForeignKey("dbo.DPUser", t => t.DPUserID)
-                .Index(t => t.DPUserID)
-                .Index(t => t.CategoryID);
-            
-            CreateTable(
                 "dbo.Role",
                 c => new
                     {
@@ -139,34 +140,34 @@ namespace Digital_Planner.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.UserRole", "RoleId", "dbo.Role");
-            DropForeignKey("dbo.Category", "DPUserID", "dbo.DPUser");
-            DropForeignKey("dbo.Event", "DPUserID", "dbo.DPUser");
-            DropForeignKey("dbo.Event", "CategoryID", "dbo.Category");
             DropForeignKey("dbo.Availability", "DPUserID", "dbo.DPUser");
-            DropForeignKey("dbo.DPUser", "ApplicationUserID", "dbo.User");
+            DropForeignKey("dbo.DPUser", "UserID", "dbo.User");
             DropForeignKey("dbo.UserRole", "UserId", "dbo.User");
             DropForeignKey("dbo.UserLogin", "UserId", "dbo.User");
             DropForeignKey("dbo.UserClaim", "UserId", "dbo.User");
+            DropForeignKey("dbo.Event", "DPUserID", "dbo.DPUser");
+            DropForeignKey("dbo.Event", "CategoryID", "dbo.Category");
+            DropForeignKey("dbo.Category", "DPUserID", "dbo.DPUser");
             DropIndex("dbo.Role", "RoleNameIndex");
-            DropIndex("dbo.Event", new[] { "CategoryID" });
-            DropIndex("dbo.Event", new[] { "DPUserID" });
-            DropIndex("dbo.Availability", new[] { "DPUserID" });
             DropIndex("dbo.UserRole", new[] { "RoleId" });
             DropIndex("dbo.UserRole", new[] { "UserId" });
             DropIndex("dbo.UserLogin", new[] { "UserId" });
             DropIndex("dbo.UserClaim", new[] { "UserId" });
             DropIndex("dbo.User", "UserNameIndex");
-            DropIndex("dbo.DPUser", new[] { "ApplicationUserID" });
+            DropIndex("dbo.Event", new[] { "CategoryID" });
+            DropIndex("dbo.Event", new[] { "DPUserID" });
             DropIndex("dbo.Category", new[] { "DPUserID" });
+            DropIndex("dbo.DPUser", new[] { "UserID" });
+            DropIndex("dbo.Availability", new[] { "DPUserID" });
             DropTable("dbo.Role");
-            DropTable("dbo.Event");
-            DropTable("dbo.Availability");
             DropTable("dbo.UserRole");
             DropTable("dbo.UserLogin");
             DropTable("dbo.UserClaim");
             DropTable("dbo.User");
-            DropTable("dbo.DPUser");
+            DropTable("dbo.Event");
             DropTable("dbo.Category");
+            DropTable("dbo.DPUser");
+            DropTable("dbo.Availability");
         }
     }
 }

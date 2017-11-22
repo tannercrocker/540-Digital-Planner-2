@@ -11,7 +11,7 @@ namespace Digital_Planner.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(DigitalPlannerDbContext context)
@@ -30,12 +30,17 @@ namespace Digital_Planner.Migrations
             //Generate 5 DPUsers
             for (index = 1; index <= 5; index ++)
             {
-                user_entities.Add(new DPUser(index, "first-" + index, "last-" + index, ""));
+                if (context.Users.Count() >= index)
+                {
+                    var auth_id = context.Users.ElementAt(index).Id;
+                    user_entities.Add(new DPUser(index, "first-" + index, "last-" + index, auth_id));
+                }
             }
             context.DPUsers.AddOrUpdate(user_entities.ToArray());
+            context.SaveChanges();
 
             //Generate 5 Availabilities for each DPUser
-            foreach (DPUser u in context.DPUsers)
+            foreach (DPUser u in context.DPUsers.Where(u => u.DPUserID <= 5))
             {
                 DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 0);
                 for (index = 1; index <= 15; index++)
@@ -45,9 +50,10 @@ namespace Digital_Planner.Migrations
                 }
             }
             context.Availabilities.AddOrUpdate(avail_entities.ToArray());
+            context.SaveChanges();
 
             //Generate 5 Categories for each DPUser
-            foreach(DPUser u in context.DPUsers)
+            foreach (DPUser u in context.DPUsers.Where(u => u.DPUserID <= 5))
             {
                 DateTime month_day = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
                 for (index = 1; index <= 5; index ++)
@@ -57,9 +63,10 @@ namespace Digital_Planner.Migrations
                 }
             }
             context.Categories.AddOrUpdate(category_entities.ToArray());
-            
+            context.SaveChanges();
+
             //Generate 15 events for each DPUser
-            foreach (DPUser u in context.DPUsers)
+            foreach (DPUser u in context.DPUsers.Where(u => u.DPUserID <= 5))
             {
                 DateTime day = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 0);
                 for (index = 1; index <= 15; index++)
@@ -81,6 +88,7 @@ namespace Digital_Planner.Migrations
                 }
             }
             context.Events.AddOrUpdate(event_entities.ToArray());
+            context.SaveChanges();
         }
     }
 }
