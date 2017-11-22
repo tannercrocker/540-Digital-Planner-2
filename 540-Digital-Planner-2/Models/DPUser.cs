@@ -41,6 +41,6 @@ namespace Digital_Planner.Models
 
         public virtual ICollection<Event> Events { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
-        public virtual ICollection<Availability> Days { get; set; }
+        public virtual ICollection<Availability> Availabilities { get; set; }
     }
 }
