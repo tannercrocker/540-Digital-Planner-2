@@ -1,5 +1,4 @@
-﻿
-@model  Digital_Planner.Models.Event
+﻿@model  Digital_Planner.Models.Event
 
 @{
     var tile_class = "";
@@ -23,7 +22,7 @@
 }
 <tr title="@tile_title" class="@tile_class">
     <td>@Model.OccursAt.ToString("h:mm tt")</td>
-    <td>@Html.ActionLink(Model.Title, "Details", "Events", new { id = Model.ID }, new {title="Event details" })</td>
+    <td>@Html.ActionLink(Model.Title, "Details", "Events", new { id = Model.EventID }, new {title="Event details" })</td>
 </tr>
 
 

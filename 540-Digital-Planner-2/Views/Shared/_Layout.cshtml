@@ -14,7 +14,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-fixed-top" style="border-bottom:1px #b81e0d solid;">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -27,29 +27,11 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("User", "Index", "Users")</li>
+                    <li>@Html.ActionLink("User", "Index", "DPUsers")</li>
                     <li>@Html.ActionLink("Event", "Index", "Events")</li>
                     <li>@Html.ActionLink("Category", "Index", "Categories")</li>
-                    @* This hard-coded link must change eventually. *@
-                    @{ var db = new Digital_Planner.Models.calendarEntities();
-                        var first = db.Users.First();
-                    }
-                    <li>@Html.ActionLink("My Schedule", "Schedule/" + first.ID , "Users")</li>
                 </ul>
-            </div>
-            @*Changing up some code*@
-            <div style=" width:auto; background-color:aqua">
-                @if(Request.IsAuthenticated)
-                {
-                    <strong>@Html.Encode(User.Identity.Name)</strong>
-                    @Html.ActionLink("Log Out", "Logout", "Users")
-                }
-                else
-                {
-                    @Html.ActionLink("Register", "Register", "Users")
-                    <span> | </span>
-                    @Html.ActionLink("Log In", "Login", "Users")
-                }
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>

@@ -13,13 +13,13 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>_540_Digital_Planner_2</RootNamespace>
-    <AssemblyName>540-Digital-Planner-2</AssemblyName>
+    <RootNamespace>Digital_Planner</RootNamespace>
+    <AssemblyName>Digital-Planner</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44356</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -213,6 +213,18 @@
     <Compile Include="Migrations\201711211907195_Init.Designer.cs">
       <DependentUpon>201711211907195_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711220107499_Add-Priority-To-Event.cs" />
+    <Compile Include="Migrations\201711220107499_Add-Priority-To-Event.Designer.cs">
+      <DependentUpon>201711220107499_Add-Priority-To-Event.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711220110514_Add-Required-To-Priority.cs" />
+    <Compile Include="Migrations\201711220110514_Add-Required-To-Priority.Designer.cs">
+      <DependentUpon>201711220110514_Add-Required-To-Priority.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711220143294_UserDays-to-UserAvailabilities.cs" />
+    <Compile Include="Migrations\201711220143294_UserDays-to-UserAvailabilities.Designer.cs">
+      <DependentUpon>201711220143294_UserDays-to-UserAvailabilities.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -243,8 +255,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="ConnectionStrings.config" />
@@ -310,11 +320,11 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
-    <Content Include="Views\Days\Create.cshtml" />
-    <Content Include="Views\Days\Delete.cshtml" />
-    <Content Include="Views\Days\Details.cshtml" />
-    <Content Include="Views\Days\Edit.cshtml" />
-    <Content Include="Views\Days\Index.cshtml" />
+    <Content Include="Views\Availabilities\Create.cshtml" />
+    <Content Include="Views\Availabilities\Delete.cshtml" />
+    <Content Include="Views\Availabilities\Details.cshtml" />
+    <Content Include="Views\Availabilities\Edit.cshtml" />
+    <Content Include="Views\Availabilities\Index.cshtml" />
     <Content Include="Views\Events\Create.cshtml" />
     <Content Include="Views\Events\Delete.cshtml" />
     <Content Include="Views\Events\Details.cshtml" />
@@ -330,20 +340,17 @@
     <Content Include="Views\Shared\_Edit-Detail-Delete_Buttons.cshtml" />
     <Content Include="Views\Shared\_PreviousPageHyperlink.cshtml" />
     <Content Include="Views\Shared\_Priority.cshtml" />
-    <Content Include="Views\Users\Create.cshtml" />
-    <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\LogIn.cshtml" />
-    <Content Include="Views\Users\LogOut.cshtml" />
-    <Content Include="Views\Users\Register.cshtml" />
-    <Content Include="Views\Users\Schedule.cshtml" />
-    <Content Include="Views\Users\_Category.cshtml" />
-    <Content Include="Views\Users\_Day.cshtml" />
-    <Content Include="Views\Users\_Event.cshtml" />
-    <Content Include="Views\Users\_Month.cshtml" />
-    <Content Include="Views\Users\_ShortEvent.cshtml" />
-    <Content Include="Views\Users\_Week.cshtml" />
+    <Content Include="Views\DPUsers\Create.cshtml" />
+    <Content Include="Views\DPUsers\Delete.cshtml" />
+    <Content Include="Views\DPUsers\Details.cshtml" />
+    <Content Include="Views\DPUsers\Edit.cshtml" />
+    <Content Include="Views\DPUsers\Schedule.cshtml" />
+    <Content Include="Views\DPUsers\_Category.cshtml" />
+    <Content Include="Views\DPUsers\_Day.cshtml" />
+    <Content Include="Views\DPUsers\_Event.cshtml" />
+    <Content Include="Views\DPUsers\_Month.cshtml" />
+    <Content Include="Views\DPUsers\_ShortEvent.cshtml" />
+    <Content Include="Views\DPUsers\_Week.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -357,6 +364,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711211907195_Init.resx">
       <DependentUpon>201711211907195_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711220107499_Add-Priority-To-Event.resx">
+      <DependentUpon>201711220107499_Add-Priority-To-Event.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711220110514_Add-Required-To-Priority.resx">
+      <DependentUpon>201711220110514_Add-Required-To-Priority.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711220143294_UserDays-to-UserAvailabilities.resx">
+      <DependentUpon>201711220143294_UserDays-to-UserAvailabilities.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -377,7 +393,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50842</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50842/</IISUrl>
+          <IISUrl>https://localhost:44356/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

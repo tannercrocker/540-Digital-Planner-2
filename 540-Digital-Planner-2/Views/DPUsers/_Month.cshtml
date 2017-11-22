@@ -54,22 +54,22 @@
                             <th class="day_number">@day_number</th>
                             <th class="day_availability">
                                 @{
-                                    Digital_Planner.Models.Day first_availability = new Digital_Planner.Models.Day();
+                                    Digital_Planner.Models.Availability first_availability = new Digital_Planner.Models.Availability();
                                     //find the day/availability corresponding....
                                     //This doesn't always link to the correct availability. User might have multiple availability sessions in a day.
                                     if (month_events.Count() > 0)
                                     {
-                                        if (month_events.First().User.Days.Where(d => d.Date.Date.Equals(day_of_month)).Count() > 0)
+                                        if (month_events.First().DPUser.Availabilities.Where(d => d.OccursAt.Date.Equals(day_of_month)).Count() > 0)
                                         {
-                                            first_availability = month_events.First().User.Days.Where(d => d.Date.Date.Equals(day_of_month)).First();
+                                            first_availability = month_events.First().DPUser.Availabilities.Where(d => d.OccursAt.Date.Equals(day_of_month)).First();
 
-                                            <a class="black-link" title="Edit availability" href=@Url.Action("Edit", "Days", new { id = first_availability.ID })>
+                                            <a class="black-link" title="Edit availability" href=@Url.Action("Edit", "Availalilities", new { id = first_availability.AvailabilityID })>
                                                 <span class="glyphicon glyphicon-time black-link" />
                                             </a>
                                         }
                                         else
                                         {
-                                            <a class="black-link text-right" title="Add availability" href=@Url.Action("Create", "Days", new { date = day_of_month.ToShortDateString() })>
+                                            <a class="black-link text-right" title="Add availability" href=@Url.Action("Create", "Availabilities", new { date = day_of_month.ToShortDateString() })>
                                                 <span class="glyphicon glyphicon-time black-link text-right" />
                                             </a>
                                         }

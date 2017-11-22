@@ -1,7 +1,7 @@
 ﻿@model ICollection<Digital_Planner.Models.Event>
 
 @{
-    /* Events occurring, or finishing today or in the next 6 days */
+    /* Events occurring/finishing in the next [0, 6] days */
     var week_events = Model
         .Where(e => 
             (e.OccursAt.DayOfYear - DateTime.Today.DayOfYear >= 0 && e.OccursAt.DayOfYear - DateTime.Today.DayOfYear < 7)

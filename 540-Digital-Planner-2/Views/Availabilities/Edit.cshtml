@@ -1,29 +1,12 @@
-﻿@model Digital_Planner.Models.Day
+﻿@model Digital_Planner.Models.Availability
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
 }
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('form').on('submit', function () {
-            //Set the recurrences
-            $(this).attr('action', $(this).attr('action') + $('#recurrence_counter').val());
-        })
-        $('#recurrence_counter').change(function () {
-            //Ensure min/max
-            if ($(this).val() > 24) {
-                $(this).val("24");
-            }
-            if ($(this).val() < 0) {
-                $(this).val("0");
-            }
-        });
-    });
-</script>
 
-<h2>Create</h2>
+<h2>Edit</h2>
 
-@using (Html.BeginForm("Create","Days", new { reocurrance=0 }))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
@@ -31,6 +14,8 @@
         <h4>Day</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
         <div class="form-group">
             @Html.LabelFor(model => model.HoursAvailable, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -39,19 +24,11 @@
             </div>
         </div>
 
-        @{ ViewBag.picker_index = 1; }
         <div class="form-group">
             @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Recurrence</label>
-            <div class="col-md-10">
-                Occurs once a week for <input id="recurrence_counter" type="number" min="0" max="24" value="0" class="text-center"/> weeks.
             </div>
         </div>
 
@@ -65,7 +42,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
