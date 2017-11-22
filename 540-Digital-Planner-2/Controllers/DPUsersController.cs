@@ -13,15 +13,18 @@ using Digital_Planner.Models;
 
 namespace Digital_Planner.Controllers
 {
+    [Authorize]
     public class DPUsersController : Controller
     {
         private DigitalPlannerDbContext db = new DigitalPlannerDbContext();
 
         // GET: Users
+        /* TC - For Privacy and Security reasons, I'm removing this action from the controller
         public ActionResult Index()
         {
             return View(db.DPUsers.ToList());
         }
+        */
 
         // GET: Users/Schedule/5
         public ActionResult Schedule(int? id)

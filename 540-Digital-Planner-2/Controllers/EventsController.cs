@@ -10,6 +10,7 @@ using Digital_Planner.Models;
 
 namespace Digital_Planner.Controllers
 {
+    [Authorize]
     public class EventsController : Controller
     {
         private DigitalPlannerDbContext db = new DigitalPlannerDbContext();
