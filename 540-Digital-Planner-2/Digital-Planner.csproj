@@ -217,6 +217,10 @@
     <Compile Include="Migrations\201711220913155_No-More-Changes-Pls.Designer.cs">
       <DependentUpon>201711220913155_No-More-Changes-Pls.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711230235124_Set-Required-Attributes-AND-Added-UIHints.cs" />
+    <Compile Include="Migrations\201711230235124_Set-Required-Attributes-AND-Added-UIHints.Designer.cs">
+      <DependentUpon>201711230235124_Set-Required-Attributes-AND-Added-UIHints.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -322,7 +326,7 @@
     <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\AutomaticAssign.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AutomaticAssignment.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CompletionCheck.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateSelector.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTimeSelector.cshtml" />
@@ -360,6 +364,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711220913155_No-More-Changes-Pls.resx">
       <DependentUpon>201711220913155_No-More-Changes-Pls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711230235124_Set-Required-Attributes-AND-Added-UIHints.resx">
+      <DependentUpon>201711230235124_Set-Required-Attributes-AND-Added-UIHints.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

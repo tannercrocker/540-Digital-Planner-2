@@ -16,9 +16,10 @@ namespace Digital_Planner.Models
 
         //Attributes
         [Required]
-        public String Description { get; set; } = "Category";
+        public String Description { get; set; } = "";
 
         //FK
+        [Required]
         [ForeignKey("DPUser")]
         public int DPUserID { get; set; }
 

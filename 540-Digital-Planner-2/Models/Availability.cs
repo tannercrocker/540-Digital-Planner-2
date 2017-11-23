@@ -17,12 +17,15 @@ namespace Digital_Planner.Models
         //Attributes
         [Required]
         [Display(Name = "Occurs At")]
-        public DateTime OccursAt { get; set; }
+        [UIHint("DateTimeSelector")]
+        public DateTime OccursAt { get; set; } = DateTime.Now;
         [Required]
         [Display(Name = "Length of Availability")]
-        public TimeSpan Duration { get; set; }
+        [UIHint("TimeSelector")]
+        public TimeSpan Duration { get; set; } = new TimeSpan(0);
 
         //FK
+        [Required]
         [ForeignKey("DPUser")]
         public int DPUserID { get; set; }
 
