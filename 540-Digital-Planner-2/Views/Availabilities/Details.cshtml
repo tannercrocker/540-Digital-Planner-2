@@ -11,32 +11,32 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.HoursAvailable)
+            @Html.DisplayNameFor(model => model.Duration)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HoursAvailable)
+            @Html.DisplayFor(model => model.Duration)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Date)
+            @Html.DisplayNameFor(model => model.OccursAt)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Date)
+            @Html.DisplayFor(model => model.OccursAt)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.User.FirstName)
+            @Html.DisplayNameFor(model => model.DPUser.FirstName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.User.FirstName)
+            @Html.DisplayFor(model => model.DPUser.FirstName)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AvailabilityID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

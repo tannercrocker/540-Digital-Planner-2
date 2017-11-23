@@ -13,13 +13,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.HoursAvailable)
+            @Html.DisplayNameFor(model => model.Duration)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            @Html.DisplayNameFor(model => model.OccursAt)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.FirstName)
+            @Html.DisplayNameFor(model => model.DPUser.FirstName)
         </th>
         <th></th>
     </tr>
@@ -27,18 +27,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.HoursAvailable)
+            @Html.DisplayFor(modelItem => item.Duration)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Date)
+            @Html.DisplayFor(modelItem => item.OccursAt)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.User.FirstName)
+            @Html.DisplayFor(modelItem => item.DPUser.FirstName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.Partial("_Edit-Detail-Delete_Buttons", new Tuple<System.Web.Mvc.ControllerBase, int>(ViewContext.Controller, item.AvailabilityID))
         </td>
     </tr>
 }
