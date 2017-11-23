@@ -25,16 +25,18 @@ namespace Digital_Planner
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/respond").Include(
-                      "~/Scripts/respond.js"
+                      "~/Scripts/respond.js",
+                      "~/Scripts/respond.matchmedia*"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/moment").Include(
-                      "~/Scripts/moment.js",
-                      "~/Scripts/moment-*"
+                      "~/Scripts/moment.js"//,
+                      //"~/Scripts/moment-*"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-datetimepicker.css",
                      // "~/Content/bootstrap-*",
                       "~/Content/Site.css"));
         }
