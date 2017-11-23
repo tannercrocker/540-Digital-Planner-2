@@ -1,0 +1,49 @@
+﻿@model Boolean
+    @{ 
+        var value = '0';
+        if (Model)
+        {
+            value = '1';
+        }
+    }
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Toggle AutoAssign buttons
+        $('.autoassign_picker .btn').click(function () {
+            $(this).parent().find('input').val($(this).data("value"));
+            //Remove old info, set the new info
+            $(document).find('.autoassign_picker-enable').removeClass('btn-primary');
+            $(document).find('.autoassign_picker-disable').removeClass('btn-primary');
+            $(this).addClass('btn-primary');
+            //Remove old info, set the new info for the glyphicon
+            $(document).find('.autoassign_picker-enable').html('<span class="glyphicon glyphicon-unchecked"></span>');
+            $(document).find('.autoassign_picker-disable').html('<span class="glyphicon glyphicon-unchecked"></span>');
+            //$(this).html('<span class="glyphicon glyphicon-ok"></span>');
+            $(this).html('<span class="glyphicon glyphicon-check"></span>');
+            //Concat original text onto the buttons
+            $(document).find('.autoassign_picker-enable').html(
+                $(document).find('.autoassign_picker-enable').html() + ' On'
+            );
+            $(document).find('.autoassign_picker-disable').html(
+                $(document).find('.autoassign_picker-disable').html() + ' Off'
+            );
+        });
+    });
+</script>
+
+<div class="autoassign_picker">
+    <div class="btn-group form-group container" data-toggle="buttons-radio">
+        <input type='hidden' class="form-control" name="AutoAssign" id="AutoAssign" value="@value" />
+        @if (Model)
+        {
+            <button style="display:inline-block;" type="button" data-value="1" class="btn btn-default btn-primary autoassign_picker-enable"><span class="glyphicon glyphicon-check"></span>&nbsp;On</button>
+            <button style="display:inline-block;" type="button" data-value="0" class="btn btn-default autoassign_picker-disable"><span class="glyphicon glyphicon-unchecked"></span>&nbsp;Off</button>
+        }
+        else
+        {
+            <button style="display:inline-block;" type="button" data-value="1" class="btn btn-default autoassign_picker-enable"><span class="glyphicon glyphicon-unchecked"></span>&nbsp;On</button>
+            <button style="display:inline-block;" type="button" data-value="0" class="btn btn-default btn-primary autoassign_picker-disable"><span class="glyphicon glyphicon-check"></span>&nbsp;Off</button>
+        }
+    </div>
+</div>
