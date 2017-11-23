@@ -4,6 +4,6 @@
 
     if (Request.IsAuthenticated)
     {
-        <li>@Html.ActionLink("Schedule", "Schedule", "DPUser", new { id = new Digital_Planner.Models.DigitalPlannerDbContext().DPUsers.First() })</li>
+        <li>@Html.ActionLink("Schedule", "Schedule", "DPUsers", new { id = new Digital_Planner.Models.DigitalPlannerDbContext().DPUsers.First().DPUserID }, new { })</li>
     }
 }
