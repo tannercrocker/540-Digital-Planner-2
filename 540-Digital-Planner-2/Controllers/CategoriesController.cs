@@ -40,7 +40,7 @@ namespace Digital_Planner.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "ID", "FirstName");
+            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPuserID", "FirstName");
             return View();
         }
 
@@ -58,7 +58,7 @@ namespace Digital_Planner.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "ID", "FirstName", category.DPUserID);
+            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
             return View(category);
         }
 
@@ -74,7 +74,7 @@ namespace Digital_Planner.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "ID", "FirstName", category.DPUserID);
+            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
             return View(category);
         }
 
@@ -91,7 +91,7 @@ namespace Digital_Planner.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "ID", "FirstName", category.DPUserID);
+            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
             return View(category);
         }
 

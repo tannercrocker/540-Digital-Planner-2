@@ -25,9 +25,9 @@
 
         @* TODO - Replace with [current_user] *@
         <div class="form-group">
-            @Html.LabelFor(model => model.DPUserID, "UserID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DPUserID, "DPUserID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("DPUserID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.DPUserID, "", new { @class = "text-danger" })
             </div>
         </div>

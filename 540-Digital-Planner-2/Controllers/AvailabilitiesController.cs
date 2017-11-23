@@ -40,7 +40,7 @@ namespace Digital_Planner.Controllers
         // GET: Days/Create
         public ActionResult Create()
         {
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "ID", "FirstName");
+            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName");
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace Digital_Planner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,OccursAt,Duration,DPUserID")] Availability avail, int? recurrence)
+        public ActionResult Create([Bind(Include = "AvailabilityID,OccursAt,Duration,DPUserID")] Availability avail, int? recurrence)
         {
 
             if (ModelState.IsValid)
@@ -82,7 +82,7 @@ namespace Digital_Planner.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "ID", "FirstName", avail.DPUserID);
+            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", avail.DPUserID);
             return View(avail);
         }
 
@@ -98,7 +98,7 @@ namespace Digital_Planner.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "ID", "FirstName", avail.DPUserID);
+            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", avail.DPUserID);
             return View(avail);
         }
 
@@ -107,7 +107,7 @@ namespace Digital_Planner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,OccursAt,Duration,DPUserID")] Availability avail)
+        public ActionResult Edit([Bind(Include = "AvailabilityID,OccursAt,Duration,DPUserID")] Availability avail)
         {
             if (ModelState.IsValid)
             {
@@ -115,7 +115,7 @@ namespace Digital_Planner.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "ID", "FirstName", avail.DPUserID);
+            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", avail.DPUserID);
             return View(avail);
         }
 
