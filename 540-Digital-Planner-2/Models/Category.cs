@@ -19,7 +19,6 @@ namespace Digital_Planner.Models
         public String Description { get; set; } = "";
 
         //FK
-        [Required]
         [ForeignKey("DPUser")]
         public int DPUserID { get; set; }
 

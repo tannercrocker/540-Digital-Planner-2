@@ -22,7 +22,6 @@ namespace Digital_Planner.Models
         //Email & Password is in the ApplicationUser
 
         //FK
-        [Required]
         [ForeignKey("User")]
         public String UserID { get; set; }
 

@@ -28,7 +28,7 @@ namespace Digital_Planner.Models
         [Required]
         [Display(Name = "Length of Event")]
         [UIHint("TimeSelector")]
-        public TimeSpan Duration { get; set; } = new TimeSpan(0);
+        public TimeSpan Duration { get; set; } = new TimeSpan(0, 0, 0);
         [Required]
         [Display(Name = "Is Complete")]
         [UIHint("CompletionCheck")]
@@ -43,10 +43,8 @@ namespace Digital_Planner.Models
         public String Location { get; set; } = "";
 
         //FKs
-        [Required]
         [ForeignKey("DPUser")]
         public int DPUserID { get; set; }
-        [Required]
         [ForeignKey("Category")]
         public int CategoryID { get; set; }
 

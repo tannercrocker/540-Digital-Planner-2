@@ -22,10 +22,9 @@ namespace Digital_Planner.Models
         [Required]
         [Display(Name = "Length of Availability")]
         [UIHint("TimeSelector")]
-        public TimeSpan Duration { get; set; } = new TimeSpan(0);
+        public TimeSpan Duration { get; set; } = new TimeSpan(0, 0, 0);
 
         //FK
-        [Required]
         [ForeignKey("DPUser")]
         public int DPUserID { get; set; }
 
