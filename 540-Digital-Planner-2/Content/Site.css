@@ -23,14 +23,18 @@ textarea {
     max-width: 280px;
 }
 
+
+
 /* ----  Below are things we added  ---- */
 
-/*          ONLY AFFECTS CHROME        */
+/*       THIS ONLY AFFECTS CHROME      */
 /* Make number spinners always visible */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     opacity: 1;
 }
+
+
 
 .navbar {
     border-bottom: 1px #158cba solid;   /* Add a little flair to the navbar & help separate it visually from the rest of the page */
@@ -48,6 +52,11 @@ input[type=number]::-webkit-outer-spin-button {
     color: #333 !important;
 }
 
+/* Stop hover effects on design-only buttons */
+.btn-useless:hover {
+    margin-top: 0 !important;
+    border-bottom-width: 4px !important;
+}
 
 /* Bootstrap styles table headers with text-left, this corrects that */
 th {
