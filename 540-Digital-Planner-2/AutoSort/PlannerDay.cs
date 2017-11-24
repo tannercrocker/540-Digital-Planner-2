@@ -29,7 +29,7 @@ namespace Digital_Planner.Sorting
 
         public DateTime Date {
             get {
-                return Date;
+                return day.OccursAt;
             }
         }
 

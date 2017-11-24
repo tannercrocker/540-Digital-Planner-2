@@ -10,6 +10,7 @@ namespace Digital_Planner.Controllers
     {
         public ActionResult Index()
         {
+            Sorting.Planner.GenerateSchedule();
             return View();
         }
 
