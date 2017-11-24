@@ -25,16 +25,16 @@ namespace Digital_Planner.Sorting
             System.Diagnostics.Debug.Print("Generate Schedule");
             List<PlannerEvent> autoEvents = new List<PlannerEvent>();
             List<PlannerEvent> manualEvents = new List<PlannerEvent>();
-            List<PlannerDay> days = new List<PlannerDay>();
+            List<PlannerAvailability> availabilities = new List<PlannerAvailability>();
 
-            GetDataFromDatabase(autoEvents, manualEvents, days);
-            SortEvents(autoEvents, manualEvents, days);
-            AssignWorkDays(autoEvents, manualEvents, days);
-            DebugPrint(autoEvents, manualEvents, days);
+            GetDataFromDatabase(autoEvents, manualEvents, availabilities);
+            SortEvents(autoEvents, manualEvents, availabilities);
+            AssignWorkDays(autoEvents, manualEvents, availabilities);
+            DebugPrint(autoEvents, manualEvents, availabilities);
             db.SaveChanges();
         }
 
-        private static void DebugPrint(List<PlannerEvent> autoEvents, List<PlannerEvent> manualEvents, List<PlannerDay> days)
+        private static void DebugPrint(List<PlannerEvent> autoEvents, List<PlannerEvent> manualEvents, List<PlannerAvailability> days)
         {
             System.Diagnostics.Debug.Print("Print Schedule");
 
@@ -47,7 +47,7 @@ namespace Digital_Planner.Sorting
         }
 
              
-        private static void GetDataFromDatabase(List<PlannerEvent> autoEvents, List<PlannerEvent> manualEvents, List<PlannerDay> days)
+        private static void GetDataFromDatabase(List<PlannerEvent> autoEvents, List<PlannerEvent> manualEvents, List<PlannerAvailability> days)
         {
             //  Gets the information from the database and populates the lists
 
@@ -55,7 +55,7 @@ namespace Digital_Planner.Sorting
 
             //Get database records
             List<Event> plannerEvents = db.Events.ToList();
-            List<Availability> plannerDays = db.Availabilities.ToList();
+            List<Availability> plannerAvailabilities = db.Availabilities.ToList();
 
             //sort events by auto/manual assign
             for (int i = 0; i < plannerEvents.Count; i++)
@@ -66,13 +66,13 @@ namespace Digital_Planner.Sorting
                     manualEvents.Add(new PlannerEvent(plannerEvents[i]));
             }
 
-            System.Diagnostics.Debug.Print("PlannerDays Count: " + plannerDays.Count);
-            for (int i = 0; i < plannerDays.Count; i++)
-                days.Add(new PlannerDay(plannerDays[i]));
+            System.Diagnostics.Debug.Print("PlannerDays Count: " + plannerAvailabilities.Count);
+            for (int i = 0; i < plannerAvailabilities.Count; i++)
+                days.Add(new PlannerAvailability(plannerAvailabilities[i]));
         }
 
 
-        private static void SortEvents(List<PlannerEvent> autoEvents, List<PlannerEvent> manualEvents, List<PlannerDay> days)
+        private static void SortEvents(List<PlannerEvent> autoEvents, List<PlannerEvent> manualEvents, List<PlannerAvailability> days)
         {
             //  Sorts automatic events based on event score
 
@@ -98,7 +98,7 @@ namespace Digital_Planner.Sorting
         }
 
 
-        private static void AssignWorkDays(List<PlannerEvent> autoEvents, List<PlannerEvent> manualEvents, List<PlannerDay> days)
+        private static void AssignWorkDays(List<PlannerEvent> autoEvents, List<PlannerEvent> manualEvents, List<PlannerAvailability> days)
         {
             System.Diagnostics.Debug.Print("Assign Work Days");
 

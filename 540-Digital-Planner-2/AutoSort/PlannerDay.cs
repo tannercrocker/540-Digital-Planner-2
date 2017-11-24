@@ -14,22 +14,22 @@ using Digital_Planner.Models;
 
 namespace Digital_Planner.Sorting
 {
-    class PlannerDay
+    class PlannerAvailability
     {
-        Availability day;
+        Availability occursAt;
         private TimeSpan totalTimeAvailable;
         private float remainingWorkMinutes;
 
-        public PlannerDay(Availability day)
+        public PlannerAvailability(Availability day)
         {
-            this.day = day;
+            this.occursAt = day;
             totalTimeAvailable = day.Duration;
             remainingWorkMinutes = day.OccursAt.Minute + day.OccursAt.Hour / 60;
         }
 
         public DateTime Date {
             get {
-                return day.OccursAt;
+                return occursAt.OccursAt;
             }
         }
 
