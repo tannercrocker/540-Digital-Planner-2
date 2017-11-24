@@ -26,7 +26,7 @@
 @using (Html.BeginForm("Create", "Events", new { recurrence = 0 }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Event</h4>
         <hr />
@@ -48,8 +48,9 @@
             </div>
         </div>
 
-        @{ ViewBag.index = 1; }
+        @{ ViewBag.index++; }
         @{ ViewBag.date_time = Model.OccursAt; }
+        @{ ViewBag.name = "OccursAt"; }
         <div class="form-group">
             @Html.LabelFor(model => model.OccursAt, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -59,8 +60,9 @@
             </div>
         </div>
 
-        @{ ViewBag.index = 2; }
+        @{ ViewBag.index++; }
         @{ ViewBag.time = Model.Duration; }
+        @{ ViewBag.name = "Duration"; }
         <div class="form-group">
             @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -69,6 +71,7 @@
             </div>
         </div>
 
+        @{ ViewBag.name = "Priority"; }
         <div class="form-group">
             @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -77,8 +80,9 @@
             </div>
         </div>
 
-        @{ ViewBag.index = 3; }
+        @{ ViewBag.index++; }
         @{ ViewBag.date_time = Model.CompleteBy; }
+        @{ ViewBag.name = "CompleteBy"; }
         <div class="form-group">
             @Html.LabelFor(model => model.CompleteBy, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -88,6 +92,8 @@
         </div>
 
         @* TC - Why create an event if it is already complete? (Needs to be included, for validations... - Default value is false) *@
+
+        @{ ViewBag.name = "IsComplete"; }
         @Html.HiddenFor(model => model.IsComplete)
         @*
         <div class="form-group">
@@ -109,8 +115,8 @@
             </div>
         </div>
 
-        @* TODO - Replace with [current_user] *@
-        @Html.HiddenFor(model => model.DPUserID)
+        @* TODO - Replace with [current_user] * @
+        @Html.HiddenFor(model => model.DPUserID) *@
         
         <div class="form-group">
             @Html.LabelFor(model => model.DPUserID, "DPUserID", htmlAttributes: new { @class = "control-label col-md-2" })

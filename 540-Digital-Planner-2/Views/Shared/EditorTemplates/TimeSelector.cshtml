@@ -1,4 +1,10 @@
 ﻿@{ 
+    String name = "Duration";
+    if (ViewBag.name != null)
+    {
+        name = ViewBag.name;
+    }
+
     int? index = ViewBag.index;
     if (index == null)
     {
@@ -10,11 +16,12 @@
     if (ViewBag.time != null)
     {
         ts = ViewBag.time;
-        dt.AddTicks(ts.Ticks);
+        dt = dt.AddTicks(ts.Ticks);
     }
 }
+
 <div class="TimeSelector bootstrap-datetimepicker-widget" style="overflow:hidden;">
-    <input id="timepickerinput-@index" class="form-control" type="hidden" value="@dt.ToString("HH:mm")" />
+    <input id="@name-@index" class="form-control" name="@name" type="hidden" value="@dt.ToString("HH:mm")" />
     <div class="form-group">
         <div class="row">
             <div class="col-md-8">
@@ -36,7 +43,7 @@
 
             $("#timepicker-@index").on('dp.change', function (ev) {
                 //console.log(ev.date.format("H:mm"))
-                $("#timepickerinput-@index").val(ev.date.format("H:mm"));
+                $("#@name-@index").val(ev.date.format("H:mm"));
             });
 
         });

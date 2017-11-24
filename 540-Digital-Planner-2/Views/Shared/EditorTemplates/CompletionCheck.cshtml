@@ -1,58 +1,78 @@
 ﻿@model Boolean
 
 @{
+    String name = "IsComplete";
+    if (ViewBag.name != null)
+    {
+        name = ViewBag.name;
+    }
+
     var index = ViewBag.index;
-    var use_class = "";
-    var initial_value = "";
+    var btn_class = "";
+    var glyph = "";
+    var initial_value = Model.ToString().ToLower();
 
     if (Model)
     {
-        use_class = "glyphicon-check text-success btn-success";
-        initial_value = "1";
+        btn_class = "btn-success";
+        glyph = "glyphicon-check";
     }
     else
     {
-        use_class = "glyphicon-unchecked text-danger btn-danger";
-        initial_value = "0";
+        btn_class = "btn-danger";
+        glyph = "glyphicon-unchecked";
     }
 }
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('.iscomplete-picker-@index').unbind('click').click(function () {
-            var input = $(this).find('input');
+        $('.iscomplete-editor-@index').unbind('click').click(function () {
+            var input = $(this).parent().find('input');
+
+            console.log(input);
+            console.log(input.val);
 
             //Change the value
-            if ($(input).data('value') === '1') {
-                $(input).data('value', '0');
+            if ($(input).data('value') === "true") {
+                $(input).data('value', "false");
             } else {
-                $(input).data('value', '1');
+                $(input).data('value', "true");
             }
 
+            var glyph = $(this).find('.glyphicon');
+
             //Remove class from span
-            $(this).removeClass('glyphicon-check')
-            $(this).removeClass('text-success')
-            $(this).removeClass('btn-success')
-            $(this).removeClass('glyphicon-unchecked')
-            $(this).removeClass('text-danger')
-            $(this).removeClass('btn-danger')
+            glyph.removeClass('glyphicon-check');
+            glyph.removeClass('glyphicon-unchecked');
+            $(this).removeClass('btn-success');
+            $(this).removeClass('btn-danger');
 
             //Update class for span
-            if ($(input).data('value') === '1') {
-                $(this).addClass('glyphicon-check')
-                $(this).addClass('text-success')
-                $(this).addClass('btn-success')
+            if ($(input).data('value') === "true") {
+                glyph.addClass('glyphicon-check');
+                $(this).addClass('btn-success');
             } else {
-                $(this).addClass('glyphicon-unchecked')
-                $(this).addClass('text-danger')
-                $(this).addClass('btn-danger')
+                glyph.addClass('glyphicon-unchecked');
+                $(this).addClass('btn-danger');
             }
         });
     });
 </script>
 
+@*
+@if (Model)
+{
+    <input type="hidden"  class="form-control"for="@name" name="@name" value="false" />
+}
+else
+{
+    <input type="hidden"  class="form-control" for="@name" name="@name" value="true" />
+}
+*@
 
-<span class="iscomplete-picker-@index btn glyphicon @use_class">
-    <input type="checkbox" hidden="hidden" value="@initial_value" />
-</span>
+<input type="hidden" class="form-control" for="@name" name="@name" value="@initial_value" />
+
+<div class="iscomplete-editor-@index btn @btn_class">
+    <span class="glyphicon @glyph"></span>
+</div>
 

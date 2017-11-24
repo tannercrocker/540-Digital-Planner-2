@@ -1,0 +1,28 @@
+﻿@model Digital_Planner.Models.Event
+
+
+@using (Html.BeginRouteForm(new { action = "ToggleCompletion", controller = "Events", id = Model.EventID }))
+{
+    @Html.AntiForgeryToken()
+
+    var index = Model.EventID;
+    var btn_class = "";
+    var glyph = "";
+
+    if (Model.IsComplete)
+    {
+        btn_class = "btn-success";
+        glyph = "glyphicon-check";
+    }
+    else
+    {
+        btn_class = "btn-danger";
+        glyph = "glyphicon-unchecked";
+    }
+
+    <!-- Script isn't needed here - This changes the page b/c of the POST. -->
+    
+    <button type="submit" class="iscomplete-picker-@index btn btn-sm @btn_class">
+        <span class="glyphicon @glyph"></span>
+    </button>
+}

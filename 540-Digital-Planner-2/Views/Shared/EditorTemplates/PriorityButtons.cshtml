@@ -1,5 +1,11 @@
 ﻿@model int
 @{
+    String name = "Priority";
+    if (ViewBag.name != null)
+    {
+        name = ViewBag.name;
+    }
+
     var value = Model;
     if(value > 4)
     {
@@ -48,7 +54,7 @@
 
 <div class="priority_picker">
     <div class="btn-group form-group container" data-toggle="buttons-radio">
-        <input type='hidden' class="form-control" name="Priority" id="Priority" value="@value" />
+        <input type='hidden' class="form-control" name="@name" id="@name" value="@value" />
 
         <button style="display:inline-block;" type="button" data-value="1" class="btn btn-default btn-info"><span class="glyphicon glyphicon-@low_check"></span>&nbsp;low</button>
         <button style="display:inline-block;" type="button" data-value="2" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-@med_check"></span>&nbsp;med</button>

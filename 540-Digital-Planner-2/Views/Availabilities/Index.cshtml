@@ -5,7 +5,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>My Availabilities</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,9 +18,12 @@
         <th>
             @Html.DisplayNameFor(model => model.OccursAt)
         </th>
+        
+        @* Categories are DPUser-specific, so this isn't needed. -TC
         <th>
             @Html.DisplayNameFor(model => model.DPUser.FirstName)
         </th>
+        *@
         <th></th>
     </tr>
 
@@ -30,11 +33,15 @@
             @Html.DisplayFor(modelItem => item.Duration)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.OccursAt)
+            @item.OccursAt.ToString("M/d/yyy h:mm tt")
+            @* @Html.DisplayFor(modelItem => item.OccursAt) *@
         </td>
+        
+        @* Categories are DPUser-specific, so this isn't needed. -TC
         <td>
             @Html.DisplayFor(modelItem => item.DPUser.FirstName)
         </td>
+        *@
         <td>
             @Html.Partial("_Edit-Detail-Delete_Buttons", new Tuple<System.Web.Mvc.ControllerBase, int>(ViewContext.Controller, item.AvailabilityID))
         </td>

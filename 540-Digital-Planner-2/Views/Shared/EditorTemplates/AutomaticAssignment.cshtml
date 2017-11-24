@@ -1,11 +1,17 @@
 ﻿@model Boolean
-    @{ 
-        var value = '0';
-        if (Model)
-        {
-            value = '1';
-        }
+@{ 
+    String name = "AutomaticAssignment";
+    if (ViewBag.name != null)
+    {
+        name = ViewBag.name;
     }
+
+    var value = '0';
+    if (Model)
+    {
+        value = '1';
+    }
+}
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -34,7 +40,7 @@
 
 <div class="autoassign_picker">
     <div class="btn-group form-group container" data-toggle="buttons-radio">
-        <input type='hidden' class="form-control" name="AutoAssign" id="AutoAssign" value="@value" />
+        <input type='hidden' class="form-control" name="@name" id="@name" value="@value" />
         @if (Model)
         {
             <button style="display:inline-block;" type="button" data-value="1" class="btn btn-default btn-primary autoassign_picker-enable"><span class="glyphicon glyphicon-check"></span>&nbsp;On</button>

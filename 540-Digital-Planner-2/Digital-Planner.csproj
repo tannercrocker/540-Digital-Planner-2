@@ -221,6 +221,10 @@
     <Compile Include="Migrations\201711230235124_Set-Required-Attributes-AND-Added-UIHints.Designer.cs">
       <DependentUpon>201711230235124_Set-Required-Attributes-AND-Added-UIHints.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711240657477_Remove-Req-on-FK.cs" />
+    <Compile Include="Migrations\201711240657477_Remove-Req-on-FK.Designer.cs">
+      <DependentUpon>201711240657477_Remove-Req-on-FK.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -332,7 +336,7 @@
     <Content Include="Views\Shared\EditorTemplates\DateTimeSelector.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\PriorityButtons.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TimeSelector.cshtml" />
-    <Content Include="Views\Shared\_CompletionCheckAsForm.cshtml" />
+    <Content Include="Views\Shared\_FORM_CompletionCheck.cshtml" />
     <Content Include="Views\Shared\_Edit-Detail-Delete_Buttons.cshtml" />
     <Content Include="Views\Shared\_PreviousPageHyperlink.cshtml" />
     <Content Include="Views\Shared\_Priority.cshtml" />
@@ -367,6 +371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711230235124_Set-Required-Attributes-AND-Added-UIHints.resx">
       <DependentUpon>201711230235124_Set-Required-Attributes-AND-Added-UIHints.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711240657477_Remove-Req-on-FK.resx">
+      <DependentUpon>201711240657477_Remove-Req-on-FK.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

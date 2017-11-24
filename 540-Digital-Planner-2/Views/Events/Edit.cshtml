@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Edit";
+    ViewBag.index = 0;
 }
 
 <h2>Edit</h2>
@@ -25,8 +26,9 @@
         </div>
 
 
-        @{ ViewBag.index = 1; }
+        @{ ViewBag.index++; }
         @{ ViewBag.date_time = Model.OccursAt; }
+        @{ ViewBag.name = "OccursAt"; }
         <div class="form-group">
             @Html.LabelFor(model => model.OccursAt, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -36,8 +38,9 @@
         </div>
 
 
-        @{ ViewBag.index = 2; }
+        @{ ViewBag.index++; }
         @{ ViewBag.time = Model.Duration; }
+        @{ ViewBag.name = "Duration"; }
         <div class="form-group">
             @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -46,6 +49,7 @@
             </div>
         </div>
 
+        @{ ViewBag.name = "Priority"; }
         <div class="form-group">
             @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -55,8 +59,9 @@
         </div>
 
 
-        @{ ViewBag.index = 3; }
+        @{ ViewBag.index++; }
         @{ ViewBag.date_time = Model.CompleteBy; }
+        @{ ViewBag.name = "CompleteBy"; }
         <div class="form-group">
             @Html.LabelFor(model => model.CompleteBy, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -65,6 +70,7 @@
             </div>
         </div>
 
+        @{ ViewBag.name = "IsComplete"; }
         <div class="form-group">
             @Html.LabelFor(model => model.IsComplete, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -83,7 +89,8 @@
             </div>
         </div>
 
-        @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control", type = "hidden" })
+        @*  TODO - Replace with [current_user] & hide *@
+        @Html.DropDownList("DPUserID", null, htmlAttributes: new { @class = "form-control", type = "hidden" })
         @*
         <div class="form-group">
             @Html.LabelFor(model => model.DPUserID, "UserID", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -94,6 +101,7 @@
         </div>
         *@
 
+        @*  TODO - Limit to [current_user]'s categories  *@
         <div class="form-group">
             @Html.LabelFor(model => model.CategoryID, "CategoryID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

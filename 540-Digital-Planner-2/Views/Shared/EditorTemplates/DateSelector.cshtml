@@ -1,8 +1,14 @@
 ﻿@{
-    int? index = ViewBag.index;
-    if (index == null)
+    String name = "Date";
+    if(ViewBag.name != null)
     {
-        index = 0;
+        name = ViewBag.name;
+    }
+
+    int index = 0;
+    if (ViewBag.index != null)
+    {
+        index = ViewBag.index;
     }
 
     DateTime dt = DateTime.Now;
@@ -12,7 +18,7 @@
     }
 }
 <div class="DateSelector bootstrap-datetimepicker-widget" style="overflow:hidden;">
-    <input id="datepickerinput-@index" class="form-control" type="hidden" value="@dt.ToString("M/d/yyy")" />
+    <input id="@name-@index" name="@name" class="form-control" type="hidden" value="@dt.ToString("M/d/yyy")" />
     <div class="form-group">
         <div class="row">
             <div class="col-md-8">
@@ -32,7 +38,7 @@
 
             $("#datepicker-@index").on('dp.change', function (ev) {
                 //console.log(ev.date.format("M/D/YYYY LT"))
-                $("#datepickerinput-@index").val(ev.date.format("M/D/YYYY"));
+                $("#@name-@index").val(ev.date.format("M/D/YYYY"));
             });
         });
     </script>

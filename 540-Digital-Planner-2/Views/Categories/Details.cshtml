@@ -18,18 +18,20 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
 
+        @* Categories are DPUser-specific, so this isn't needed. -TC
         <dt>
-            @Html.DisplayNameFor(model => model.User.FirstName)
+            @Html.DisplayNameFor(model => model.DPUser.FirstName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.User.FirstName)
+            @Html.DisplayFor(model => model.DPUser.FirstName)
         </dd>
+        *@
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CategoryID }) |
     @Html.Partial("_PreviousPageHyperlink")
     @* @Html.ActionLink("Back to List", "Index") *@
 </p>

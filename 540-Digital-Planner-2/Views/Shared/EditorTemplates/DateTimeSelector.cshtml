@@ -1,4 +1,10 @@
 ﻿@{
+    String name = "OccursAt";
+    if (ViewBag.name != null)
+    {
+        name = ViewBag.name;
+    }
+
     int? index = ViewBag.index;
     if(index == null)
     {
@@ -12,7 +18,7 @@
     }
 }
 <div class="DateTimeSelector bootstrap-datetimepicker-widget" style="overflow:hidden;">
-    <input id="datetimepickerinput-@index" class="form-control" type="hidden" value="@dt.ToString("M/d/yyy h:mm tt")" />
+    <input id="@name-@index" name="@name" class="form-control" type="hidden" value="@dt.ToString("M/d/yyy h:mm tt")" />
     <div class="form-group">
         <div class="row">
             <div class="col-md-8">
@@ -32,7 +38,7 @@
 
             $("#datetimepicker-@index").on('dp.change', function (ev) {
                 //console.log(ev.date.format("M/D/YYYY LT"))
-                $("#datetimepickerinput-@index").val(ev.date.format("M/D/YYYY LT"));
+                $("#@name-@index").val(ev.date.format("M/D/YYYY LT"));
             });
         });
     </script>

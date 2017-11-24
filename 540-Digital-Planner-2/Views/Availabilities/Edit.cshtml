@@ -2,11 +2,12 @@
 
 @{
     ViewBag.Title = "Edit";
+    ViewBag.index = 0;
 }
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Availabilities", new { id = Model.AvailabilityID }))
 {
     @Html.AntiForgeryToken()
     
@@ -17,19 +18,9 @@
         @Html.HiddenFor(model => model.AvailabilityID)
 
 
-        @{ ViewBag.index = 1; }
-        @{ ViewBag.time = Model.Duration; }
-        <div class="form-group">
-            @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        
-
-        @{ ViewBag.index = 2; }
+        @{ ViewBag.index++; }
         @{ ViewBag.date_time = Model.OccursAt; }
+        @{ ViewBag.name = "OccursAt"; }
         <div class="form-group">
             @Html.LabelFor(model => model.OccursAt, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -37,6 +28,19 @@
                 @Html.ValidationMessageFor(model => model.OccursAt, "", new { @class = "text-danger" })
             </div>
         </div>
+
+
+        @{ ViewBag.index++; }
+        @{ ViewBag.time = Model.Duration; }
+        @{ ViewBag.name = "Duration"; }
+        <div class="form-group">
+            @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.DPUserID, "DPUserID", htmlAttributes: new { @class = "control-label col-md-2" })
