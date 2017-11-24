@@ -1,11 +1,20 @@
 ﻿@{ 
-    int? index = ViewBag.picker_index;
+    int? index = ViewBag.index;
     if (index == null)
     {
         index = 0;
     }
+
+    TimeSpan ts = new TimeSpan(0, 0, 0);
+    DateTime dt = DateTime.Today;
+    if (ViewBag.time != null)
+    {
+        ts = ViewBag.time;
+        dt.AddTicks(ts.Ticks);
+    }
 }
 <div class="TimeSelector bootstrap-datetimepicker-widget" style="overflow:hidden;">
+    <input id="timepickerinput-@index" class="form-control" type="hidden" value="@dt.ToString("HH:mm")" />
     <div class="form-group">
         <div class="row">
             <div class="col-md-8">
@@ -14,13 +23,22 @@
         </div>
     </div>
     <script type="text/javascript">
-    $(function () {
-        $('#timepicker-@index').datetimepicker({
-            format: 'h:mm A',
-            useCurrent: true,
-            inline: true,
-            sideBySide: true
+        $(document).ready(function () {
+            $("#timepicker-@index").datetimepicker({
+                format: "HH:mm",
+                useCurrent: false,
+                inline: true,
+                sideBySide: true,
+                defaultDate: "@dt.ToString("yyyy-MM-ddTHH:mm:ss.ffffff")"   //ISO Format
+            });
+
+            $("#timepicker-@index, #timepicker-@index *").trigger('dp.update')
+
+            $("#timepicker-@index").on('dp.change', function (ev) {
+                //console.log(ev.date.format("H:mm"))
+                $("#timepickerinput-@index").val(ev.date.format("H:mm"));
+            });
+
         });
-    });
     </script>
 </div>

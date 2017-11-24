@@ -1,12 +1,18 @@
 ﻿@{
-    int? index = ViewBag.picker_index;
+    int? index = ViewBag.index;
     if(index == null)
     {
         index = 0;
     }
+
+    DateTime dt = DateTime.Now;
+    if (ViewBag.date_time != null)
+    {
+        dt = ViewBag.date_time;
+    }
 }
 <div class="DateTimeSelector bootstrap-datetimepicker-widget" style="overflow:hidden;">
-    <input id="pickerinput-@index" class="form-control" type="text" hidden value="@DateTime.Now.ToString("M/d/yyy h:mm tt")" />
+    <input id="datetimepickerinput-@index" class="form-control" type="hidden" value="@dt.ToString("M/d/yyy h:mm tt")" />
     <div class="form-group">
         <div class="row">
             <div class="col-md-8">
@@ -16,17 +22,17 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
-            //var dp = $("#datetimepicker-@index");
 
             $("#datetimepicker-@index").datetimepicker({
-                format: 'M/D/YYYY h:mm A',
+                format: "M/D/YYYY LT",
                 useCurrent: true,
                 inline: true,
                 sideBySide: true
             });
 
-            $("#datetimepicker-@index, #datetimepicker-@index *").on('dp.change', function (ev) {
-                $("#pickerinput-@index").val(ev.datetime.format('M/D/YYYY h:mm A'));
+            $("#datetimepicker-@index").on('dp.change', function (ev) {
+                //console.log(ev.date.format("M/D/YYYY LT"))
+                $("#datetimepickerinput-@index").val(ev.date.format("M/D/YYYY LT"));
             });
         });
     </script>

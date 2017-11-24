@@ -54,6 +54,8 @@
                 @Html.ActionLink(item.Title, "Edit", "Events", new { id = item.EventID }, new { title = "Edit event" })
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+                @*
                 @item.Duration.ToString("%h' hr, '%m' min'")
                 @* @Html.DisplayFor(modelItem => item.Duration) *@
             </td>
@@ -62,7 +64,6 @@
             </td>
             <td>
                 @item.CompleteBy.ToString("M/d/yyyy h:mm tt")
-            
             </td>
             <td>
                 @Html.Partial("_CompletionCheckAsForm", item)

@@ -1,7 +1,18 @@
 ﻿@{
-    int index = ViewBag.picker_index;
+    int? index = ViewBag.index;
+    if (index == null)
+    {
+        index = 0;
+    }
+
+    DateTime dt = DateTime.Now;
+    if (ViewBag.date_time != null)
+    {
+        dt = ViewBag.date_time;
+    }
 }
 <div class="DateSelector bootstrap-datetimepicker-widget" style="overflow:hidden;">
+    <input id="datepickerinput-@index" class="form-control" type="hidden" value="@dt.ToString("M/d/yyy")" />
     <div class="form-group">
         <div class="row">
             <div class="col-md-8">
@@ -10,13 +21,19 @@
         </div>
     </div>
     <script type="text/javascript">
-    $(function () {
-        $('#datepicker-@index').datetimepicker({
-            format: 'M/D/YYYY',
-            useCurrent: true,
-            inline: true,
-            sideBySide: true
+        $(document).ready(function () {
+            $("#datepicker-@index").datetimepicker({
+                format: "M/D/YYYY",
+                useCurrent: true,
+                inline: true,
+                sideBySide: true
+            });
+
+
+            $("#datepicker-@index").on('dp.change', function (ev) {
+                //console.log(ev.date.format("M/D/YYYY LT"))
+                $("#datepickerinput-@index").val(ev.date.format("M/D/YYYY"));
+            });
         });
-    });
     </script>
 </div>

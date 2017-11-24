@@ -16,6 +16,9 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.AvailabilityID)
 
+
+        @{ ViewBag.index = 1; }
+        @{ ViewBag.time = Model.Duration; }
         <div class="form-group">
             @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -23,7 +26,10 @@
                 @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
             </div>
         </div>
+        
 
+        @{ ViewBag.index = 2; }
+        @{ ViewBag.date_time = Model.OccursAt; }
         <div class="form-group">
             @Html.LabelFor(model => model.OccursAt, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

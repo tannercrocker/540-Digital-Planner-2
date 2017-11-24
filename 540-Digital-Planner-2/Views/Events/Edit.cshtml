@@ -24,6 +24,9 @@
             </div>
         </div>
 
+
+        @{ ViewBag.index = 1; }
+        @{ ViewBag.date_time = Model.OccursAt; }
         <div class="form-group">
             @Html.LabelFor(model => model.OccursAt, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -32,6 +35,9 @@
             </div>
         </div>
 
+
+        @{ ViewBag.index = 2; }
+        @{ ViewBag.time = Model.Duration; }
         <div class="form-group">
             @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -40,7 +46,6 @@
             </div>
         </div>
 
-        @* TODO - Replace with low/med/md-high/high button group *@
         <div class="form-group">
             @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -49,6 +54,9 @@
             </div>
         </div>
 
+
+        @{ ViewBag.index = 3; }
+        @{ ViewBag.date_time = Model.CompleteBy; }
         <div class="form-group">
             @Html.LabelFor(model => model.CompleteBy, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

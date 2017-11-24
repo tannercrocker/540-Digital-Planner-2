@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Create";
-    ViewBag.picker_index = 0;
+    ViewBag.index = 0;
 }
 <script type="text/javascript">
     $(document).ready(function () {
@@ -47,8 +47,9 @@
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
         </div>
-        
-        @{ ViewBag.picker_index++; }
+
+        @{ ViewBag.index = 1; }
+        @{ ViewBag.date_time = Model.OccursAt; }
         <div class="form-group">
             @Html.LabelFor(model => model.OccursAt, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -58,7 +59,8 @@
             </div>
         </div>
 
-        @{ ViewBag.picker_index++; }
+        @{ ViewBag.index = 2; }
+        @{ ViewBag.time = Model.Duration; }
         <div class="form-group">
             @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -75,7 +77,8 @@
             </div>
         </div>
 
-        @{ ViewBag.picker_index++; }
+        @{ ViewBag.index = 3; }
+        @{ ViewBag.date_time = Model.CompleteBy; }
         <div class="form-group">
             @Html.LabelFor(model => model.CompleteBy, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
