@@ -50,7 +50,7 @@ namespace Digital_Planner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EventID,Title,OccursAt,Duration,Priority,CompleteBy,IsComplete,Location,DPUserID,CategoryID")] Event @event, int? recurrence)
+        public ActionResult Create([Bind(Include = "EventID,AutoAssign,Title,OccursAt,Duration,Priority,CompleteBy,IsComplete,Location,DPUserID,CategoryID")] Event @event, int? recurrence)
         {
             if (ModelState.IsValid)
             {
