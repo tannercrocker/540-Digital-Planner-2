@@ -61,11 +61,14 @@ namespace Digital_Planner.Controllers
             return View(dpuser);
         }
 
+        /*
+         * TC - Disabling this because DPUsers are created with a corresponding Account.
         // GET: Users/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new DPUser());
         }
+        */
 
         // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
