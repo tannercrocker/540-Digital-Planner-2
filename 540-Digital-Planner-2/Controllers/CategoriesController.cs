@@ -41,7 +41,7 @@ namespace Digital_Planner.Controllers
         public ActionResult Create()
         {
             ViewBag.DPUserID = new SelectList(db.DPUsers, "DPuserID", "FirstName");
-            return View();
+            return View(new Category());
         }
 
         // POST: Categories/Create

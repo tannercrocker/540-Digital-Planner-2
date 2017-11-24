@@ -41,7 +41,7 @@ namespace Digital_Planner.Controllers
         public ActionResult Create()
         {
             ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName");
-            return View();
+            return View(new Availability());
         }
 
         // POST: Days/Create
