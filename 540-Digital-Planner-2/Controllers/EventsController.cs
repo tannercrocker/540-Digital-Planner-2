@@ -144,8 +144,8 @@ namespace Digital_Planner.Controllers
                 foreach(var item in evt)
                 {
                     item.IsComplete = !item.IsComplete;
-                    db.SaveChanges();
                 }
+                db.SaveChanges();
             }
             return RedirectToAction("Index");
             /* //Old Stuff
