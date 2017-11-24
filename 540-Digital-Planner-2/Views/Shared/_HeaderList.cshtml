@@ -1,6 +1,8 @@
 ﻿@{
-    <li>@Html.ActionLink("Events", "Index", "Events")</li>
-    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+    @* The ', new { }' is needed because there isn't an ActionLink() override for just adding an id (which is strange to me) -TC *@
+    <li>@Html.ActionLink("Availability", "Index", "Availabilities", new { id = 0 }, new { })</li>
+    <li>@Html.ActionLink("Categories", "Index", "Categories", new { id = 0 }, new { })</li>
+    <li>@Html.ActionLink("My Events", "Index", "Events", new { id = 0 }, new { })</li>
 
     if (Request.IsAuthenticated)
     {

@@ -10,7 +10,7 @@
         value = 1;
     }
 
-    String low_check = "unchecked", med_check = "unchecked", md_high_check = "unchecked", high_check = "unchecked";
+    String low_check = "unchecked", med_check = "unchecked", med_high_check = "unchecked", high_check = "unchecked";
     switch(value)
     {
         case 1:
@@ -20,7 +20,7 @@
             med_check = "check";
             break;
         case 3:
-            md_high_check = "check";
+            med_high_check = "check";
             break;
         case 4:
             high_check = "check";
@@ -35,35 +35,24 @@
 <script type="text/javascript">
     $(document).ready(function () {
         //Toggle Priority buttons
-        $('.autoassign_picker .btn').click(function () {
-            $(this).parent().find('input').val($(this).data("value"));
+        $('.priority_picker .btn').click(function () {
+            $('.priority_picker input').val($(this).data("value"));
             //Remove old info, set the new info
-            $(document).find('.autoassign_picker-enable').removeClass('btn-primary');
-            $(document).find('.autoassign_picker-disable').removeClass('btn-primary');
-            $(this).addClass('btn-primary');
-            //Remove old info, set the new info for the glyphicon
-            $(document).find('.autoassign_picker-enable').html('<span class="glyphicon glyphicon-unchecked"></span>');
-            $(document).find('.autoassign_picker-disable').html('<span class="glyphicon glyphicon-unchecked"></span>');
-            //$(this).html('<span class="glyphicon glyphicon-ok"></span>');
-            $(this).html('<span class="glyphicon glyphicon-check"></span>');
-            //Concat original text onto the buttons
-            $(document).find('.autoassign_picker-enable').html(
-                $(document).find('.autoassign_picker-enable').html() + ' On'
-            );
-            $(document).find('.autoassign_picker-disable').html(
-                $(document).find('.autoassign_picker-disable').html() + ' Off'
-            );
+            $(this).parent().find('.glyphicon').removeClass('glyphicon-check');
+            $(this).parent().find('.glyphicon').addClass('glyphicon-unchecked');
+            $(this).find('.glyphicon').removeClass('glyphicon-unchecked');
+            $(this).find('.glyphicon').addClass('glyphicon-check');
         });
     });
 </script>
 
 <div class="priority_picker">
     <div class="btn-group form-group container" data-toggle="buttons-radio">
-        <input type='hidden' class="form-control" name="AutoAssign" id="Priority" value="@value" />
+        <input type='hidden' class="form-control" name="Priority" id="Priority" value="@value" />
 
         <button style="display:inline-block;" type="button" data-value="1" class="btn btn-default btn-info"><span class="glyphicon glyphicon-@low_check"></span>&nbsp;low</button>
         <button style="display:inline-block;" type="button" data-value="2" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-@med_check"></span>&nbsp;med</button>
-        <button style="display:inline-block;" type="button" data-value="3" class="btn btn-default btn-warning"><span class="glyphicon glyphicon-@md_high_check"></span>&nbsp;md-high</button>
+        <button style="display:inline-block;" type="button" data-value="3" class="btn btn-default btn-warning"><span class="glyphicon glyphicon-@med_high_check"></span>&nbsp;med-high</button>
         <button style="display:inline-block;" type="button" data-value="4" class="btn btn-default btn-danger"><span class="glyphicon glyphicon-@high_check"></span>&nbsp;high</button>
     </div>
 </div>
