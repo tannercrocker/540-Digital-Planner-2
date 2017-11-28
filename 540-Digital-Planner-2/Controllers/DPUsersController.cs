@@ -170,16 +170,17 @@ namespace Digital_Planner.Controllers
         [Authorize]
         public int CurrentDPUserID()
         {
-            var currentUserID = User.Identity.GetUserId();
-            var dpuser = db.DPUsers.Where(u => u.UserID.Equals(currentUserID));
-            if(dpuser.Count() > 0)
-            {
-                return dpuser.First().DPUserID;
-            }
-            else
-            {
-                return -1;
-            }
+            //var currentUserID = User.Identity.GetUserId();
+            //var dpuser = db.DPUsers.Where(u => u.UserID.Equals(currentUserID));
+            /* if(dpuser.Count() > 0)
+             {
+                 return dpuser.First().DPUserID;
+             }
+             else
+             {
+                 return -1;
+             }*/
+            return -1;
         }
         #endregion
 
