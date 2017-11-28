@@ -166,13 +166,18 @@ namespace Digital_Planner.Controllers
         }
 
         //NT - Matching Current Users Logged in to DPUser
-        //Please look and test to make sure
-        public ActionResult CurrentUser()
+        public int CurrentUser()
         {
             var currentUserID = User.Identity.GetUserId();
-            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>());
-            var currentUser = manager.FindById(User.Identity.GetUserId());
-            return View(currentUser);
+            var dpuser = db.DPUsers.Where(u => u.UserID.Equals(currentUserID));
+            if(dpuser.Count() > 0)
+            {
+                return dpuser.First().DPUserID;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         //TC - @Natrone, I don't think we need these, but you can be the judge of that.
