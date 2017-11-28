@@ -18,10 +18,10 @@ namespace Digital_Planner.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            int current_dp = new DPUsersController().CurrentDPUserID();
-            if (current_dp > 0)
+            DPUser dp = new DPUsersController().CurrentDPUserID();
+            if (dp  != null)
             {
-                var categories = db.Categories.Where(u => u.DPUserID == current_dp);
+                var categories = db.Categories.Where(u => u.DPUserID == dp.DPUserID);
                 return View(categories.ToList());
             }
             else
@@ -49,18 +49,17 @@ namespace Digital_Planner.Controllers
         public ActionResult Create()
         {
 
-            int current_dp = new DPUsersController().CurrentDPUserID();
-            if (current_dp > 0)
+            DPUser dp = new DPUsersController().CurrentDPUserID();
+            if (dp != null)
             {
-                ViewBag.DPUserID = current_dp;
-                return View(new Category());
+                return View(new Category() { DPUserID = dp.DPUserID });
             }
             else
             {
+                //We should really never get this case.
                 ViewBag.DPUserID = new SelectList(db.DPUsers, "DPuserID", "FirstName");
                 return View(new Category());
             }
-
         }
 
         // POST: Categories/Create

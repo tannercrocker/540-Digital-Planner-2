@@ -167,20 +167,22 @@ namespace Digital_Planner.Controllers
 
         #region Helpers
         //NT - Matching Current Users Logged in to DPUser
+        //TC - Return null if there isn't a logged in user 
+        //  (Things are reaaly messed up if that happens. 
+        //      This only gets called from an authorized user.)
         [Authorize]
-        public int CurrentDPUserID()
+        public DPUser CurrentDPUserID()
         {
-            //var currentUserID = User.Identity.GetUserId();
-            //var dpuser = db.DPUsers.Where(u => u.UserID.Equals(currentUserID));
-            /* if(dpuser.Count() > 0)
+            var currentUserID = User.Identity.GetUserId();
+            var user = db.Users.Where(u => u.Id.Equals(currentUserID));
+            if(user.Count() > 0)
              {
-                 return dpuser.First().DPUserID;
+                 return user.First().DPUser;
              }
              else
              {
-                 return -1;
-             }*/
-            return -1;
+                 return null;
+             }
         }
         #endregion
 
