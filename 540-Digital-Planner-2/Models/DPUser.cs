@@ -10,6 +10,8 @@ namespace Digital_Planner.Models
 {
     public class DPUser
     {
+        public static object Identity { get; internal set; }
+
         //PK
         [Key]
         public int DPUserID { get; set; }

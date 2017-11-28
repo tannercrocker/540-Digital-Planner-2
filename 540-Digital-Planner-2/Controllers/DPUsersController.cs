@@ -5,11 +5,15 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
 using Digital_Planner.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Digital_Planner.Controllers
 {
@@ -161,6 +165,15 @@ namespace Digital_Planner.Controllers
             base.Dispose(disposing);
         }
 
+        //NT - Matching Current Users Logged in to DPUser
+        //Please look and test to make sure
+        public ActionResult CurrentUser()
+        {
+            var currentUserID = User.Identity.GetUserId();
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>());
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+            return View(currentUser);
+        }
 
         //TC - @Natrone, I don't think we need these, but you can be the judge of that.
         // ^^ TC - Commenting out.
