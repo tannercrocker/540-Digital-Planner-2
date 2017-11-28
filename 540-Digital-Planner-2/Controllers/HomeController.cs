@@ -10,7 +10,9 @@ namespace Digital_Planner.Controllers
     {
         public ActionResult Index()
         {
+            //TODO: delete this call to GenerateSchedule().  It's just a temporary test
             Sorting.Planner.GenerateSchedule();
+
             return View();
         }
 
