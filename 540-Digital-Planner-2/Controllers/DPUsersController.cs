@@ -11,11 +11,11 @@ using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
-using Digital_Planner_2.Models;
+using Digital_Planner.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Digital_Planner_2.Controllers
+namespace Digital_Planner.Controllers
 {
     [Authorize]
     public class DPUsersController : Controller
@@ -165,8 +165,10 @@ namespace Digital_Planner_2.Controllers
             base.Dispose(disposing);
         }
 
+        #region Helpers
         //NT - Matching Current Users Logged in to DPUser
-        public int CurrentUser()
+        [Authorize]
+        public int CurrentDPUserID()
         {
             var currentUserID = User.Identity.GetUserId();
             var dpuser = db.DPUsers.Where(u => u.UserID.Equals(currentUserID));
@@ -179,6 +181,7 @@ namespace Digital_Planner_2.Controllers
                 return -1;
             }
         }
+        #endregion
 
         //TC - @Natrone, I don't think we need these, but you can be the judge of that.
         // ^^ TC - Commenting out.

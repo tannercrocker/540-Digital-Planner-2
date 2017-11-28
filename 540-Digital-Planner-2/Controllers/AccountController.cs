@@ -8,9 +8,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Digital_Planner_2.Models;
+using Digital_Planner.Models;
 
-namespace Digital_Planner_2.Controllers
+namespace Digital_Planner.Controllers
 {
     [Authorize]
     public class AccountController : Controller
@@ -151,7 +151,8 @@ namespace Digital_Planner_2.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var dpuser = new DPUser();
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, DPUserID = dpuser.DPUserID };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

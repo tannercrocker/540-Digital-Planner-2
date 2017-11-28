@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Digital_Planner_2
+namespace Digital_Planner
 {
     public class BundleConfig
     {

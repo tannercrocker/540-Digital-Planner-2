@@ -6,9 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Digital_Planner_2.Models;
+using Digital_Planner.Models;
 
-namespace Digital_Planner_2.Controllers
+namespace Digital_Planner.Controllers
 {
     [Authorize]
     public class CategoriesController : Controller
@@ -18,8 +18,16 @@ namespace Digital_Planner_2.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            var categories = db.Categories.Include(c => c.DPUser);
-            return View(categories.ToList());
+            int current_dp = new DPUsersController().CurrentDPUserID();
+            if (current_dp > 0)
+            {
+                var categories = db.Categories.Where(u => u.DPUserID == current_dp);
+                return View(categories.ToList());
+            }
+            else
+            {
+                return View(new List<Category>());
+            }
         }
 
         // GET: Categories/Details/5
@@ -40,8 +48,19 @@ namespace Digital_Planner_2.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPuserID", "FirstName");
-            return View(new Category());
+
+            int current_dp = new DPUsersController().CurrentDPUserID();
+            if (current_dp > 0)
+            {
+                ViewBag.DPUserID = current_dp;
+                return View(new Category());
+            }
+            else
+            {
+                ViewBag.DPUserID = new SelectList(db.DPUsers, "DPuserID", "FirstName");
+                return View(new Category());
+            }
+
         }
 
         // POST: Categories/Create
@@ -58,8 +77,17 @@ namespace Digital_Planner_2.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
-            return View(category);
+            int current_dp = new DPUsersController().CurrentDPUserID();
+            if (current_dp > 0)
+            {
+                ViewBag.DPUserID = current_dp;
+                return View(category);
+            }
+            else
+            {
+                ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
+                return View(category);
+            }
         }
 
         // GET: Categories/Edit/5
@@ -74,8 +102,18 @@ namespace Digital_Planner_2.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
-            return View(category);
+
+            int current_dp = new DPUsersController().CurrentDPUserID();
+            if (current_dp > 0)
+            {
+                ViewBag.DPUserID = current_dp;
+                return View(category);
+            }
+            else
+            {
+                ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
+                return View(category);
+            }
         }
 
         // POST: Categories/Edit/5
@@ -91,8 +129,18 @@ namespace Digital_Planner_2.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
-            return View(category);
+
+            int current_dp = new DPUsersController().CurrentDPUserID();
+            if (current_dp > 0)
+            {
+                ViewBag.DPUserID = current_dp;
+                return View(category);
+            }
+            else
+            {
+                ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
+                return View(category);
+            }
         }
 
         // GET: Categories/Delete/5

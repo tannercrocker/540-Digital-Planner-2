@@ -11,9 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using Digital_Planner_2.Models;
+using Digital_Planner.Models;
 
-namespace Digital_Planner_2.Sorting
+namespace Digital_Planner.Sorting
 {
     static class Planner
     {

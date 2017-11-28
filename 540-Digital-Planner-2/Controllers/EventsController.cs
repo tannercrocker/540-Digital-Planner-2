@@ -6,9 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Digital_Planner_2.Models;
+using Digital_Planner.Models;
 
-namespace Digital_Planner_2.Controllers
+namespace Digital_Planner.Controllers
 {
     [Authorize]
     public class EventsController : Controller

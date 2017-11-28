@@ -10,9 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Digital_Planner_2.Models;
+using Digital_Planner.Models;
 
-namespace Digital_Planner_2.Sorting
+namespace Digital_Planner.Sorting
 {
     class PlannerAvailability
     {
