@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(Digital_Planner.Startup))]
-namespace Digital_Planner
+[assembly: OwinStartupAttribute(typeof(Digital_Planner_2.Startup))]
+namespace Digital_Planner_2
 {
     public partial class Startup
     {

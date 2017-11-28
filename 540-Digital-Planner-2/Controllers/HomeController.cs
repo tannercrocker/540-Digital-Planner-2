@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Digital_Planner.Controllers
+namespace Digital_Planner_2.Controllers
 {
     public class HomeController : Controller
     {

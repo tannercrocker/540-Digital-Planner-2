@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Digital_Planner
+namespace Digital_Planner_2
 {
     public class RouteConfig
     {

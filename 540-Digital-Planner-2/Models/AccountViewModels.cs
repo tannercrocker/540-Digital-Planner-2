@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Digital_Planner.Models
+namespace Digital_Planner_2.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

@@ -11,11 +11,11 @@ using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
-using Digital_Planner.Models;
+using Digital_Planner_2.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Digital_Planner.Controllers
+namespace Digital_Planner_2.Controllers
 {
     [Authorize]
     public class DPUsersController : Controller

@@ -8,9 +8,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Digital_Planner.Models;
+using Digital_Planner_2.Models;
 
-namespace Digital_Planner.Controllers
+namespace Digital_Planner_2.Controllers
 {
     [Authorize]
     public class AccountController : Controller

@@ -1,10 +1,10 @@
-namespace Digital_Planner.Migrations
+namespace Digital_Planner_2.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using Digital_Planner.Models;
+    using Digital_Planner_2.Models;
     using System.Collections.Generic;
 
     internal sealed class Configuration : DbMigrationsConfiguration<DigitalPlannerDbContext>

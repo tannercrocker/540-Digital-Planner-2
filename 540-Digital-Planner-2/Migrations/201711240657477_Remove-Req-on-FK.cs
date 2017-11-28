@@ -1,4 +1,4 @@
-namespace Digital_Planner.Migrations
+namespace Digital_Planner_2.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

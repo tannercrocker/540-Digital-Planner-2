@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using Digital_Planner.Models;
+using Digital_Planner_2.Models;
 
-namespace Digital_Planner
+namespace Digital_Planner_2
 {
     public partial class Startup
     {

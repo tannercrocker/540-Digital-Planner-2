@@ -6,7 +6,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Digital_Planner.Models
+namespace Digital_Planner_2.Models
 {
     public class DPUser
     {

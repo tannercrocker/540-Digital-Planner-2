@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace Digital_Planner.Models
+namespace Digital_Planner_2.Models
 {
     public class IndexViewModel
     {

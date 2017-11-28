@@ -7,9 +7,9 @@
 
 
 using System;
-using Digital_Planner.Models;
+using Digital_Planner_2.Models;
 
-namespace Digital_Planner.Sorting
+namespace Digital_Planner_2.Sorting
 {
     class PlannerEvent
     {
