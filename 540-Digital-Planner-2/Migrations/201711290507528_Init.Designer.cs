@@ -13,7 +13,7 @@ namespace Digital_Planner.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201711281932524_Init"; }
+            get { return "201711290507528_Init"; }
         }
         
         string IMigrationMetadata.Source

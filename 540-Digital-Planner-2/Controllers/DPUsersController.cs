@@ -165,13 +165,14 @@ namespace Digital_Planner.Controllers
             base.Dispose(disposing);
         }
 
+        /*
         #region Helpers
         //NT - Matching Current Users Logged in to DPUser
         //TC - Return null if there isn't a logged in user 
         //  (Things are reaaly messed up if that happens. 
         //      This only gets called from an authorized user.)
         [Authorize]
-        public DPUser CurrentDPUserID()
+        public DPUser CurrentDPUser()
         {
             var currentUserID = User.Identity.GetUserId();
             var user = db.Users.Where(u => u.Id.Equals(currentUserID));
@@ -185,108 +186,6 @@ namespace Digital_Planner.Controllers
              }
         }
         #endregion
-
-        //TC - @Natrone, I don't think we need these, but you can be the judge of that.
-        // ^^ TC - Commenting out.
-        /*
-        //User Registering For an Account
-        //-------------------------------
-        [HttpGet]
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(DPUser U)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    using (db)  //db == new DigitalPlannerDbContext(), if that isn't what you need, try ApplicationDbContext()
-                    {
-                        db.DPUsers.Add(U);
-                        db.SaveChanges();
-                        ModelState.Clear();
-                        U = null;
-                        ViewBag.Message = "Registration Successful";
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Inocrrect Data");
-                }
-            }
-            catch(DbEntityValidationException e)
-            {
-                foreach(var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"" +
-                        "{1}\" " + "has the following validation errors:", eve.Entry.Entity.GetType().Name,
-                        eve.Entry.State);
-                    foreach(var ve in eve.ValidationErrors)
-                    {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
-                throw;
-            }
-            return View();
-        }
-
-        //Login For Account
-        //Will need help
-        //-----------------
-        [HttpGet]
-        public ActionResult LogIn()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult LogIn(DPUser U)
-        {
-            /*
-            if (IsAuthentic(U.Email, U.Password))
-            {
-                FormsAuthentication.SetAuthCookie(U.Email, false);
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                ModelState.AddModelError("", "Incorrect Login");
-            }
-            * /
-            return View(U);
-        }
-        
-        //Testing Validity of LogIn
-        private bool IsAuthentic(string email, string password)
-        {
-            bool Valid = false;
-            var emailList = db.Users.FirstOrDefault(e => e.Email == email);
-            //var passwordList = db.Users.FirstOrDefault(p => p.Password == password);
-            if(User != null)
-            {
-                if((emailList.Email == email))
-                {
-                    Valid = true;
-                }
-            }
-            return Valid;
-        }
-
-        //Logging Out
-        //-----------
-        public ActionResult LogOut()
-        {
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
-        }
-
         */
     }
 }

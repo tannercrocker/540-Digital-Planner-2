@@ -151,17 +151,20 @@ namespace Digital_Planner.Controllers
         {
             if (ModelState.IsValid)
             {
-                var dpuser = new DPUser();
-                using (var dp_db = new DigitalPlannerDbContext())
-                {
-                    dp_db.Entry(dpuser);
-                    dp_db.SaveChanges();
-                }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, DPUserID = dpuser.DPUserID, DPUser = dpuser };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                    var dpuser = new DPUser() { UserID = user.Id, User = user };
+                    using (var dp_db = new DigitalPlannerDbContext())
+                    {
+                        dp_db.Database.ExecuteSqlCommand(
+                            "INSERT INTO dbo.DPUsers values ('', '', " + user.Id + ", " + user.
+                            );
+                        dp_db.SaveChanges();
+                    }
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -430,6 +433,7 @@ namespace Digital_Planner.Controllers
         }
 
         #region Helpers
+        /*
         [Authorize]
         private int CurrentDPUserID()   //Maybe have the User.Identity as a parameter? Why is it null
         {
@@ -443,6 +447,7 @@ namespace Digital_Planner.Controllers
             }
             return homie_home;
         }
+        */
 
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
