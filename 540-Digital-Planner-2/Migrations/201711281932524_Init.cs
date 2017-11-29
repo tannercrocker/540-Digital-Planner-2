@@ -27,11 +27,8 @@ namespace Digital_Planner.Migrations
                         DPUserID = c.Int(nullable: false, identity: true),
                         FirstName = c.String(),
                         LastName = c.String(),
-                        UserID = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.DPUserID)
-                .ForeignKey("dbo.User", t => t.UserID)
-                .Index(t => t.UserID);
+                .PrimaryKey(t => t.DPUserID);
             
             CreateTable(
                 "dbo.Category",
@@ -68,24 +65,27 @@ namespace Digital_Planner.Migrations
                 .Index(t => t.CategoryID);
             
             CreateTable(
-                "dbo.User",
+                "dbo.Role",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        Email = c.String(maxLength: 256),
-                        EmailConfirmed = c.Boolean(nullable: false),
-                        PasswordHash = c.String(maxLength: 500),
-                        SecurityStamp = c.String(),
-                        PhoneNumber = c.String(maxLength: 50),
-                        PhoneNumberConfirmed = c.Boolean(nullable: false),
-                        TwoFactorEnabled = c.Boolean(nullable: false),
-                        LockoutEndDateUtc = c.DateTime(),
-                        LockoutEnabled = c.Boolean(nullable: false),
-                        AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(nullable: false, maxLength: 256),
+                        Name = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
+            CreateTable(
+                "dbo.UserRole",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.Role", t => t.RoleId)
+                .ForeignKey("dbo.User", t => t.UserId)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
             
             CreateTable(
                 "dbo.UserClaim",
@@ -113,57 +113,57 @@ namespace Digital_Planner.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.UserRole",
-                c => new
-                    {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.User", t => t.UserId)
-                .ForeignKey("dbo.Role", t => t.RoleId)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
-            
-            CreateTable(
-                "dbo.Role",
+                "dbo.User",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
+                        DPUserID = c.Int(nullable: false),
+                        Email = c.String(maxLength: 256),
+                        EmailConfirmed = c.Boolean(nullable: false),
+                        PasswordHash = c.String(maxLength: 500),
+                        SecurityStamp = c.String(),
+                        PhoneNumber = c.String(maxLength: 50),
+                        PhoneNumberConfirmed = c.Boolean(nullable: false),
+                        TwoFactorEnabled = c.Boolean(nullable: false),
+                        LockoutEndDateUtc = c.DateTime(),
+                        LockoutEnabled = c.Boolean(nullable: false),
+                        AccessFailedCount = c.Int(nullable: false),
+                        UserName = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+                .ForeignKey("dbo.DPUser", t => t.DPUserID)
+                .Index(t => t.DPUserID)
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.UserRole", "RoleId", "dbo.Role");
-            DropForeignKey("dbo.Availability", "DPUserID", "dbo.DPUser");
-            DropForeignKey("dbo.DPUser", "UserID", "dbo.User");
             DropForeignKey("dbo.UserRole", "UserId", "dbo.User");
             DropForeignKey("dbo.UserLogin", "UserId", "dbo.User");
+            DropForeignKey("dbo.User", "DPUserID", "dbo.DPUser");
             DropForeignKey("dbo.UserClaim", "UserId", "dbo.User");
+            DropForeignKey("dbo.UserRole", "RoleId", "dbo.Role");
+            DropForeignKey("dbo.Availability", "DPUserID", "dbo.DPUser");
             DropForeignKey("dbo.Event", "DPUserID", "dbo.DPUser");
             DropForeignKey("dbo.Event", "CategoryID", "dbo.Category");
             DropForeignKey("dbo.Category", "DPUserID", "dbo.DPUser");
-            DropIndex("dbo.Role", "RoleNameIndex");
-            DropIndex("dbo.UserRole", new[] { "RoleId" });
-            DropIndex("dbo.UserRole", new[] { "UserId" });
+            DropIndex("dbo.User", "UserNameIndex");
+            DropIndex("dbo.User", new[] { "DPUserID" });
             DropIndex("dbo.UserLogin", new[] { "UserId" });
             DropIndex("dbo.UserClaim", new[] { "UserId" });
-            DropIndex("dbo.User", "UserNameIndex");
+            DropIndex("dbo.UserRole", new[] { "RoleId" });
+            DropIndex("dbo.UserRole", new[] { "UserId" });
+            DropIndex("dbo.Role", "RoleNameIndex");
             DropIndex("dbo.Event", new[] { "CategoryID" });
             DropIndex("dbo.Event", new[] { "DPUserID" });
             DropIndex("dbo.Category", new[] { "DPUserID" });
-            DropIndex("dbo.DPUser", new[] { "UserID" });
             DropIndex("dbo.Availability", new[] { "DPUserID" });
-            DropTable("dbo.Role");
-            DropTable("dbo.UserRole");
+            DropTable("dbo.User");
             DropTable("dbo.UserLogin");
             DropTable("dbo.UserClaim");
-            DropTable("dbo.User");
+            DropTable("dbo.UserRole");
+            DropTable("dbo.Role");
             DropTable("dbo.Event");
             DropTable("dbo.Category");
             DropTable("dbo.DPUser");

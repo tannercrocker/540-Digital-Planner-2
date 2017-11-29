@@ -10,6 +10,8 @@ namespace Digital_Planner.Models
 {
     public class DPUser
     {
+        public static object Identity { get; internal set; }
+
         //PK
         [Key]
         public int DPUserID { get; set; }
@@ -21,12 +23,14 @@ namespace Digital_Planner.Models
         public String LastName { get; set; } = "";
         //Email & Password is in the ApplicationUser
 
+            /*
         //FK
         [ForeignKey("User")]
         public String UserID { get; set; }
 
         //Navigation Properties
         public ApplicationUser User { get; set; }
+        */
 
         public virtual ICollection<Event> Events { get; set; }
         public virtual ICollection<Category> Categories { get; set; }

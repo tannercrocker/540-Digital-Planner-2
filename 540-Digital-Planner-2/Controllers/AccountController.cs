@@ -151,7 +151,13 @@ namespace Digital_Planner.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var dpuser = new DPUser();
+                using (var dp_db = new DigitalPlannerDbContext())
+                {
+                    dp_db.Entry(dpuser);
+                    dp_db.SaveChanges();
+                }
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, DPUserID = dpuser.DPUserID, DPUser = dpuser };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -424,6 +430,20 @@ namespace Digital_Planner.Controllers
         }
 
         #region Helpers
+        [Authorize]
+        private int CurrentDPUserID()   //Maybe have the User.Identity as a parameter? Why is it null
+        {
+            var homie = this.ControllerContext.HttpContext.User.Identity;
+            var homieID = homie.GetUserId();
+            int homie_home = -1;
+            using (var db = new ApplicationDbContext())
+            {
+                var someone = db.Users.Where(u => u.Id.Equals(homieID));
+                homie_home = someone.First().DPUserID;
+            }
+            return homie_home;
+        }
+
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 

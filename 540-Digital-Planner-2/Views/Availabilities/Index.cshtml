@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = "Index";
+    var dpuser_id = ViewBag.DPUserID;
 }
 
 <h2>My Availabilities</h2>
@@ -37,6 +38,9 @@
             @* @Html.DisplayFor(modelItem => item.OccursAt) *@
         </td>
         
+        <td>
+            <input type="hidden" form="DPUserID" value="@dpuser_id" />
+        </td>
         @* Categories are DPUser-specific, so this isn't needed. -TC
         <td>
             @Html.DisplayFor(modelItem => item.DPUser.FirstName)
