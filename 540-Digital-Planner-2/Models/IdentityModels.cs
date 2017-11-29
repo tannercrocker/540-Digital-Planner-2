@@ -55,8 +55,8 @@ namespace Digital_Planner.Models
             // Configure Asp Net Identity Tables
             modelBuilder.Entity<ApplicationUser>().ToTable("User");
             modelBuilder.Entity<ApplicationUser>().Property(u => u.PasswordHash).HasMaxLength(500);
-            //TC - ApplicationUser doesn't have Stamp attribute ??? Not sure why, got this code from: /u/'Augusto Baretto' 's second option from their answer of: https://stackoverflow.com/questions/28531201/entitytype-identityuserlogin-has-no-key-defined-define-the-key-for-this-entit
-            //modelBuilder.Entity<ApplicationUser>().Property(u => u.Stamp).HasMaxLength(500);
+            //TC - got this code from: /u/'Augusto Baretto' 's second option from their answer of: https://stackoverflow.com/questions/28531201/entitytype-identityuserlogin-has-no-key-defined-define-the-key-for-this-entit
+            modelBuilder.Entity<ApplicationUser>().Property(u => u.SecurityStamp).HasMaxLength(500);
             modelBuilder.Entity<ApplicationUser>().Property(u => u.PhoneNumber).HasMaxLength(50);
 
             modelBuilder.Entity<IdentityRole>().ToTable("Role");
