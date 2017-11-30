@@ -17,7 +17,7 @@ namespace Digital_Planner.Sorting
     {
         private static DigitalPlannerDbContext db = new DigitalPlannerDbContext();
 
-        public static void GenerateSchedule(int userID)
+        public static void GenerateSchedule(string userID)
         {
             //Debug
             System.Diagnostics.Debug.Print("Generate Schedule");
@@ -33,7 +33,7 @@ namespace Digital_Planner.Sorting
         }
 
 
-        private static void GetDataFromDatabase(List<PlannerEvent> autoEvents, List<PlannerAvailability> availabilities, int userID)
+        private static void GetDataFromDatabase(List<PlannerEvent> autoEvents, List<PlannerAvailability> availabilities, string userID)
         {
             //Debug
             System.Diagnostics.Debug.Print("Get Data From Database");
@@ -44,12 +44,12 @@ namespace Digital_Planner.Sorting
 
             //get the specified users automatic events
             for (int i = 0; i < plannerEvents.Count; i++)
-                if (plannerEvents[i].AutoAssign && plannerEvents[i].DPUserID == userID)
+                if (plannerEvents[i].AutoAssign && plannerEvents[i].UserID == userID)
                     autoEvents.Add(new PlannerEvent(plannerEvents[i]));
 
             //get the specified user's availabilities
             for (int i = 0; i < plannerAvailabilities.Count; i++)
-                if (plannerAvailabilities[i].DPUserID == userID)
+                if (plannerAvailabilities[i].UserID == userID)
                     availabilities.Add(new PlannerAvailability(plannerAvailabilities[i]));
 
             //Debug
@@ -63,9 +63,10 @@ namespace Digital_Planner.Sorting
             //Debug
             System.Diagnostics.Debug.Print("Sort Events");
 
+            //Create temp list to temporarily hold the contents of autoEvents
             List<PlannerEvent> temp = new List<PlannerEvent>();
 
-            //set temp equal to autoEvents
+            //populate temp with the contents of autoEvents
             for (int i = 0; i < autoEvents.Count; i++)
                 temp.Add(autoEvents[i]);
 
@@ -85,6 +86,7 @@ namespace Digital_Planner.Sorting
 
         private static void AssignWorkDays(List<PlannerEvent> autoEvents, List<PlannerAvailability> days)
         {
+            //Debug
             System.Diagnostics.Debug.Print("Assign Work Days");
 
             int dayIndex = 0;
