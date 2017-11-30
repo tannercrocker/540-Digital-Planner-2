@@ -43,13 +43,14 @@ namespace Digital_Planner.Models
         public String Location { get; set; } = "";
 
         //FKs
-        [ForeignKey("DPUser")]
-        public int DPUserID { get; set; }
+        [ForeignKey("User")]
+        public string UserID { get; set; }
         [ForeignKey("Category")]
         public int CategoryID { get; set; }
 
         //Navigation Properties
-        public virtual DPUser DPUser { get; set; }
+        public virtual ApplicationUser User { get; set; }
+        //public virtual DPUser DPUser { get; set; }
         public virtual Category Category { get; set; }
     }
 }

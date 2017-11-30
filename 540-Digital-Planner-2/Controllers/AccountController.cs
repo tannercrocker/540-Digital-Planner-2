@@ -157,14 +157,14 @@ namespace Digital_Planner.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    var dpuser = new DPUser() { UserID = user.Id, User = user };
+                    /*
+                    //var dpuser = new DPUser() { UserID = user.Id, User = user };
                     using (var dp_db = new DigitalPlannerDbContext())
                     {
-                        dp_db.Database.ExecuteSqlCommand(
-                            "INSERT INTO dbo.DPUsers values ('', '', " + user.Id + ", " + user.
-                            );
+                        dp_db.DPUsers.Add(new DPUser() { UserID = user.Id, User = user });
                         dp_db.SaveChanges();
                     }
+                    */
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

@@ -1,8 +1,10 @@
-﻿@* @model HashSet<Digital_Planner.Models.Event> *@
-@* @model IGrouping<int, Digital_Planner.Models.Event> *@
+﻿@using Digital_Planner.Models;
 @model Tuple<DateTime, ICollection<Digital_Planner.Models.Event>>
+@* @model IEnumerable<Event>*@
+
 
 @{ 
+    //Using these because it works a little more clearly than using just an IEnumerable
     var intended_day = Model.Item1;
     var events = Model.Item2;
     var today_by_cats = events

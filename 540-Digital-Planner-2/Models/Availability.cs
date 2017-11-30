@@ -25,10 +25,10 @@ namespace Digital_Planner.Models
         public TimeSpan Duration { get; set; } = new TimeSpan(0, 0, 0);
 
         //FK
-        [ForeignKey("DPUser")]
-        public int DPUserID { get; set; }
+        [ForeignKey("User")]
+        public string UserID { get; set; }
 
         //Navigation Properties
-        public virtual DPUser DPUser { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

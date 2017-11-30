@@ -4,6 +4,12 @@
 <li>@Html.ActionLink("Availability", "Index", "Availabilities", new { id = 0 }, new { })</li>
 <li>@Html.ActionLink("Categories", "Index", "Categories", new { id = 0 }, new { })</li>
 <li>@Html.ActionLink("Events", "Index", "Events", new { id = 0 }, new { })</li>
-
+@{ 
+    if (ViewBag.isAuth != null && ViewBag.isAuth)
+    {
+        <li>Hello, @User.Identity.Name</li>
+        
+    }
+}
 @* 'Hard'-coded First User needs to be Current DPUser *@
-<li>@Html.ActionLink("Schedule", "Schedule", "DPUsers", new { id = new Digital_Planner.Models.DigitalPlannerDbContext().DPUsers.First().DPUserID }, new { })</li>
+<li>@Html.ActionLink("Schedule", "Schedule", "DPUsers", new { id = new Digital_Planner.Models.DigitalPlannerDbContext().Users.First().Id }, new { })</li>

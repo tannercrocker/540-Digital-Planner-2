@@ -18,7 +18,8 @@ namespace Digital_Planner.Controllers
         // GET: Events
         public ActionResult Index()
         {
-            var events = db.Events.Include(e => e.Category).Include(e => e.DPUser);
+            var events = db.Events.Include(e => e.Category).Include(e => e.User);
+            //var events = db.Events.Include(e => e.Category).Include(e => e.DPUser);
             return View(events.ToList());
         }
 
@@ -41,7 +42,8 @@ namespace Digital_Planner.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description");
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName");
+            ViewBag.UserID = new SelectList(db.Users, "Id", "Email");
+            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName");
             return View(new Event());
         }
 
@@ -50,7 +52,7 @@ namespace Digital_Planner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EventID,AutoAssign,Title,OccursAt,Duration,Priority,CompleteBy,IsComplete,Location,DPUserID,CategoryID")] Event @event, int? recurrence)
+        public ActionResult Create([Bind(Include = "EventID,AutoAssign,Title,OccursAt,Duration,Priority,CompleteBy,IsComplete,Location,UserID,CategoryID")] Event @event, int? recurrence)
         {
             if (ModelState.IsValid)
             {
@@ -76,7 +78,8 @@ namespace Digital_Planner.Controllers
                         re_event.IsComplete = @event.IsComplete;
                         re_event.Priority = @event.Priority;
                         re_event.Title = @event.Title;
-                        re_event.DPUserID = @event.DPUserID;
+                        re_event.UserID = @event.UserID;
+                        //re_event.DPUserID = @event.DPUserID;
                         re_event.CategoryID = @event.CategoryID;
                         re_event.Location = @event.Location;
                         re_event.AutoAssign = @event.AutoAssign;
@@ -92,7 +95,8 @@ namespace Digital_Planner.Controllers
             }
 
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", @event.CategoryID);
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPuserID", "FirstName", @event.DPUserID);
+            ViewBag.UserID = new SelectList(db.Users, "Id", "Email", @event.UserID);
+            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPuserID", "FirstName", @event.DPUserID);
             return View(@event);
         }
 
@@ -109,7 +113,8 @@ namespace Digital_Planner.Controllers
                 return HttpNotFound();
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", @event.CategoryID);
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", @event.DPUserID);
+            ViewBag.UserID = new SelectList(db.Users, "Id", "Email", @event.UserID);
+            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", @event.DPUserID);
             return View(@event);
         }
 
@@ -118,7 +123,7 @@ namespace Digital_Planner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EventID,Title,OccursAt,Duration,Priority,CompleteBy,IsComplete,Location,DPUserID,CategoryID")] Event @event)
+        public ActionResult Edit([Bind(Include = "EventID,Title,OccursAt,Duration,Priority,CompleteBy,IsComplete,Location,UserID,CategoryID")] Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -127,7 +132,8 @@ namespace Digital_Planner.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", @event.CategoryID);
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPuserID", "FirstName", @event.DPUserID);
+            ViewBag.UserID = new SelectList(db.Users, "Id", "Email", @event.UserID);
+            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPuserID", "FirstName", @event.DPUserID);
             return View(@event);
         }
 

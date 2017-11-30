@@ -18,7 +18,8 @@ namespace Digital_Planner.Controllers
         // GET: Days
         public ActionResult Index()
         {
-            var avails = db.Availabilities.Include(d => d.DPUser);
+            var avails = db.Availabilities.Include(d => d.User);
+            //var avails = db.Availabilities.Include(d => d.DPUser);
             return View(avails.ToList());
         }
 
@@ -40,7 +41,8 @@ namespace Digital_Planner.Controllers
         // GET: Days/Create
         public ActionResult Create()
         {
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName");
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "Email");
+            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName");
             return View(new Availability());
         }
 
@@ -71,7 +73,8 @@ namespace Digital_Planner.Controllers
 
                         re_day.OccursAt = day_to_use;
                         re_day.Duration = avail.Duration;
-                        re_day.DPUserID = avail.DPUserID;
+                        re_day.UserID = avail.UserID;
+                        //re_day.DPUserID = avail.DPUserID;
 
                         db.Availabilities.Add(re_day);
                         db.SaveChanges();
@@ -82,7 +85,8 @@ namespace Digital_Planner.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", avail.DPUserID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "Email");
+            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", avail.DPUserID);
             return View(avail);
         }
 
@@ -98,7 +102,8 @@ namespace Digital_Planner.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", avail.DPUserID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "Email");
+            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", avail.DPUserID);
             return View(avail);
         }
 
@@ -115,7 +120,8 @@ namespace Digital_Planner.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", avail.DPUserID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "Email");
+            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", avail.DPUserID);
             return View(avail);
         }
 

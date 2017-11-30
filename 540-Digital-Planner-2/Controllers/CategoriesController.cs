@@ -53,6 +53,7 @@ namespace Digital_Planner.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
+            ViewBag.UserID = new SelectList(db.Users, "Id", "Email");
             return View(new Category());
             /*
             DPUser dp = new DPUsersController().CurrentDPUser();
@@ -83,7 +84,8 @@ namespace Digital_Planner.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
+            ViewBag.UserID = new SelectList(db.Users, "Id", "Email", category.UserID);
+            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
             return View(category);
             /*
             int current_dp = new DPUsersController().CurrentDPUser();
@@ -113,7 +115,8 @@ namespace Digital_Planner.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
+            ViewBag.UserID = new SelectList(db.Users, "Id", "Email", category.UserID);
+            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
             return View(category);
             /*
             int current_dp = new DPUsersController().CurrentDPUser();
@@ -144,7 +147,8 @@ namespace Digital_Planner.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
+            ViewBag.UserID = new SelectList(db.Users, "Id", "Email", category.UserID);
+            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
             return View(category);
             /*
             int current_dp = new DPUsersController().CurrentDPUser();

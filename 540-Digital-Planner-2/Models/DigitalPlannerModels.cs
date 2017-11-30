@@ -14,7 +14,7 @@ namespace Digital_Planner.Models
         {
             Database.SetInitializer<DigitalPlannerDbContext>(null);// Remove default initializer
             //Database.DefaultConnectionFactory.CreateConnection("DigitalPlannerModels");
-            Configuration.ProxyCreationEnabled = false;
+            Configuration.ProxyCreationEnabled = true;
             Configuration.LazyLoadingEnabled = false;
         }
 
@@ -23,10 +23,6 @@ namespace Digital_Planner.Models
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
 
-        public virtual DbSet<DPUser> DPUsers { get; set; }
-        public virtual DbSet<Event> Events { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Availability> Availabilities { get; set; }
         
     }
 

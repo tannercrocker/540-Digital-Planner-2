@@ -8,75 +8,28 @@ namespace Digital_Planner.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Availability",
+                "dbo.Availabilities",
                 c => new
                     {
                         AvailabilityID = c.Int(nullable: false, identity: true),
                         OccursAt = c.DateTime(nullable: false),
                         Duration = c.Time(nullable: false, precision: 7),
-                        DPUserID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.AvailabilityID)
-                .ForeignKey("dbo.DPUser", t => t.DPUserID)
-                .Index(t => t.DPUserID);
-            
-            CreateTable(
-                "dbo.DPUser",
-                c => new
-                    {
-                        DPUserID = c.Int(nullable: false, identity: true),
-                        FirstName = c.String(),
-                        LastName = c.String(),
                         UserID = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.DPUserID)
-                .ForeignKey("dbo.User", t => t.UserID)
+                .PrimaryKey(t => t.AvailabilityID)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserID)
                 .Index(t => t.UserID);
             
             CreateTable(
-                "dbo.Category",
-                c => new
-                    {
-                        CategoryID = c.Int(nullable: false, identity: true),
-                        Description = c.String(nullable: false),
-                        DPUserID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.CategoryID)
-                .ForeignKey("dbo.DPUser", t => t.DPUserID)
-                .Index(t => t.DPUserID);
-            
-            CreateTable(
-                "dbo.Event",
-                c => new
-                    {
-                        EventID = c.Int(nullable: false, identity: true),
-                        Title = c.String(nullable: false),
-                        OccursAt = c.DateTime(nullable: false),
-                        CompleteBy = c.DateTime(nullable: false),
-                        Duration = c.Time(nullable: false, precision: 7),
-                        IsComplete = c.Boolean(nullable: false),
-                        AutoAssign = c.Boolean(nullable: false),
-                        Priority = c.Int(nullable: false),
-                        Location = c.String(),
-                        DPUserID = c.Int(nullable: false),
-                        CategoryID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.EventID)
-                .ForeignKey("dbo.Category", t => t.CategoryID)
-                .ForeignKey("dbo.DPUser", t => t.DPUserID)
-                .Index(t => t.DPUserID)
-                .Index(t => t.CategoryID);
-            
-            CreateTable(
-                "dbo.User",
+                "dbo.AspNetUsers",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
-                        PasswordHash = c.String(maxLength: 500),
-                        SecurityStamp = c.String(maxLength: 500),
-                        PhoneNumber = c.String(maxLength: 50),
+                        PasswordHash = c.String(),
+                        SecurityStamp = c.String(),
+                        PhoneNumber = c.String(),
                         PhoneNumberConfirmed = c.Boolean(nullable: false),
                         TwoFactorEnabled = c.Boolean(nullable: false),
                         LockoutEndDateUtc = c.DateTime(),
@@ -88,20 +41,54 @@ namespace Digital_Planner.Migrations
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
             CreateTable(
-                "dbo.UserClaim",
+                "dbo.Categories",
+                c => new
+                    {
+                        CategoryID = c.Int(nullable: false, identity: true),
+                        Description = c.String(nullable: false),
+                        UserID = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.CategoryID)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserID)
+                .Index(t => t.UserID);
+            
+            CreateTable(
+                "dbo.Events",
+                c => new
+                    {
+                        EventID = c.Int(nullable: false, identity: true),
+                        Title = c.String(nullable: false),
+                        OccursAt = c.DateTime(nullable: false),
+                        CompleteBy = c.DateTime(nullable: false),
+                        Duration = c.Time(nullable: false, precision: 7),
+                        IsComplete = c.Boolean(nullable: false),
+                        AutoAssign = c.Boolean(nullable: false),
+                        Priority = c.Int(nullable: false),
+                        Location = c.String(),
+                        UserID = c.String(maxLength: 128),
+                        CategoryID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.EventID)
+                .ForeignKey("dbo.Categories", t => t.CategoryID, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserID)
+                .Index(t => t.UserID)
+                .Index(t => t.CategoryID);
+            
+            CreateTable(
+                "dbo.AspNetUserClaims",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         UserId = c.String(nullable: false, maxLength: 128),
-                        ClaimType = c.String(maxLength: 150),
-                        ClaimValue = c.String(maxLength: 500),
+                        ClaimType = c.String(),
+                        ClaimValue = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.User", t => t.UserId)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.UserLogin",
+                "dbo.AspNetUserLogins",
                 c => new
                     {
                         LoginProvider = c.String(nullable: false, maxLength: 128),
@@ -109,24 +96,24 @@ namespace Digital_Planner.Migrations
                         UserId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-                .ForeignKey("dbo.User", t => t.UserId)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.UserRole",
+                "dbo.AspNetUserRoles",
                 c => new
                     {
                         UserId = c.String(nullable: false, maxLength: 128),
                         RoleId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.User", t => t.UserId)
-                .ForeignKey("dbo.Role", t => t.RoleId)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.Role",
+                "dbo.AspNetRoles",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
@@ -139,35 +126,32 @@ namespace Digital_Planner.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.UserRole", "RoleId", "dbo.Role");
-            DropForeignKey("dbo.Availability", "DPUserID", "dbo.DPUser");
-            DropForeignKey("dbo.DPUser", "UserID", "dbo.User");
-            DropForeignKey("dbo.UserRole", "UserId", "dbo.User");
-            DropForeignKey("dbo.UserLogin", "UserId", "dbo.User");
-            DropForeignKey("dbo.UserClaim", "UserId", "dbo.User");
-            DropForeignKey("dbo.Event", "DPUserID", "dbo.DPUser");
-            DropForeignKey("dbo.Event", "CategoryID", "dbo.Category");
-            DropForeignKey("dbo.Category", "DPUserID", "dbo.DPUser");
-            DropIndex("dbo.Role", "RoleNameIndex");
-            DropIndex("dbo.UserRole", new[] { "RoleId" });
-            DropIndex("dbo.UserRole", new[] { "UserId" });
-            DropIndex("dbo.UserLogin", new[] { "UserId" });
-            DropIndex("dbo.UserClaim", new[] { "UserId" });
-            DropIndex("dbo.User", "UserNameIndex");
-            DropIndex("dbo.Event", new[] { "CategoryID" });
-            DropIndex("dbo.Event", new[] { "DPUserID" });
-            DropIndex("dbo.Category", new[] { "DPUserID" });
-            DropIndex("dbo.DPUser", new[] { "UserID" });
-            DropIndex("dbo.Availability", new[] { "DPUserID" });
-            DropTable("dbo.Role");
-            DropTable("dbo.UserRole");
-            DropTable("dbo.UserLogin");
-            DropTable("dbo.UserClaim");
-            DropTable("dbo.User");
-            DropTable("dbo.Event");
-            DropTable("dbo.Category");
-            DropTable("dbo.DPUser");
-            DropTable("dbo.Availability");
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Availabilities", "UserID", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Categories", "UserID", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Events", "UserID", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Events", "CategoryID", "dbo.Categories");
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropIndex("dbo.Events", new[] { "CategoryID" });
+            DropIndex("dbo.Events", new[] { "UserID" });
+            DropIndex("dbo.Categories", new[] { "UserID" });
+            DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.Availabilities", new[] { "UserID" });
+            DropTable("dbo.AspNetRoles");
+            DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.AspNetUserClaims");
+            DropTable("dbo.Events");
+            DropTable("dbo.Categories");
+            DropTable("dbo.AspNetUsers");
+            DropTable("dbo.Availabilities");
         }
     }
 }

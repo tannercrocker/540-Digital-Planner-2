@@ -31,7 +31,7 @@ namespace Digital_Planner.Controllers
         */
 
         // GET: Users/Schedule/5
-        public ActionResult Schedule(int? id)
+        public ActionResult Schedule(string id)
         {
             if (id == null)
             {
@@ -39,16 +39,20 @@ namespace Digital_Planner.Controllers
             }
             //Require logged in user
             //Get logged in user's events
-            DPUser dpuser = db.DPUsers.Find(id);
-
-            if (dpuser == null)
+            using (var new_db = new ApplicationDbContext())
             {
-                return HttpNotFound();
-            }
-            
-            return View(dpuser);
+                ApplicationUser user = new_db.Users.Find(User.Identity.Name);
 
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                //return View(db.Events.Where(e => e.UserID.Equals(user.Id)).ToList());
+                return View(user);
+            }
         }
+        /*
 
         // GET: Users/Details/5
         public ActionResult Details(int? id)
@@ -64,6 +68,7 @@ namespace Digital_Planner.Controllers
             }
             return View(dpuser);
         }
+        */
 
         /*
          * TC - Disabling this because DPUsers are created with a corresponding Account.
@@ -73,7 +78,7 @@ namespace Digital_Planner.Controllers
             return View(new DPUser());
         }
         */
-
+        /*
         // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -155,6 +160,7 @@ namespace Digital_Planner.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        */
 
         protected override void Dispose(bool disposing)
         {

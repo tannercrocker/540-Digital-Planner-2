@@ -23,17 +23,17 @@
             </div>
         </div>
 
-        @* TODO - Replace with [current_user] & hide *@
+        @* TODO - Replace with [current_user] & hide * @
         <input type="hidden" name="DPUserID" value="@dpuser_id"/>
-        @*
+        *@
         <div class="form-group">
-            @Html.LabelFor(model => model.DPUserID, "DPUserID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.UserID, "UserID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("DPUserID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DPUserID, "", new { @class = "text-danger" })
+                @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
             </div>
         </div>
-            *@
+            
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

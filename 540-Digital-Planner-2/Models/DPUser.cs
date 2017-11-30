@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Digital_Planner.Models
 {
+    /*
     public class DPUser
     {
         //PK
@@ -33,4 +34,5 @@ namespace Digital_Planner.Models
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Availability> Availabilities { get; set; }
     }
+    */
 }

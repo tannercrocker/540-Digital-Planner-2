@@ -28,6 +28,7 @@
         </div>
 
 
+        @{ ViewBag.name = "OccursAt"; }
         <div class="form-group">
             @Html.LabelFor(model => model.AutoAssign, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -100,17 +101,17 @@
             </div>
         </div>
 
-        @*  TODO - Replace with [current_user] & hide *@
+        @*  TODO - Replace with [current_user] & hide * @
         @Html.DropDownList("DPUserID", null, htmlAttributes: new { @class = "form-control", type = "hidden" })
-        @*
+        *@
         <div class="form-group">
-            @Html.LabelFor(model => model.DPUserID, "UserID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.UserID, "UserID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control", type="hidden" })
-                @Html.ValidationMessageFor(model => model.DPUserID, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
             </div>
         </div>
-        *@
+        * @
 
         @*  TODO - Limit to [current_user]'s categories  *@
         <div class="form-group">

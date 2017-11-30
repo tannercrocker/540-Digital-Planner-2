@@ -1,9 +1,13 @@
-﻿@model Digital_Planner.Models.DPUser
+﻿@using Digital_Planner.Models;
+@* @model ICollection<Event> *@
+ @model ApplicationUser 
 
 @{
     ViewBag.Title = "Schedule";
     var model_events = Model.Events;
+    //var model_events = Model;
 }
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#day_button').click(function () {
@@ -57,15 +61,11 @@
         </div>
 
         <div id="schedule" class="row" style="margin-top:1%">
-    
-            var evts = model_events.Where(e => e.OccursAt.DayOfYear.Equals(DateTime.Today.DayOfYear) && e.OccursAt.Year.Equals(DateTime.Today.Year))
-                .GroupBy(e => e.CategoryID);
 
             <div id="day" class="table">
                 @Html.Partial("_Day", new Tuple<DateTime, ICollection<Digital_Planner.Models.Event>>(DateTime.Today, model_events))
             </div>
-
-
+            
             <div id="week" class="table" style="display:none;">
                 @Html.Partial("_Week", model_events)
            </div>
