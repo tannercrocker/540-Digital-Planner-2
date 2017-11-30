@@ -7,6 +7,7 @@
 
 
 using System;
+using System.Collections;
 using Digital_Planner.Models;
 
 namespace Digital_Planner.Sorting
@@ -14,7 +15,7 @@ namespace Digital_Planner.Sorting
     class PlannerEvent
     {
         private static DigitalPlannerDbContext db = new DigitalPlannerDbContext();
-
+        
         Event dbEvent;
         private float score;
 

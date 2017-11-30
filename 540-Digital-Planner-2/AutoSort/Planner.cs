@@ -37,15 +37,16 @@ namespace Digital_Planner.Sorting
         {
             //Debug
             System.Diagnostics.Debug.Print("Get Data From Database");
-
+            
             //Get all database records
             List<Event> plannerEvents = db.Events.ToList();
             List<Availability> plannerAvailabilities = db.Availabilities.ToList();
 
             //get the specified users automatic events
             for (int i = 0; i < plannerEvents.Count; i++)
-                if (plannerEvents[i].AutoAssign && plannerEvents[i].UserID == userID)
-                    autoEvents.Add(new PlannerEvent(plannerEvents[i]));
+                if (plannerEvents[i].AutoAssign)
+                    if (userID == "all" || plannerEvents[i].UserID == userID)
+                        autoEvents.Add(new PlannerEvent(plannerEvents[i]));
 
             //get the specified user's availabilities
             for (int i = 0; i < plannerAvailabilities.Count; i++)
