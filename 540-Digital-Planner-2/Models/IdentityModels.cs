@@ -8,16 +8,45 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Collections.Generic;
+using System.Data.Entity.Spatial;
 
 namespace Digital_Planner.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        public virtual ICollection<Event> Events { get; set; }
-        public virtual ICollection<Category> Categories { get; set; }
-        public virtual ICollection<Availability> Availabilities { get; set; }
-        
+        public List<Event> getEvents()
+        {
+            List<Event> list = new List<Event>();
+            using (var db = new ApplicationDbContext())
+            {
+                var l2 = db.Events.Where(e => e.UserID == this.Id).ToList();
+                list = l2;
+            }
+            return list;
+        }
+
+        public List<Availability> getAvailabilities()
+        {
+            List<Availability> list = new List<Availability>();
+            using (var db = new ApplicationDbContext())
+            {
+                var l2 = db.Availabilities.Where(e => e.UserID == this.Id).ToList();
+                list = l2;
+            }
+            return list;
+        }
+
+        public List<Category> getCategories()
+        {
+            List<Category> list = new List<Category>();
+            using (var db = new ApplicationDbContext())
+            {
+                var l2 = db.Categories.Where(e => e.UserID == this.Id).ToList();
+                list = l2;
+            }
+            return list;
+        }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -32,8 +61,11 @@ namespace Digital_Planner.Models
         public ApplicationDbContext()
             : base("DigitalPlannerModels")
         {
+            /*
+            Configuration.AutoDetectChangesEnabled = true;
             Configuration.ProxyCreationEnabled = true;
             Configuration.LazyLoadingEnabled = false;
+            */
         }
         
 
@@ -52,7 +84,28 @@ namespace Digital_Planner.Models
             return new ApplicationDbContext();
         }
 
-        
+        /*
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            /*
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(e => e.Availabilities)
+                .WithOptional(e => e.User)
+                .HasForeignKey(e => e.UserID);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(e => e.Categories)
+                .WithOptional(e => e.User)
+                .HasForeignKey(e => e.UserID);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(e => e.Events)
+                .WithOptional(e => e.User)
+                .HasForeignKey(e => e.UserID);
+                
+        }*/
             /*
             protected override void OnModelCreating(DbModelBuilder modelBuilder)
             {

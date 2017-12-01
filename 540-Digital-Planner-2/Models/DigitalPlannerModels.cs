@@ -12,10 +12,13 @@ namespace Digital_Planner.Models
         // connection string in the application configuration file.
         public DigitalPlannerDbContext()    //Inherits the connection from ApplicationDbContext() : base("name=DigitalPlannerDbContext")
         {
-            Database.SetInitializer<DigitalPlannerDbContext>(null);// Remove default initializer
+            //Database.SetInitializer<DigitalPlannerDbContext>(null);// Remove default initializer
             //Database.DefaultConnectionFactory.CreateConnection("DigitalPlannerModels");
+            /*
+            Configuration.AutoDetectChangesEnabled = true;
             Configuration.ProxyCreationEnabled = true;
             Configuration.LazyLoadingEnabled = false;
+            */
         }
 
         // Add a DbSet for each entity type that you want to include in your model. For more information 
