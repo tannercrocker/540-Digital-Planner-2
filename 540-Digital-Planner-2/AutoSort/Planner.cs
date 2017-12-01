@@ -15,9 +15,9 @@ namespace Digital_Planner.Sorting
 {
     static class Planner
     {
-        private static DigitalPlannerDbContext db = new DigitalPlannerDbContext();
+        //private static ApplicationDbContext db = new ApplicationDbContext();
 
-        public static void GenerateSchedule(string userID)
+        public static void GenerateSchedule(ApplicationUser user)
         {
             //Debug
             System.Diagnostics.Debug.Print("Generate Schedule");
@@ -25,33 +25,41 @@ namespace Digital_Planner.Sorting
             List<PlannerEvent> autoEvents = new List<PlannerEvent>();
             List<PlannerAvailability> availabilities = new List<PlannerAvailability>();
 
-            GetDataFromDatabase(autoEvents, availabilities, userID);
+            GetDataFromDatabase(autoEvents, availabilities, user);
             SortEvents(autoEvents, availabilities);
             AssignWorkDays(autoEvents, availabilities);
 
-            db.SaveChanges();
+            using (var db = new ApplicationDbContext())
+            {
+                foreach(var evt in autoEvents)
+                {
+                    db.Entry(evt);
+                }
+                db.SaveChanges();
+            }
         }
 
 
-        private static void GetDataFromDatabase(List<PlannerEvent> autoEvents, List<PlannerAvailability> availabilities, string userID)
+        private static void GetDataFromDatabase(List<PlannerEvent> autoEvents, List<PlannerAvailability> availabilities, ApplicationUser user)
         {
             //Debug
             System.Diagnostics.Debug.Print("Get Data From Database");
-            
-            //Get all database records
-            List<Event> plannerEvents = db.Events.ToList();
-            List<Availability> plannerAvailabilities = db.Availabilities.ToList();
 
+            //Get all database records
+            List<Event> plannerEvents = user.getEvents();// db.Events.ToList();
+            List<Availability> plannerAvailabilities = user.getAvailabilities();// db.Availabilities.ToList();
+            
             //get the specified users automatic events
             for (int i = 0; i < plannerEvents.Count; i++)
                 if (plannerEvents[i].AutoAssign)
-                    if (userID == "all" || plannerEvents[i].UserID == userID)
+                    //if (userID == "all" || plannerEvents[i].UserID == userID)
                         autoEvents.Add(new PlannerEvent(plannerEvents[i]));
 
             //get the specified user's availabilities
             for (int i = 0; i < plannerAvailabilities.Count; i++)
-                if (plannerAvailabilities[i].UserID == userID)
+                //if (plannerAvailabilities[i].UserID == userID)
                     availabilities.Add(new PlannerAvailability(plannerAvailabilities[i]));
+                    
 
             //Debug
             System.Diagnostics.Debug.Print("Availabilities List Count: " + availabilities.Count);
