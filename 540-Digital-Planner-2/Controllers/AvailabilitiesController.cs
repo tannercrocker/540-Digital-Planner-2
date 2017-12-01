@@ -120,7 +120,7 @@ namespace Digital_Planner.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserID = AccountController.CurrentUser(User.Identity).Id;
+            //ViewBag.UserID = AccountController.CurrentUser(User.Identity).Id;
             return View(avail);
         }
 

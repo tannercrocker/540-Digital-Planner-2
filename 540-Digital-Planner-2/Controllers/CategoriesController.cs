@@ -18,8 +18,10 @@ namespace Digital_Planner.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            var categories = db.Categories;
-            return View(categories.ToList());
+            var user = AccountController.CurrentUser(User.Identity);
+            return View(user.getCategories());
+            //var categories = db.Categories;
+            //return View(categories.ToList());
 
             /*
             DPUser dp = new DPUsersController().CurrentDPUser();
@@ -53,8 +55,8 @@ namespace Digital_Planner.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
-            ViewBag.UserID = new SelectList(db.Users, "Id", "Email");
-            return View(new Category());
+            //ViewBag.UserID = new SelectList(db.Users, "Id", "Email");
+            return View(new Category() { UserID = AccountController.CurrentUser(User.Identity).Id});
             /*
             DPUser dp = new DPUsersController().CurrentDPUser();
             if (dp != null)
@@ -75,17 +77,19 @@ namespace Digital_Planner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Description,DPUserID")] Category category)
+        public ActionResult Create([Bind(Include = "ID,Description,UserID")] Category category)
         {
             if (ModelState.IsValid)
             {
+                category.UserID = AccountController.CurrentUser(User.Identity).Id;
                 db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserID = new SelectList(db.Users, "Id", "Email", category.UserID);
+            //ViewBag.UserID = new SelectList(db.Users, "Id", "Email", category.UserID);
             //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
+            category.UserID = AccountController.CurrentUser(User.Identity).Id;
             return View(category);
             /*
             int current_dp = new DPUsersController().CurrentDPUser();
@@ -115,7 +119,7 @@ namespace Digital_Planner.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.UserID = new SelectList(db.Users, "Id", "Email", category.UserID);
+            //ViewBag.UserID = new SelectList(db.Users, "Id", "Email", category.UserID);
             //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
             return View(category);
             /*
@@ -138,7 +142,7 @@ namespace Digital_Planner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Description,DPUserID")] Category category)
+        public ActionResult Edit([Bind(Include = "CategoryID,Description,UserID")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -147,8 +151,9 @@ namespace Digital_Planner.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserID = new SelectList(db.Users, "Id", "Email", category.UserID);
+            //ViewBag.UserID = new SelectList(db.Users, "Id", "Email", category.UserID);
             //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", category.DPUserID);
+            //ViewBag.UserID = AccountController.CurrentUser(User.Identity).Id;
             return View(category);
             /*
             int current_dp = new DPUsersController().CurrentDPUser();
