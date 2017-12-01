@@ -64,10 +64,10 @@ namespace Digital_Planner.Controllers
         // GET: Events/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description");
-            ViewBag.UserID = new SelectList(db.Users, "Id", "Email");
+            //ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description");
+            //ViewBag.UserID = new SelectList(db.Users, "Id", "Email");
             //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName");
-            return View(new Event());
+            return View(new Event() {UserID = AccountController.CurrentUser(User.Identity).Id });
         }
 
         // POST: Events/Create
@@ -79,6 +79,7 @@ namespace Digital_Planner.Controllers
         {
             if (ModelState.IsValid)
             {
+                @event.UserID = AccountController.CurrentUser(User.Identity).Id;
                 db.Events.Add(@event);
                 db.SaveChanges();
 
@@ -102,7 +103,6 @@ namespace Digital_Planner.Controllers
                         re_event.Priority = @event.Priority;
                         re_event.Title = @event.Title;
                         re_event.UserID = @event.UserID;
-                        //re_event.DPUserID = @event.DPUserID;
                         re_event.CategoryID = @event.CategoryID;
                         re_event.Location = @event.Location;
                         re_event.AutoAssign = @event.AutoAssign;
@@ -117,9 +117,10 @@ namespace Digital_Planner.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", @event.CategoryID);
-            ViewBag.UserID = new SelectList(db.Users, "Id", "Email", @event.UserID);
+            //ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", @event.CategoryID);
+           // ViewBag.UserID = new SelectList(db.Users, "Id", "Email", @event.UserID);
             //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPuserID", "FirstName", @event.DPUserID);
+            @event.UserID = AccountController.CurrentUser(User.Identity).Id;
             return View(@event);
         }
 
@@ -154,8 +155,8 @@ namespace Digital_Planner.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", @event.CategoryID);
-            ViewBag.UserID = new SelectList(db.Users, "Id", "Email", @event.UserID);
+            //ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", @event.CategoryID);
+            //ViewBag.UserID = new SelectList(db.Users, "Id", "Email", @event.UserID);
             //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPuserID", "FirstName", @event.DPUserID);
             return View(@event);
         }
