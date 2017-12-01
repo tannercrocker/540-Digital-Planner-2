@@ -89,6 +89,10 @@ a.btn:hover {
     border: #333 solid 1px;
 }
 
+.schedule_day_header {
+    border-bottom: #333 solid 1px !important;
+}
+
 /* vvv Styling for Month view vvv */
 #month #days_of_week {
     border-bottom: #333 solid 1px;
