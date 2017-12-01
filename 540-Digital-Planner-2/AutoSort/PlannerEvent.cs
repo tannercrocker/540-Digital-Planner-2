@@ -14,7 +14,7 @@ namespace Digital_Planner.Sorting
 {
     class PlannerEvent
     {
-        private static DigitalPlannerDbContext db = new DigitalPlannerDbContext();
+       // private static DigitalPlannerDbContext db = new DigitalPlannerDbContext();
         
         Event dbEvent;
         private float score;
