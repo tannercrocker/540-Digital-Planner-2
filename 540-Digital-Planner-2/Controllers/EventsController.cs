@@ -13,7 +13,7 @@ namespace Digital_Planner.Controllers
     [Authorize]
     public class EventsController : Controller
     {
-        private DigitalPlannerDbContext db = new DigitalPlannerDbContext();
+        private ApplicationDbContext db = AccountController.GetNewDbContext();
 
         // GET: Users/Schedule/5
         public ActionResult Schedule(string id)

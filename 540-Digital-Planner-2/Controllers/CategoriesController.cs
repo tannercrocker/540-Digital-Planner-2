@@ -13,7 +13,7 @@ namespace Digital_Planner.Controllers
     [Authorize]
     public class CategoriesController : Controller
     {
-        private DigitalPlannerDbContext db = new DigitalPlannerDbContext();
+        private ApplicationDbContext db = AccountController.GetNewDbContext();
 
         // GET: Categories
         public ActionResult Index()

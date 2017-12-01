@@ -13,10 +13,6 @@ namespace Digital_Planner.Controllers
             //TODO: delete this call to GenerateSchedule().  It's just a temporary test
             Sorting.Planner.GenerateSchedule("all");
 
-            //Testing. Please remove this and related code.
-            // IT WORKS! We can find the User by the name, since the name = email.
-            ViewBag.isAuth = User.Identity.IsAuthenticated;
-
             return View();
         }
 
