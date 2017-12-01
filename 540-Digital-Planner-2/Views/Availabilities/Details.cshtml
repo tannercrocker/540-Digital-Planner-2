@@ -23,15 +23,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OccursAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DPUser.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DPUser.FirstName)
+            @Model.OccursAt.ToString("M/d/yyy h:mm tt")
+            @* @Html.DisplayFor(model => model.OccursAt) *@
         </dd>
 
     </dl>

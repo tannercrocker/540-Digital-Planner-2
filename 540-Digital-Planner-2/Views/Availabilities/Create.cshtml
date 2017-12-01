@@ -31,6 +31,8 @@
         <h4>Day</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @* <input type="hidden" name="UserID" value="@ViewBag.UserID" readonly /> *@
+        @Html.HiddenFor(model => model.UserID)
 
 
         @{ ViewBag.index = 1; }
@@ -60,15 +62,6 @@
             <label class="control-label col-md-2">Recurrence</label>
             <div class="col-md-10">
                 Occurs once a week for <input id="recurrence_counter" type="number" min="0" max="24" value="0" class="text-center"/> weeks.
-            </div>
-        </div>
-
-        @* Replace with current user & hide *@
-        <div class="form-group">
-            @Html.LabelFor(model => model.DPUserID, "DPUserID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("DPUserID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DPUserID, "", new { @class = "text-danger" })
             </div>
         </div>
 

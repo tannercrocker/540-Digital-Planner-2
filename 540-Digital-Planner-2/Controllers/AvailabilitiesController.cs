@@ -13,14 +13,13 @@ namespace Digital_Planner.Controllers
     [Authorize]
     public class AvailabilitiesController : Controller
     {
-        private DigitalPlannerDbContext db = new DigitalPlannerDbContext();
+        private ApplicationDbContext db = AccountController.GetNewDbContext();
 
         // GET: Days
         public ActionResult Index()
         {
-            var avails = db.Availabilities.Include(d => d.User);
-            //var avails = db.Availabilities.Include(d => d.DPUser);
-            return View(avails.ToList());
+            var user = AccountController.CurrentUser(User.Identity);
+            return View(user.getAvailabilities());
         }
 
         // GET: Days/Details/5
@@ -41,9 +40,8 @@ namespace Digital_Planner.Controllers
         // GET: Days/Create
         public ActionResult Create()
         {
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Email");
-            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName");
-            return View(new Availability());
+            //ViewBag.UserID = AccountController.CurrentUser(User.Identity).Id;
+            return View(new Availability() { UserID = AccountController.CurrentUser(User.Identity).Id } );
         }
 
         // POST: Days/Create
@@ -51,11 +49,13 @@ namespace Digital_Planner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AvailabilityID,OccursAt,Duration,DPUserID")] Availability avail, int? recurrence)
+        public ActionResult Create([Bind(Include = "AvailabilityID,OccursAt,Duration,UserID")] Availability avail, int? recurrence)
         {
 
             if (ModelState.IsValid)
             {
+                //Ensure the current user.
+                avail.UserID = AccountController.CurrentUser(User.Identity).Id;
                 db.Availabilities.Add(avail);
                 db.SaveChanges();
 
@@ -74,7 +74,6 @@ namespace Digital_Planner.Controllers
                         re_day.OccursAt = day_to_use;
                         re_day.Duration = avail.Duration;
                         re_day.UserID = avail.UserID;
-                        //re_day.DPUserID = avail.DPUserID;
 
                         db.Availabilities.Add(re_day);
                         db.SaveChanges();
@@ -85,8 +84,7 @@ namespace Digital_Planner.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Email");
-            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", avail.DPUserID);
+            avail.UserID = AccountController.CurrentUser(User.Identity).Id;
             return View(avail);
         }
 
@@ -102,8 +100,7 @@ namespace Digital_Planner.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Email");
-            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", avail.DPUserID);
+            
             return View(avail);
         }
 
@@ -112,16 +109,18 @@ namespace Digital_Planner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AvailabilityID,OccursAt,Duration,DPUserID")] Availability avail)
+        public ActionResult Edit([Bind(Include = "AvailabilityID,OccursAt,Duration,UserID")] Availability avail)
         {
+                //Ensure current user
+                //avail.UserID = AccountController.CurrentUser(User.Identity).Id;
             if (ModelState.IsValid)
             {
                 db.Entry(avail).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Email");
-            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", avail.DPUserID);
+
+            ViewBag.UserID = AccountController.CurrentUser(User.Identity).Id;
             return View(avail);
         }
 
