@@ -433,21 +433,23 @@ namespace Digital_Planner.Controllers
         }
 
         #region Helpers
-        /*
+        
         [Authorize]
-        private int CurrentDPUserID()   //Maybe have the User.Identity as a parameter? Why is it null
+        public static ApplicationUser CurrentUser(System.Security.Principal.IIdentity identity)
         {
-            var homie = this.ControllerContext.HttpContext.User.Identity;
-            var homieID = homie.GetUserId();
-            int homie_home = -1;
+            ApplicationUser homie;
             using (var db = new ApplicationDbContext())
             {
-                var someone = db.Users.Where(u => u.Id.Equals(homieID));
-                homie_home = someone.First().DPUserID;
+                homie = db.Users.Find(identity.GetUserId());
             }
-            return homie_home;
+            return homie;
         }
-        */
+
+        public static ApplicationDbContext GetNewDbContext()
+        {
+            return new ApplicationDbContext();
+        }
+
 
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
