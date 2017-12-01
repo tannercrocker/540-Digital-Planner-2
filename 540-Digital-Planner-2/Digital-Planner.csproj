@@ -205,7 +205,6 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\DPUsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -213,12 +212,15 @@
     <Compile Include="Migrations\201711290507528_Init.Designer.cs">
       <DependentUpon>201711290507528_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712010010044_Collections-Should-Be-Good.cs" />
+    <Compile Include="Migrations\201712010010044_Collections-Should-Be-Good.Designer.cs">
+      <DependentUpon>201712010010044_Collections-Should-Be-Good.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Availability.cs" />
     <Compile Include="Models\Event.cs" />
-    <Compile Include="Models\DPUser.cs" />
     <Compile Include="Models\DigitalPlannerModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -328,18 +330,14 @@
     <Content Include="Views\Shared\_Edit-Detail-Delete_Buttons.cshtml" />
     <Content Include="Views\Shared\_PreviousPageHyperlink.cshtml" />
     <Content Include="Views\Shared\_Priority.cshtml" />
-    <Content Include="Views\DPUsers\Create.cshtml" />
-    <Content Include="Views\DPUsers\Delete.cshtml" />
-    <Content Include="Views\DPUsers\Details.cshtml" />
-    <Content Include="Views\DPUsers\Edit.cshtml" />
-    <Content Include="Views\DPUsers\Schedule.cshtml" />
-    <Content Include="Views\DPUsers\_Category.cshtml" />
-    <Content Include="Views\DPUsers\_Day.cshtml" />
-    <Content Include="Views\DPUsers\_Event.cshtml" />
-    <Content Include="Views\DPUsers\_Month.cshtml" />
-    <Content Include="Views\DPUsers\_ShortEvent.cshtml" />
-    <Content Include="Views\DPUsers\_Week.cshtml" />
     <Content Include="Views\Shared\_HeaderList.cshtml" />
+    <Content Include="Views\Events\Schedule.cshtml" />
+    <Content Include="Views\Events\_Week.cshtml" />
+    <Content Include="Views\Events\_ShortEvent.cshtml" />
+    <Content Include="Views\Events\_Month.cshtml" />
+    <Content Include="Views\Events\_Event.cshtml" />
+    <Content Include="Views\Events\_Day.cshtml" />
+    <Content Include="Views\Events\_Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -353,6 +351,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711290507528_Init.resx">
       <DependentUpon>201711290507528_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712010010044_Collections-Should-Be-Good.resx">
+      <DependentUpon>201712010010044_Collections-Should-Be-Good.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
