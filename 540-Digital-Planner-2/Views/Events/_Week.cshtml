@@ -1,0 +1,28 @@
+﻿@model ICollection<Digital_Planner.Models.Event>
+
+@{
+    /* Events occurring/finishing in the next [0, 6] days */
+    var week_events = Model
+        .Where(e => 
+            (e.OccursAt.DayOfYear - DateTime.Today.DayOfYear >= 0 && e.OccursAt.DayOfYear - DateTime.Today.DayOfYear < 7)
+            ||
+            (e.CompleteBy.DayOfYear - DateTime.Today.DayOfYear >= 0 && e.CompleteBy.DayOfYear - DateTime.Today.DayOfYear < 7)
+        );
+}
+    @{ 
+        var offset = 0;
+
+        if(week_events.Count() == 0)
+        {
+            <tr>
+                <td class="text-muted">No Events</td>
+            </tr>
+        }
+        else
+        { 
+            foreach (var events in week_events.GroupBy(e => e.OccursAt.DayOfYear))
+            {
+                @Html.Partial("_Day", new Tuple<DateTime, ICollection<Digital_Planner.Models.Event>>(DateTime.Today.AddDays(offset++), Model))
+            }
+        }
+    }

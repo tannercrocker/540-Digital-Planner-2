@@ -1,0 +1,24 @@
+﻿@model  Digital_Planner.Models.Event
+
+<td>@Model.OccursAt.ToString("M/d/yyyy h:mm tt")</td>
+<td>
+    @Html.ActionLink(@Model.Title, "Details", "Events", new { id = Model.EventID }, new { title = "Event details" })
+</td>
+<td title="">
+    @if (Model.CompleteBy.Date.Equals(DateTime.Today.Date))
+    {
+        @Model.CompleteBy.ToString("M/d/yyyy h:mm tt") 
+    }
+    else
+    {
+        @Model.CompleteBy.ToString("M/d/yyyy h:mm tt")
+    }
+</td>
+<td>
+    @Html.Partial("_FORM_CompletionCheck", Model)
+</td>
+@* Edit/Delete glyph-links*@
+<td>
+    @Html.Partial("_Edit-Detail-Delete_Buttons", new Tuple<System.Web.Mvc.ControllerBase, int>(ViewContext.Controller, Model.EventID))
+</td>
+

@@ -1,0 +1,85 @@
+﻿@using Digital_Planner.Models;
+@* @model ICollection<Event> *@
+ @model ApplicationUser 
+
+@{
+    ViewBag.Title = "Schedule";
+    var model_events = Model.getEvents();
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#day_button').click(function () {
+            $(this).addClass('btn-primary');
+            $('#week_button').removeClass('btn-primary');
+            $('#month_button').removeClass('btn-primary');
+            $('#day').css('display', 'block');
+            $('#week').css('display', 'none');
+            $('#month').css('display', 'none');
+            $('schedule_text').innerHTML = 'Events for today';
+
+        });
+
+
+        $('#week_button').click(function () {
+                $(this).addClass('btn-primary');
+                $('#day_button').removeClass('btn-primary');
+                $('#month_button').removeClass('btn-primary');
+                $('#week').css({ display: 'block' });
+                $('#day').css({ display: 'none' });
+                $('#month').css({ display: 'none' });
+                $('schedule_text').innerHTML = 'Events for the next week';
+
+            });
+
+
+        $('#month_button').click(function () {
+            $(this).addClass('btn-primary');
+            $('#day_button').removeClass('btn-primary');
+            $('#week_button').removeClass('btn-primary');
+            $('#month').css("display", "block");
+            $('#day').css("display", "none");
+            $('#week').css("display", "none");
+            $('schedule_text').innerHTML = 'Events for @DateTime.Today.ToString("MMMM") @DateTime.Today.Year';
+        });
+    });
+</script>
+
+<h2 id="schedule_text">Events for today</h2>
+<h5>@Html.ActionLink("Add Event", "Create", "Events", new { }, new { })</h5>
+
+@{
+    if (model_events != null)
+    {
+        <div class="row">
+            <center>
+                <button id="day_button" class="btn btn-primary" style="margin-right: 1%;">Today</button>
+                <button id="week_button" class="btn" style="margin-right: 1%;">Week</button>
+                <button id="month_button" class="btn" style="margin-right: 1%;">Month</button>
+            </center>
+        </div>
+
+        <div id="schedule" class="row" style="margin-top:1%">
+
+            <div id="day" class="table">
+                @Html.Partial("_Day", new Tuple<DateTime, ICollection<Event>>(DateTime.Today, model_events))
+            </div>
+            
+            <div id="week" class="table" style="display:none;">
+                @Html.Partial("_Week", model_events)
+           </div>
+
+            <div id="month" class="container" style="display:none;">
+                @Html.Partial("_Month", new Tuple<ICollection<Event>, ICollection<Availability>>(model_events, Model.getAvailabilities()));
+            </div>
+        </div>
+    }
+    else
+    {
+        <p class="text-center">You have no upcoming events, why not @Html.ActionLink("make one", "Create", "Events")?</p>
+    }
+}
+
+<div>
+    @Html.Partial("_PreviousPageHyperlink")
+</div>

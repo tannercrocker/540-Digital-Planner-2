@@ -1,0 +1,28 @@
+﻿@model  Digital_Planner.Models.Event
+
+@{
+    var tile_class = "";
+    var tile_title = "";
+    if (!Model.IsComplete && Model.CompleteBy.Date.CompareTo(DateTime.Today.Date) == 0)
+    {
+        tile_class = "warning";
+        tile_title = "This event is set to be complete today";
+    }
+    if (!Model.IsComplete && Model.CompleteBy.CompareTo(DateTime.Now) <= 0)
+    {
+        tile_class = "danger";
+        tile_title = "This event is past due";
+    }
+    if (Model.IsComplete)// && Model.CompleteBy.Date.Equals(DateTime.Today.Date))
+    {
+        tile_class = "success";
+        tile_title = "This event is complete";
+    }
+
+}
+<tr title="@tile_title" class="@tile_class">
+    <td>@Model.OccursAt.ToString("h:mm tt")</td>
+    <td>@Html.ActionLink(Model.Title, "Details", "Events", new { id = Model.EventID }, new {title="Event details" })</td>
+</tr>
+
+

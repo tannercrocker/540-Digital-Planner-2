@@ -15,6 +15,29 @@ namespace Digital_Planner.Controllers
     {
         private DigitalPlannerDbContext db = new DigitalPlannerDbContext();
 
+        // GET: Users/Schedule/5
+        public ActionResult Schedule(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //Require logged in user
+            //Get logged in user's events
+            using (var new_db = new ApplicationDbContext())
+            {
+                ApplicationUser user = new_db.Users.Single(u => u.UserName == User.Identity.Name);
+
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                //return View(db.Events.Where(e => e.UserID.Equals(user.Id)).ToList());
+                return View(user);
+            }
+        }
+
         // GET: Events
         public ActionResult Index()
         {
