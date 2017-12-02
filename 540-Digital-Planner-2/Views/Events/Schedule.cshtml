@@ -4,7 +4,7 @@
 
 @{
     ViewBag.Title = "Schedule";
-    var model_events = Model.getEvents();
+    var model_events = Model.getEventsWithCategories();
 }
 
 <script type="text/javascript">
@@ -70,7 +70,7 @@
            </div>
 
             <div id="month" class="container" style="display:none;">
-                @Html.Partial("_Month", new Tuple<ICollection<Event>, ICollection<Availability>>(model_events, Model.getAvailabilities()));
+                @Html.Partial("_Month", new Tuple<ICollection<Event>, ICollection<Availability>>(model_events, Model.getAvailabilities()))
             </div>
         </div>
     }
