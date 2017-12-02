@@ -47,6 +47,18 @@ namespace Digital_Planner.Models
             }
             return list;
         }
+
+        public List<Event> getEventsWithCategories()
+        {
+            List<Event> list = new List<Event>();
+            using (var db = new ApplicationDbContext())
+            {
+                var l2 = db.Events.Where(e => e.UserID == this.Id).Include(e => e.Category).ToList();
+                list = l2;
+            }
+            return list;
+        }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

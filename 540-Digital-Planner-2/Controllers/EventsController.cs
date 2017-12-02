@@ -41,7 +41,7 @@ namespace Digital_Planner.Controllers
             ApplicationUser user = AccountController.CurrentUser(User.Identity);
             //var events = db.Events.Include(e => e.Category);//.Include(e => e.User);
             //var events = db.Events.Include(e => e.Category).Include(e => e.DPUser);
-            return View(user.getEvents());
+            return View(user.getEventsWithCategories());
         }
 
         // GET: Events/Details/5

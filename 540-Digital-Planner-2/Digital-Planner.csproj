@@ -338,6 +338,7 @@
     <Content Include="Views\Events\_Event.cshtml" />
     <Content Include="Views\Events\_Day.cshtml" />
     <Content Include="Views\Events\_Category.cshtml" />
+    <Content Include="Views\Shared\_AutoAssign.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
