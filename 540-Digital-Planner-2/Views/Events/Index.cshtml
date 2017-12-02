@@ -12,8 +12,6 @@
 </p>
 <table class="table table-hover table-responsive">
     <tr>
-        <th>@Html.DisplayNameFor(model => model.OccursAt)
-        </th>
         <th>@* Header for categories - 'description' doesn't adequately define what is in the column *@
             Category
         </th>
@@ -21,10 +19,13 @@
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Duration)
+            @Html.DisplayNameFor(model => model.Priority)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Priority)
+            @Html.DisplayNameFor(model => model.OccursAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CompleteBy)
@@ -33,8 +34,11 @@
             @Html.DisplayNameFor(model => model.IsComplete)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.AutoAssign)
+        </th>@*
+        <th>
             @Html.DisplayNameFor(model => model.Location)
-        </th>
+        </th>*@
         <!-- Blank header tag for uniform look to each row -->
         <th></th>
     </tr>
@@ -45,19 +49,19 @@
         {
         <tr class="text-center">
             <td>
-                @item.OccursAt.ToString("M/d/yyyy hh:mm tt")
-            </td>@*
-            <td>
                 @item.Category.Description
-            </td>*@
+            </td>
             <td>
                 @Html.ActionLink(item.Title, "Edit", "Events", new { id = item.EventID }, new { title = "Edit event" })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Duration)
+                @Html.Partial("_Priority", item.Priority)
             </td>
             <td>
-                @Html.Partial("_Priority", item.Priority)
+                @item.OccursAt.ToString("M/d/yyyy hh:mm tt")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
             </td>
             <td>
                 @item.CompleteBy.ToString("M/d/yyyy h:mm tt")
@@ -66,8 +70,11 @@
                 @Html.Partial("_FORM_CompletionCheck", item)
             </td>
             <td>
+                @Html.Partial("_AutoAssign", item.AutoAssign)
+            </td>@*
+            <td>
                 @Html.DisplayFor(modelItem => item.Location)
-            </td>
+            </td>*@
             <td>
                 @Html.Partial("_Edit-Detail-Delete_Buttons", new Tuple<System.Web.Mvc.ControllerBase, int>(ViewContext.Controller, item.EventID))
             </td>
