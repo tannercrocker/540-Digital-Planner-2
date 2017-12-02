@@ -30,8 +30,7 @@ namespace Digital_Planner.Controllers
             {
                 return HttpNotFound();
             }
-
-            //return View(db.Events.Where(e => e.UserID.Equals(user.Id)).ToList());
+            //The view manages the stuff it needs. Not proper MVC style, but eh, it works.
             return View(user);
         }
 
@@ -39,8 +38,6 @@ namespace Digital_Planner.Controllers
         public ActionResult Index()
         {
             ApplicationUser user = AccountController.CurrentUser(User.Identity);
-            //var events = db.Events.Include(e => e.Category);//.Include(e => e.User);
-            //var events = db.Events.Include(e => e.Category).Include(e => e.DPUser);
             return View(user.getEventsWithCategories());
         }
 
@@ -64,8 +61,6 @@ namespace Digital_Planner.Controllers
         {
             ApplicationUser user = AccountController.CurrentUser(User.Identity);
             ViewBag.CategoryID = new SelectList(user.getCategories(), "CategoryID", "Description");
-            //ViewBag.UserID = new SelectList(db.Users, "Id", "Email");
-            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName");
             return View(new Event() { UserID = user.Id });
         }
 
@@ -115,11 +110,13 @@ namespace Digital_Planner.Controllers
                         recurrence--;
                     }
                 }
+
+
+                Sorting.Planner.GenerateSchedule(AccountController.CurrentUser(User.Identity));
                 return RedirectToAction("Index");
             }
 
             ViewBag.CategoryID = new SelectList(user.getCategories(), "CategoryID", "Description", @event.CategoryID);
-            //ViewBag.UserID = new SelectList(db.Users, "Id", "Email", @event.UserID);
             @event.UserID = user.Id;
             return View(@event);
         }
@@ -138,7 +135,6 @@ namespace Digital_Planner.Controllers
             }
             ApplicationUser user = AccountController.CurrentUser(User.Identity);
             ViewBag.CategoryID = new SelectList(user.getCategories(), "CategoryID", "Description", @event.CategoryID);
-            //ViewBag.UserID = new SelectList(db.Users, "Id", "Email", @event.UserID);
             @event.UserID = user.Id;
             return View(@event);
         }
@@ -156,11 +152,12 @@ namespace Digital_Planner.Controllers
                 @event.UserID = user.Id;
                 db.Entry(@event).State = EntityState.Modified;
                 db.SaveChanges();
+
+                Sorting.Planner.GenerateSchedule(AccountController.CurrentUser(User.Identity));
                 return RedirectToAction("Index");
             }
 
             ViewBag.CategoryID = new SelectList(user.getCategories(), "CategoryID", "Description", @event.CategoryID);
-            //ViewBag.UserID = new SelectList(db.Users, "Id", "Email", @event.UserID);
             @event.UserID = user.Id;
             return View(@event);
         }
@@ -173,12 +170,9 @@ namespace Digital_Planner.Controllers
         {
             if (id != null)
             {
-                var evt = db.Events.Where(e => e.EventID == id);
-                //Shouldn't be more than one, but just to make sure....
-                foreach(var item in evt)
-                {
-                    item.IsComplete = !item.IsComplete;
-                }
+                var evt = db.Events.Single(e => e.EventID == id);
+                evt.IsComplete = !evt.IsComplete;
+                db.Entry(evt);
                 db.SaveChanges();
             }
             return RedirectToAction("Index");
