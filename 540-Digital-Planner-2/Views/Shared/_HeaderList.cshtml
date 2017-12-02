@@ -6,4 +6,7 @@
 <li>@Html.ActionLink("Events", "Index", "Events", new { id = 0 }, new { })</li>
 
 @* Gets current user on the back-end. *@
-<li>@Html.ActionLink("Schedule", "Schedule", "Events", new { id = Digital_Planner.Controllers.AccountController.CurrentUser(User.Identity).Id })</li>
+<li>
+    <a href="@Url.Action("Schedule", "Events", new { id = Digital_Planner.Controllers.AccountController.CurrentUser(User.Identity).Id })">Schedule</a>
+    @* @Html.ActionLink("Schedule", "Schedule", "Events", new { id = Digital_Planner.Controllers.AccountController.CurrentUser(User.Identity).Id })*@
+</li>
