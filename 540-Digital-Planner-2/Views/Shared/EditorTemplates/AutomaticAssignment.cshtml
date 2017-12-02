@@ -1,6 +1,6 @@
 ﻿@model Boolean
 @{ 
-    String name = "AutomaticAssignment";
+    String name = "AutoAssign";
     if (ViewBag.name != null)
     {
         name = ViewBag.name;
@@ -17,7 +17,7 @@
     $(document).ready(function () {
         //Toggle AutoAssign buttons
         $('.autoassign_picker .btn').click(function () {
-            $(this).parent().find('input').val($(this).data("value"));
+            $('#AutoAssign').val($(this).data("value"));
             //Remove old info, set the new info
             $('.autoassign_picker').find('.autoassign_picker-enable').removeClass('btn-primary');
             $('.autoassign_picker').find('.autoassign_picker-disable').removeClass('btn-primary');
