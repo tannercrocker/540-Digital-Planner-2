@@ -43,7 +43,7 @@ namespace Digital_Planner.Controllers
         {
             var events = db.Events.Include(e => e.Category).Include(e => e.User);
             //var events = db.Events.Include(e => e.Category).Include(e => e.DPUser);
-            return View(events.ToList());
+            return View(events.ToList().Where(e => e.UserID == AccountController.CurrentUser(User.Identity).Id));
         }
 
         // GET: Events/Details/5
