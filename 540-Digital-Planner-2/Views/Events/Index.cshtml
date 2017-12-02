@@ -46,10 +46,10 @@
         <tr class="text-center">
             <td>
                 @item.OccursAt.ToString("M/d/yyyy hh:mm tt")
-            </td>
+            </td>@*
             <td>
                 @item.Category.Description
-            </td>
+            </td>*@
             <td>
                 @Html.ActionLink(item.Title, "Edit", "Events", new { id = item.EventID }, new { title = "Edit event" })
             </td>

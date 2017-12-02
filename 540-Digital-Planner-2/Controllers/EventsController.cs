@@ -24,26 +24,24 @@ namespace Digital_Planner.Controllers
             }
             //Require logged in user
             //Get logged in user's events
-            using (var new_db = new ApplicationDbContext())
+            ApplicationUser user = AccountController.CurrentUser(User.Identity);
+
+            if (user == null)
             {
-                ApplicationUser user = new_db.Users.Single(u => u.UserName == User.Identity.Name);
-
-                if (user == null)
-                {
-                    return HttpNotFound();
-                }
-
-                //return View(db.Events.Where(e => e.UserID.Equals(user.Id)).ToList());
-                return View(user);
+                return HttpNotFound();
             }
+
+            //return View(db.Events.Where(e => e.UserID.Equals(user.Id)).ToList());
+            return View(user);
         }
 
         // GET: Events
         public ActionResult Index()
         {
-            var events = db.Events.Include(e => e.Category).Include(e => e.User);
+            ApplicationUser user = AccountController.CurrentUser(User.Identity);
+            //var events = db.Events.Include(e => e.Category);//.Include(e => e.User);
             //var events = db.Events.Include(e => e.Category).Include(e => e.DPUser);
-            return View(events.ToList().Where(e => e.UserID == AccountController.CurrentUser(User.Identity).Id));
+            return View(user.getEvents());
         }
 
         // GET: Events/Details/5
@@ -64,10 +62,11 @@ namespace Digital_Planner.Controllers
         // GET: Events/Create
         public ActionResult Create()
         {
-            //ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description");
+            ApplicationUser user = AccountController.CurrentUser(User.Identity);
+            ViewBag.CategoryID = new SelectList(user.getCategories(), "CategoryID", "Description");
             //ViewBag.UserID = new SelectList(db.Users, "Id", "Email");
             //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName");
-            return View(new Event() {UserID = AccountController.CurrentUser(User.Identity).Id });
+            return View(new Event() { UserID = user.Id });
         }
 
         // POST: Events/Create
@@ -77,9 +76,11 @@ namespace Digital_Planner.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "EventID,AutoAssign,Title,OccursAt,Duration,Priority,CompleteBy,IsComplete,Location,UserID,CategoryID")] Event @event, int? recurrence)
         {
+            ApplicationUser user = AccountController.CurrentUser(User.Identity);
+
             if (ModelState.IsValid)
             {
-                @event.UserID = AccountController.CurrentUser(User.Identity).Id;
+                @event.UserID = user.Id;
                 db.Events.Add(@event);
                 db.SaveChanges();
 
@@ -117,10 +118,9 @@ namespace Digital_Planner.Controllers
                 return RedirectToAction("Index");
             }
 
-            //ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", @event.CategoryID);
-           // ViewBag.UserID = new SelectList(db.Users, "Id", "Email", @event.UserID);
-            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPuserID", "FirstName", @event.DPUserID);
-            @event.UserID = AccountController.CurrentUser(User.Identity).Id;
+            ViewBag.CategoryID = new SelectList(user.getCategories(), "CategoryID", "Description", @event.CategoryID);
+            //ViewBag.UserID = new SelectList(db.Users, "Id", "Email", @event.UserID);
+            @event.UserID = user.Id;
             return View(@event);
         }
 
@@ -136,9 +136,10 @@ namespace Digital_Planner.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", @event.CategoryID);
-            ViewBag.UserID = new SelectList(db.Users, "Id", "Email", @event.UserID);
-            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", @event.DPUserID);
+            ApplicationUser user = AccountController.CurrentUser(User.Identity);
+            ViewBag.CategoryID = new SelectList(user.getCategories(), "CategoryID", "Description", @event.CategoryID);
+            //ViewBag.UserID = new SelectList(db.Users, "Id", "Email", @event.UserID);
+            @event.UserID = user.Id;
             return View(@event);
         }
 
@@ -147,17 +148,20 @@ namespace Digital_Planner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EventID,Title,OccursAt,Duration,Priority,CompleteBy,IsComplete,Location,UserID,CategoryID")] Event @event)
+        public ActionResult Edit([Bind(Include = "EventID,Title,AutoAssign,OccursAt,Duration,Priority,CompleteBy,IsComplete,Location,UserID,CategoryID")] Event @event)
         {
+            ApplicationUser user = AccountController.CurrentUser(User.Identity);
             if (ModelState.IsValid)
             {
+                @event.UserID = user.Id;
                 db.Entry(@event).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            //ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", @event.CategoryID);
+
+            ViewBag.CategoryID = new SelectList(user.getCategories(), "CategoryID", "Description", @event.CategoryID);
             //ViewBag.UserID = new SelectList(db.Users, "Id", "Email", @event.UserID);
-            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPuserID", "FirstName", @event.DPUserID);
+            @event.UserID = user.Id;
             return View(@event);
         }
 
@@ -178,19 +182,6 @@ namespace Digital_Planner.Controllers
                 db.SaveChanges();
             }
             return RedirectToAction("Index");
-            /* //Old Stuff
-            if (ModelState.IsValid)
-            {
-                //db.Entry(@event).State = EntityState.Modified;
-                db.Entry(@event).Entity.IsComplete = !db.Entry(@event).Entity.IsComplete;
-                db.SaveChanges();
-                //Response.Redirect(Request.UrlReferrer.ToString());
-                return RedirectToAction("Index");
-            }
-            //ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", @event.CategoryID);
-            //ViewBag.DPUserID = new SelectList(db.DPUsers, "DPUserID", "FirstName", @event.DPUserID);
-            return View(@event);
-            */
         }
 
         // GET: Events/Delete/5
