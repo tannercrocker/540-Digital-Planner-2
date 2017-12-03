@@ -22,5 +22,9 @@ namespace Digital_Planner.Controllers
             return View();
         }
         
+        public ActionResult Contact()
+        {
+            return View();
+        }
     }
 }

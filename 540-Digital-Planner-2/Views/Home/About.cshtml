@@ -5,24 +5,26 @@
     <h1>Help / About</h1>
     <!-- <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p> -->
     <p>
-        Digital Planner is a web-based solution for your scheduling needs.  Organize events by category, mark items as complete, and use our
-        auto assign feature to automatically build a schedule for you.
+        Digital Planner is a web-based solution for your scheduling needs.
+        Organize events by category, mark items as complete, and use our
+        automatic assignment feature to automatically build a schedule for you.
     </p>
 </div>
 
 <h2>New User?</h2>
-<p>You must login to your account before you can access your schedule.  If you don't have an account,
-    click <b>Register</b> in the top-left.</p>
+<p>You must login to your account before you can access your schedule. If you don't have an account,
+    click this link to <b>@Html.ActionLink("Register", "Register", "Account")</b>.</p>
 
 <h2>View your schedule</h2>
 <p>
-    Click <b>Schedule</b> to view your schedule.  You can then select <b>Day</b>, <b>Week</b>, or <b>Month</b> view.
+    Once you have signed in, click <b>Schedule</b> to view your schedule.
+    You can then select the <b>Day</b>, <b>Week</b>, or <b>Month</b> view.
 </p>
 
 <h2>Automatic Assignment</h2>
 <p>
-    Before the planner can automatically assign events, you must tell it when you are avialable.
-    Set how much time you have each day by visiting the <b>Availabilities</b> page.  You can then set events as
-    <b>Automatic</b>.  These events will automatically be assigned based on their priority, length, and due date.
+    Before the planner can automatically assign events, you must tell it when you are available.
+    Set how much time you have available each day by visiting the <b>Availabilities</b> page. You can then set events as
+    <b>Automatic</b>. These events will automatically be assigned based on their priority, length, and due date.
 </p>
 
