@@ -114,17 +114,50 @@ namespace Digital_Planner.Sorting
             System.Diagnostics.Debug.Print("Assign Work Days");
 
             List<Event> events_to_update = new List<Event>();
+            /*
             int availableIndex = 0;
             int eventIndex = 0;
             int last_update = -1;
+            int last_added = 0;
+            */
 
+            foreach(var ev in autoEvents)
+            {
+                foreach(var av in availabilities)
+                {
+                    if(av.RemainingWorkMinutes >= 0)
+                    {
+                        if(av.RemainingWorkMinutes >= ev.Duration.TotalMinutes)
+                        {
+                            //Do this before the modifications, to make sure it finds the right object
+                            //last_added = autoEvents.IndexOf(ev);
+
+                            ev.OccursAt =
+                                av.Availability.OccursAt
+                                //Adjust the start time of the event
+                                .AddMinutes(
+                                    av.timeAvailable.TotalMinutes - av.RemainingWorkMinutes
+                                    );
+                            //Subtract the event duration after setting the new time for the event.
+                            av.RemainingWorkMinutes -= ev.Duration.TotalMinutes;
+
+                            System.Diagnostics.Debug.Print("'" + ev.Title + "' assigned to " + av.Availability.OccursAt + " - new date: " + ev.OccursAt);
+
+                            events_to_update.Add(ev.getEvent());
+                            //Don't keep adding to other availabilities
+                            break;
+                        }
+                    }
+                }
+            }
+            /*
             //start at the first availability and keep adding events until no events fit
             //then move to next availability.  Repeat until all events have been assigned
             // or until there are no availabilities left
             while (availableIndex < availabilities.Count() && eventIndex < autoEvents.Count())
             {
                 //That check isn't needed. While loop won't run if 0 == 0
-                if (/*availabilities.Count > 0 && */availabilities[availableIndex].RemainingWorkMinutes >= autoEvents[eventIndex].Duration.TotalMinutes)
+                if (/*availabilities.Count > 0 && *//*availabilities[availableIndex].RemainingWorkMinutes >= autoEvents[eventIndex].Duration.TotalMinutes)
                 {
                     var current_availability = availabilities[availableIndex];
                     var current_plannerevent = autoEvents[eventIndex];
@@ -157,9 +190,10 @@ namespace Digital_Planner.Sorting
                 {
                     availableIndex++;
                 }
-                */
+                * /
 
             }
+        */
 
             return events_to_update;
         }
