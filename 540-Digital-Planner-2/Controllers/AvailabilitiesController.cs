@@ -81,6 +81,8 @@ namespace Digital_Planner.Controllers
                         recurrence--;
                     }
                 }
+
+                Sorting.Planner.GenerateSchedule(AccountController.CurrentUser(User.Identity));
                 return RedirectToAction("Index");
             }
 
@@ -117,6 +119,8 @@ namespace Digital_Planner.Controllers
             {
                 db.Entry(avail).State = EntityState.Modified;
                 db.SaveChanges();
+
+                Sorting.Planner.GenerateSchedule(AccountController.CurrentUser(User.Identity));
                 return RedirectToAction("Index");
             }
 
@@ -147,6 +151,8 @@ namespace Digital_Planner.Controllers
             Availability avail = db.Availabilities.Find(id);
             db.Availabilities.Remove(avail);
             db.SaveChanges();
+
+            Sorting.Planner.GenerateSchedule(AccountController.CurrentUser(User.Identity));
             return RedirectToAction("Index");
         }
 

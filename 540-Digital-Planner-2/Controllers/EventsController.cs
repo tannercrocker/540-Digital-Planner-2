@@ -121,7 +121,6 @@ namespace Digital_Planner.Controllers
                     }
                 }
 
-
                 Sorting.Planner.GenerateSchedule(AccountController.CurrentUser(User.Identity));
                 return RedirectToAction("Index");
             }
@@ -143,6 +142,7 @@ namespace Digital_Planner.Controllers
             {
                 return HttpNotFound();
             }
+
             ApplicationUser user = AccountController.CurrentUser(User.Identity);
             ViewBag.CategoryID = new SelectList(user.getCategories(), "CategoryID", "Description", @event.CategoryID);
             @event.UserID = user.Id;
@@ -157,6 +157,7 @@ namespace Digital_Planner.Controllers
         public ActionResult Edit([Bind(Include = "EventID,Title,AutoAssign,OccursAt,Duration,Priority,CompleteBy,IsComplete,Location,UserID,CategoryID")] Event @event)
         {
             ApplicationUser user = AccountController.CurrentUser(User.Identity);
+
             if (ModelState.IsValid)
             {
                 @event.UserID = user.Id;
@@ -209,8 +210,14 @@ namespace Digital_Planner.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Event @event = db.Events.Find(id);
+            Boolean was_auto = @event.AutoAssign;
             db.Events.Remove(@event);
             db.SaveChanges();
+
+            if(was_auto)
+            {
+                Sorting.Planner.GenerateSchedule(AccountController.CurrentUser(User.Identity));
+            }
             return RedirectToAction("Index");
         }
 

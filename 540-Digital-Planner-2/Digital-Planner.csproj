@@ -196,7 +196,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="AutoSort\Planner.cs" />
-    <Compile Include="AutoSort\PlannerDay.cs" />
+    <Compile Include="AutoSort\PlannerAvailability.cs" />
     <Compile Include="AutoSort\PlannerEvent.cs" />
     <Compile Include="AutoSort\PlannerSettings.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -221,7 +221,6 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Availability.cs" />
     <Compile Include="Models\Event.cs" />
-    <Compile Include="Models\DigitalPlannerModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

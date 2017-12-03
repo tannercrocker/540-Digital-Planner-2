@@ -78,6 +78,7 @@ namespace Digital_Planner.Models
             Configuration.ProxyCreationEnabled = true;
             Configuration.LazyLoadingEnabled = false;
             */
+            
         }
         
 
