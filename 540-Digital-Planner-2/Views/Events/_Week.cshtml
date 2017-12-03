@@ -1,20 +1,18 @@
 ﻿@model ICollection<Digital_Planner.Models.Event>
 
 @{
-    /* Events occurring/finishing in the next [0, 7] days */
+    /* Events occurring/finishing in the next [0, 6] days */
     var week_events = Model
         .Where(e => 
-            (0 <= (e.OccursAt.DayOfYear - DateTime.Today.DayOfYear) && e.OccursAt.DayOfYear - DateTime.Today.DayOfYear <= 7)
+            (0 <= (e.OccursAt.DayOfYear - DateTime.Now.DayOfYear) && e.OccursAt.DayOfYear - DateTime.Now.DayOfYear <= 6)
             ||
-            (0 <= (e.CompleteBy.DayOfYear - DateTime.Today.DayOfYear) && e.CompleteBy.DayOfYear - DateTime.Today.DayOfYear <= 7)
+            (0 <= (e.CompleteBy.DayOfYear - DateTime.Now.DayOfYear) && e.CompleteBy.DayOfYear - DateTime.Now.DayOfYear <= 6)
         )
-        .OrderBy(e => e.Priority)
+        .OrderByDescending(e => e.Priority)
         .ThenBy(e => e.OccursAt)
         .ToList();
 }
     @{ 
-        var offset = 0;
-
         if(week_events.Count() == 0)
         {
             <tr>
@@ -22,10 +20,10 @@
             </tr>
         }
         else
-        { 
-            foreach (var events in week_events.GroupBy(e => e.OccursAt.DayOfYear))
+        {
+            for (var i = 0; i <= 7; i++)
             {
-                @Html.Partial("_Day", new Tuple<DateTime, ICollection<Digital_Planner.Models.Event>>(DateTime.Today.AddDays(offset++), Model))
+                @Html.Partial("_Day", new Tuple<DateTime, ICollection<Digital_Planner.Models.Event>>(DateTime.Today.AddDays(i), week_events))
             }
         }
     }

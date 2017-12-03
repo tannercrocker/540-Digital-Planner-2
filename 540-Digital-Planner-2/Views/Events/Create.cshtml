@@ -42,7 +42,11 @@
             </div>
         </div>
 
-
+        @if (ViewBag.MakeAvailabilities != null && ViewBag.MakeAvailabilities)
+        {
+            <span>You must create some @Html.ActionLink("availabilities", "Create", "Availabilities") to use Automatic Assignment.</span>
+        }
+        @{ ViewBag.name = "AutoAssign"; }
         <div class="form-group">
             @Html.LabelFor(model => model.AutoAssign, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -99,17 +103,7 @@
 
         @{ ViewBag.name = "IsComplete"; }
         @Html.HiddenFor(model => model.IsComplete)
-        @*
-        <div class="form-group">
-            @* @Html.LabelFor(model => model.IsComplete, htmlAttributes: new { @class = "control-label col-md-2", }) * @
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsComplete)
-                    @* @Html.ValidationMessageFor(model => model.IsComplete, "", new { @class = "text-danger" }) * @
-                </div>
-            </div>
-        </div>
-        *@
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -119,7 +113,10 @@
             </div>
         </div>
 
-        @* TODO - Limit to [current_user]'s categories *@
+        @if (ViewBag.MakeCategories != null && ViewBag.MakeCategories)
+        {
+            <span>You must create a @Html.ActionLink("category", "Create", "Categories")!</span>
+        }
         <div class="form-group">
             @Html.LabelFor(model => model.CategoryID, "CategoryID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

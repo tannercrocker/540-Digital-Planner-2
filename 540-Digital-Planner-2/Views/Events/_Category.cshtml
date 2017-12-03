@@ -11,30 +11,6 @@
 
             foreach (var evt in Model.OrderBy(e => e.OccursAt))
             {
-                var row_class = "";
-                var priority = evt.Priority;
-                if (0 > priority)
-                {
-                    priority = priority * -1;
-                }
-                switch (priority)
-                {
-                    case 1:
-                        row_class = "dismissable";
-                        break;
-                    case 2:
-                        row_class = "info";
-                        break;
-                    case 3:
-                        row_class = "warning";
-                        break;
-                    case 4:
-                        row_class = "danger";
-                        break;
-                    default:
-                        break;
-                }
-
                 var tile_class = "";
                 var tile_title = "";
                 //Incomplete & DateTime has passed
@@ -55,7 +31,7 @@
                     tile_title = "This event is complete";
                 }
 
-                <tr class="@row_class @tile_class" title="@tile_title" priority="@priority">
+                <tr class="@tile_class" title="@tile_title">
                     @Html.Partial("_Event", evt)
                 </tr>
 

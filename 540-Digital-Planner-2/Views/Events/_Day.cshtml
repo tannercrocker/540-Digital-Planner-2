@@ -5,13 +5,12 @@
 @{ 
     //Using these because it works a little more clearly than using just an IEnumerable
     var intended_day = Model.Item1;
-    var events = Model.Item2;
-    var today_by_cats = events
+    var today_by_cats = Model.Item2
         .Where(e =>
         e.OccursAt.DayOfYear.Equals(intended_day.DayOfYear) && e.OccursAt.Year.Equals(intended_day.Year) 
         || 
         e.CompleteBy.DayOfYear.Equals(intended_day.DayOfYear) && e.CompleteBy.Year.Equals(intended_day.Year))
-        .OrderBy(e => e.Priority)
+        .OrderByDescending(e => e.Priority)
         .ThenBy(e => e.OccursAt)
         ;
 }
@@ -25,8 +24,9 @@
 
         <tr>
             <th>Category</th>
-            <th>Occurs</th>
+            <th>Priority</th>
             <th>Title</th>
+            <th>Occurs At</th>
             <th>Completion Time</th>
             <th>Completed</th>
             <!-- Blank header for styling -->
@@ -37,6 +37,10 @@
         {
             @Html.Partial("_Category", cat)
         }
+    }
+    else
+    {
+        <tr>There are no events for this day.</tr>
     }
 </table>
 

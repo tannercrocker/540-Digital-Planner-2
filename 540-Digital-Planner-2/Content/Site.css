@@ -118,6 +118,10 @@ a.btn:hover {
     margin: 2px;
 }
 
+.calendar-item table {
+    border-width: 2px !important;
+}
+
 .calendar-item * {
     width: 100% !important;
 }

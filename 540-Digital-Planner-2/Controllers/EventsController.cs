@@ -60,6 +60,16 @@ namespace Digital_Planner.Controllers
         public ActionResult Create()
         {
             ApplicationUser user = AccountController.CurrentUser(User.Identity);
+            ViewBag.MakeAvailabilities = false;
+            if (user.getAvailabilities().Count() <= 0)
+            {
+                ViewBag.MakeAvailabilities = true;
+            }
+            ViewBag.MakeCategories = false;
+            if (user.getCategories().Count() <= 0)
+            {
+                ViewBag.MakeCategories = true;
+            }
             ViewBag.CategoryID = new SelectList(user.getCategories(), "CategoryID", "Description");
             return View(new Event() { UserID = user.Id });
         }

@@ -4,16 +4,16 @@
 @{
     var month_avail = Model.Item2
         .Where(a =>
-            (a.OccursAt.Month.Equals(DateTime.Today.Month) && a.OccursAt.Year.Equals(DateTime.Today.Year))
+            (a.OccursAt.Month.Equals(DateTime.Now.Month) && a.OccursAt.Year.Equals(DateTime.Now.Year))
         )
         .OrderBy(a => a.OccursAt)
         .ToList();
     var month_events = Model.Item1
         .Where(e =>
-            (e.OccursAt.Month.Equals(DateTime.Today.Month) && e.OccursAt.Year.Equals(DateTime.Today.Year)) ||
-            (e.CompleteBy.Month.Equals(DateTime.Today.Month) && e.CompleteBy.Year.Equals(DateTime.Today.Year))
+            (e.OccursAt.Month.Equals(DateTime.Now.Month) && e.OccursAt.Year.Equals(DateTime.Now.Year)) ||
+            (e.CompleteBy.Month.Equals(DateTime.Now.Month) && e.CompleteBy.Year.Equals(DateTime.Now.Year))
         )
-        .OrderBy(e => e.Priority)
+        .OrderByDescending(e => e.Priority)
         .ThenBy(e => e.OccursAt)
         .ToList();
     var day_number = 1;
@@ -66,7 +66,7 @@
                             <th class="day_availability">
                                 @{
                                     Availability first_availability = new Availability();
-                                    if (month_avail.Count() > 0)
+                                    if (month_avail.Where(a => a.OccursAt.Day == day_number).Count() > 0)
                                     {
                                         first_availability = month_avail.First();
 

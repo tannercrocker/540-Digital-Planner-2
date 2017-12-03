@@ -1,10 +1,15 @@
 ﻿@model  Digital_Planner.Models.Event
 
-<td>@Model.OccursAt.ToString("M/d/yyyy h:mm tt")</td>
+<td>
+    @Html.Partial("_Priority", Model.Priority)
+</td>
 <td>
     @Html.ActionLink(@Model.Title, "Details", "Events", new { id = Model.EventID }, new { title = "Event details" })
 </td>
-<td title="">
+<td>
+    @Model.OccursAt.ToString("M/d/yyyy h:mm tt")
+</td>
+<td>
     @if (Model.CompleteBy.Date.Equals(DateTime.Today.Date))
     {
         @Model.CompleteBy.ToString("M/d/yyyy h:mm tt") 
