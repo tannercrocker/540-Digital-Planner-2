@@ -33,7 +33,8 @@
                 format: "M/D/YYYY LT",
                 useCurrent: true,
                 inline: true,
-                sideBySide: true
+                sideBySide: true,
+                defaultDate: "@dt.ToString("yyyy-MM-ddTHH:mm:ss.ffffff")"   //ISO Format
             });
 
             $("#datetimepicker-@index").on('dp.change', function (ev) {

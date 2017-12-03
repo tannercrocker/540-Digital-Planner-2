@@ -39,8 +39,6 @@
                 defaultDate: "@dt.ToString("yyyy-MM-ddTHH:mm:ss.ffffff")"   //ISO Format
             });
 
-            $("#timepicker-@index, #timepicker-@index *").trigger('dp.update')
-
             $("#timepicker-@index").on('dp.change', function (ev) {
                 //console.log(ev.date.format("H:mm"))
                 $("#@name-@index").val(ev.date.format("H:mm"));
