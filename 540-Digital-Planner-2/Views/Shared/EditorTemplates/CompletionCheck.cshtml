@@ -27,16 +27,16 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('.iscomplete-editor-@index').unbind('click').click(function () {
-            var input = $(this).parent().find('input');
+            var input = $(document).find('#@name');
 
-            console.log(input);
-            console.log(input.val);
+            //console.log(input);
+            //console.log(input.val);
 
             //Change the value
-            if ($(input).data('value') === "true") {
-                $(input).data('value', "false");
+            if(input.attr('value') === "true") {
+                $('#@name').attr('value', "false");
             } else {
-                $(input).data('value', "true");
+                $('#@name').attr('value', "true");
             }
 
             var glyph = $(this).find('.glyphicon');
@@ -48,7 +48,7 @@
             $(this).removeClass('btn-danger');
 
             //Update class for span
-            if ($(input).data('value') === "true") {
+            if ($('#@name').attr('value') === "true") {
                 glyph.addClass('glyphicon-check');
                 $(this).addClass('btn-success');
             } else {
@@ -59,20 +59,9 @@
     });
 </script>
 
-@*
-@if (Model)
-{
-    <input type="hidden"  class="form-control"for="@name" name="@name" value="false" />
-}
-else
-{
-    <input type="hidden"  class="form-control" for="@name" name="@name" value="true" />
-}
-*@
-
-<input type="hidden" class="form-control" for="@name" name="@name" value="@initial_value" />
-
 <div class="iscomplete-editor-@index btn @btn_class">
+    <input id="@name" name="@name" type="hidden" class="form-control" value="@initial_value" />
+
     <span class="glyphicon @glyph"></span>
 </div>
 
