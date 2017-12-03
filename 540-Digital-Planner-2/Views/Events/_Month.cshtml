@@ -3,14 +3,19 @@
 @* @model ICollection<Event> *@
 @{
     var month_avail = Model.Item2
-        .Where(e =>
-            (e.OccursAt.Month.Equals(DateTime.Today.Month) && e.OccursAt.Year.Equals(DateTime.Today.Year))
-        ).ToList();
+        .Where(a =>
+            (a.OccursAt.Month.Equals(DateTime.Today.Month) && a.OccursAt.Year.Equals(DateTime.Today.Year))
+        )
+        .OrderBy(a => a.OccursAt)
+        .ToList();
     var month_events = Model.Item1
         .Where(e =>
             (e.OccursAt.Month.Equals(DateTime.Today.Month) && e.OccursAt.Year.Equals(DateTime.Today.Year)) ||
             (e.CompleteBy.Month.Equals(DateTime.Today.Month) && e.CompleteBy.Year.Equals(DateTime.Today.Year))
-        ).ToList();
+        )
+        .OrderBy(e => e.Priority)
+        .ThenBy(e => e.OccursAt)
+        .ToList();
     var day_number = 1;
     var days_in_month = DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month);
 }

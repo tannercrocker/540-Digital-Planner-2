@@ -6,7 +6,7 @@
         {
             var cat_rowspan = Model.Count() + 1;
             <td rowspan="@cat_rowspan" class="text-center">
-                @Html.ActionLink(@Model.First().Category.Description, "Details", "Categories", new { id = Model.First().EventID }, new { title = "Category details" })
+                @Html.ActionLink(Model.First().Category.Description, "Details", "Categories", new { id = Model.First().EventID }, new { title = "Category details" })
             </td>
 
             foreach (var evt in Model.OrderBy(e => e.OccursAt))

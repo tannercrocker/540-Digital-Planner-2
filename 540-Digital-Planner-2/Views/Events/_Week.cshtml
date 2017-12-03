@@ -1,13 +1,16 @@
 ﻿@model ICollection<Digital_Planner.Models.Event>
 
 @{
-    /* Events occurring/finishing in the next [0, 6] days */
+    /* Events occurring/finishing in the next [0, 7] days */
     var week_events = Model
         .Where(e => 
-            (e.OccursAt.DayOfYear - DateTime.Today.DayOfYear >= 0 && e.OccursAt.DayOfYear - DateTime.Today.DayOfYear < 7)
+            (0 <= (e.OccursAt.DayOfYear - DateTime.Today.DayOfYear) && e.OccursAt.DayOfYear - DateTime.Today.DayOfYear <= 7)
             ||
-            (e.CompleteBy.DayOfYear - DateTime.Today.DayOfYear >= 0 && e.CompleteBy.DayOfYear - DateTime.Today.DayOfYear < 7)
-        );
+            (0 <= (e.CompleteBy.DayOfYear - DateTime.Today.DayOfYear) && e.CompleteBy.DayOfYear - DateTime.Today.DayOfYear <= 7)
+        )
+        .OrderBy(e => e.Priority)
+        .ThenBy(e => e.OccursAt)
+        .ToList();
 }
     @{ 
         var offset = 0;
