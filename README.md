@@ -1,5 +1,6 @@
 # Digital Planner
 Our semester project for CSCI 540-01: Software Engineering (Fall 2017).  
+Check out the site [here!](http://digital-planner.azurewebsites.net)
 
 This is the second repository for this project. The first one can be found [here](https://github.com/techset7set/540-Digital-Planner). 
 
