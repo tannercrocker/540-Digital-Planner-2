@@ -16,36 +16,38 @@
             $('#day').css('display', 'block');
             $('#week').css('display', 'none');
             $('#month').css('display', 'none');
-            $('schedule_text').innerHTML = 'Events for today';
+            $('#schedule_text').html('Events for Today');
 
         });
 
 
         $('#week_button').click(function () {
-                $(this).addClass('btn-primary');
-                $('#day_button').removeClass('btn-primary');
-                $('#month_button').removeClass('btn-primary');
-                $('#week').css({ display: 'block' });
-                $('#day').css({ display: 'none' });
-                $('#month').css({ display: 'none' });
-                $('schedule_text').innerHTML = 'Events for the next week';
+            console.log("change to week");
+            $(this).addClass('btn-primary');
+            $('#day_button').removeClass('btn-primary');
+            $('#month_button').removeClass('btn-primary');
+            $('#week').css({ display: 'block' });
+            $('#day').css({ display: 'none' });
+            $('#month').css({ display: 'none' });
+            $('#schedule_text').html('Events for the next seven days');
 
-            });
+        });
 
 
         $('#month_button').click(function () {
+            console.log("change to month");
             $(this).addClass('btn-primary');
             $('#day_button').removeClass('btn-primary');
             $('#week_button').removeClass('btn-primary');
             $('#month').css("display", "block");
             $('#day').css("display", "none");
             $('#week').css("display", "none");
-            $('schedule_text').innerHTML = 'Events for @DateTime.Today.ToString("MMMM") @DateTime.Today.Year';
+            $('#schedule_text').html('Events for @DateTime.Today.ToString("MMMM") @DateTime.Today.Year');
         });
     });
 </script>
 
-<h2 id="schedule_text">Events for today</h2>
+<h2 id="schedule_text">Events for Today</h2>
 <h5>@Html.ActionLink("Add Event", "Create", "Events", new { }, new { })</h5>
 
 @{
